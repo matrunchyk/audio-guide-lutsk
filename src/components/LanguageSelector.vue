@@ -34,7 +34,7 @@
 <script lang="ts">
 export default {
   name: "LanguageSelector",
-  emits: ['hide'],
+  emits: ['select'],
 }
 
 </script>
