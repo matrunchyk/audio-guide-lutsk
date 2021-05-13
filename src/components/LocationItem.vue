@@ -6,7 +6,7 @@
     </div>
     <img src="@/assets/castle.svg" class="w-full">
     <div>
-      <img src="@/assets/red-line.svg" class="absolute top-0 -right-7 p-9">
+      <img src="@/assets/red-line.svg" class="absolute top-9 right-2">
     </div>
     <div class="flex icon bg-x-red gap-4 pl-4 py-2.5">
       <img class="flex-none cursor-pointer" src="@/assets/icon-castle.svg">
