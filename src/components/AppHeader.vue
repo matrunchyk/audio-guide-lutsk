@@ -22,7 +22,7 @@
     <div class="second-line sm:flex bg-white mt-0.5 py-3 sm:items-center px-4">
       <AppToggle/>
     </div>
-    <div v-if="!isLanguageSelected">123123123123</div>
+    <LanguageSelector v-if="!isLanguageSelected" v-on:hide="hideLanguageSelector"/>
   </div>
 </template>
 
@@ -36,6 +36,7 @@
 <script>
 import { onBeforeMount, ref } from 'vue';
 import AppToggle from './AppToggle.vue';
+import LanguageSelector from "@/components/LanguageSelector";
 
 
 // noinspection JSUnusedGlobalSymbols
@@ -43,13 +44,24 @@ export default {
   name: "AppHeader",
   components: {
     AppToggle,
+    LanguageSelector,
   },
   setup() {
     let isLanguageSelected = ref(false);
 
     onBeforeMount(() => {
       isLanguageSelected.value = !!localStorage.getItem('isLanguageSelected');
+
+      if (!isLanguageSelected.value) {
+        document.body.classList.add('overflow-hidden');
+      } else {
+        document.body.classList.remove('overflow-hidden');
+      }
     });
+
+    function hideLanguageSelector() {
+
+    }
 
     return {
       isLanguageSelected,
