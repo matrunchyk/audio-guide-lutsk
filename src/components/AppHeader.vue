@@ -59,13 +59,14 @@ export default {
       }
     });
 
-    function hideLanguageSelector(lang: string) {
+    function hideLanguageSelector(lang) {
       localStorage.setItem('languageSelected', lang);
       languageSelected.value = lang;
     }
 
     return {
       languageSelected,
+      hideLanguageSelector,
     }
   }
 }
