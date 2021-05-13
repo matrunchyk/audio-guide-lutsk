@@ -22,7 +22,7 @@
     <div class="second-line sm:flex bg-white mt-0.5 py-3 sm:items-center px-4">
       <AppToggle/>
     </div>
-    <LanguageSelector v-if="!languageSelected" v-on:hide="hideLanguageSelector"/>
+    <LanguageSelector v-if="!languageSelected" v-on:select="hideLanguageSelector"/>
   </div>
 </template>
 
@@ -60,6 +60,7 @@ export default {
     });
 
     function hideLanguageSelector(lang) {
+      console.log(lang)
       localStorage.setItem('languageSelected', lang);
       languageSelected.value = lang;
     }
