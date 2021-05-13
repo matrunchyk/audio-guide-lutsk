@@ -4,22 +4,22 @@
     <div class="sound flex bg-x-red justify-center items-center rounded-full absolute top-0 right-0 mt-32 mr-3 w-12 h-12">
       <img src="@/assets/volume.svg" class=" w-6 h-6">
     </div>
-    <img src="@/assets/flags/castle.svg" class="w-full">
+    <img src="@/assets/castle.svg" class="w-full">
     <div>
       <img src="@/assets/red-line.svg" class="absolute top-0 -right-7 p-9">
     </div>
     <div class="flex icon bg-x-red gap-4 pl-4 py-2.5">
-      <img class="flex-none cursor-pointer" src="@/assets/flags/icon-castle.svg">
+      <img class="flex-none cursor-pointer" src="@/assets/icon-castle.svg">
       <div class="flex-grow cursor-pointer text-white text-md flex">Покровська церква</div>
     </div>
     <div class="flex stars gap-4 px-4 py-2.5">
       <div class="flex-none cursor-pointer">Рейтинг</div>
       <div class="flex-grow cursor-pointer flex">
-        <img src="@/assets/flags/star-grey.svg">
-        <img src="@/assets/flags/star-grey.svg">
-        <img src="@/assets/flags/star-grey.svg">
-        <img src="@/assets/flags/star-grey.svg">
-        <img src="@/assets/flags/star-grey.svg">
+        <img src="@/assets/star-grey.svg">
+        <img src="@/assets/star-grey.svg">
+        <img src="@/assets/star-grey.svg">
+        <img src="@/assets/star-grey.svg">
+        <img src="@/assets/star-grey.svg">
       </div>
       <div class="flex-none cursor-pointer">Оцінити</div>
     </div>
