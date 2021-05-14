@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="flex-grow sm:flex-none">
+    <div class="flex-grow sm:flex-grow-0 left-column flex-grow-0">
       <AppHeader></AppHeader>
       <AppLocations></AppLocations>
     </div>
@@ -27,7 +27,14 @@ export default {
 </script>
 
 <style scoped>
-div {
+.left-column {
   background: #f3f3f3;
+  min-width:  320px;
+}
+
+@media (min-width: 640px) {
+  .left-column {
+    max-width: 20%;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="sm:flex">
-    <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse">
+    <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse sm:flex-1">
       <img class="flex-none sm:hidden cursor-pointer opacity-30"
            src="@/assets/map.svg"
            alt="" />
