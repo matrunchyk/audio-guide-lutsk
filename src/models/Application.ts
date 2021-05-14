@@ -12,6 +12,8 @@ export default class Application {
 
   static ratingVenue = ref<Venue | null>(null);
 
+  static detailVenue = ref<Venue | null>(null);
+
   static setLanguage(language: string) {
     this.language.value = language;
   }
