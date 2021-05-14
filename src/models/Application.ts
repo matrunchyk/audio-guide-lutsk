@@ -27,6 +27,10 @@ export default class Application {
   }
 
   static resetRatingVenue() {
-    this.ratingVenue.value = null
+    this.ratingVenue.value = null;
+  }
+
+  static resetDetailVenue() {
+    this.detailVenue.value = null;
   }
 }

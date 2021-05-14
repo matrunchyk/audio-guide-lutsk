@@ -5,6 +5,8 @@ export default class Venue {
 
   public name = '';
 
+  public description = '';
+
   public image = '';
 
   public icon = '';

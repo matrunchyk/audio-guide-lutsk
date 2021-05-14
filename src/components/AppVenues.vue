@@ -27,6 +27,7 @@ export default {
     const venues = Array(7).fill(0).map((_, index) => new Venue({
       index,
       name: faker.lorem.sentence(),
+      description: faker.lorem.paragraph(),
       image: images(`./${index + 1}.jpg`).default,
       icon: faker.image.abstract(20, 20) + '?index=' + index,
       recommended: faker.datatype.number({ min: 0, max: 1 }),
