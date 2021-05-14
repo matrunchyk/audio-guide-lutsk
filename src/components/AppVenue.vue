@@ -31,7 +31,7 @@
             'top-9': venue.firstRecommended && venue.recommended,
             'top-0.5': !(venue.firstRecommended && venue.recommended),
            }"
-      >
+      />
     </div>
     <div class="flex icon bg-x-red gap-4 pl-4 py-2.5">
       <img
