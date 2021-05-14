@@ -2,8 +2,9 @@
   <div class="flex">
     <div class="flex-grow sm:flex-grow-0 left-column flex-grow-0">
       <AppHeader/>
-      <AppLocations/>
+      <AppVenues/>
       <AppTutorial v-if="tutorialOpen"/>
+      <RateVenueModal v-if="ratingVenue"/>
     </div>
     <div
       class="hidden flex-grow sm:block"
@@ -20,22 +21,25 @@
 </template>
 
 <script lang="ts">
-import Application from '@/models/application';
+import Application from '@/models/Application';
 import AppHeader from './components/AppHeader.vue';
-import AppLocations from './components/AppLocations.vue';
+import AppVenues from './components/AppVenues.vue';
 import AppTutorial from './components/AppTutorial.vue';
+import RateVenueModal from './components/RateVenueModal.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppLocations,
+    AppVenues,
     AppTutorial,
+    RateVenueModal,
   },
   setup() {
     return {
       menuOpen: Application.menuOpen,
       tutorialOpen: Application.tutorialOpen,
+      ratingVenue: Application.ratingVenue,
     }
   }
 };

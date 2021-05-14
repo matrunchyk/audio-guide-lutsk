@@ -1,3 +1,4 @@
+import Venue from '@/models/Venue';
 import { ref } from "vue";
 
 export default class Application {
@@ -7,7 +8,9 @@ export default class Application {
 
   static tutorialOpen = ref(false);
 
-  static pinnedLocations = ref(0);
+  static pinnedVenues = ref(0);
+
+  static ratingVenue = ref<Venue | null>(null);
 
   static setLanguage(language: string) {
     this.language.value = language;
@@ -19,5 +22,9 @@ export default class Application {
 
   static setTutorialOpen(tutorialOpen: boolean) {
     this.tutorialOpen.value = tutorialOpen;
+  }
+
+  static resetRatingVenue() {
+    this.ratingVenue.value = null
   }
 }
