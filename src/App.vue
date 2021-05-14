@@ -28,6 +28,6 @@ export default {
 
 <style scoped>
 div {
-  background: #E5E5E5;
+  background: #f3f3f3;
 }
 </style>
