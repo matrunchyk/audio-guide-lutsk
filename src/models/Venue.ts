@@ -40,7 +40,8 @@ export default class Venue {
     Application.ratingVenue.value = this;
   }
 
-  public showDetail() {
+  public showDetail(minimized = false) {
+    Application.detailVenueMinimized.value = minimized;
     Application.detailVenue.value = this;
   }
 }

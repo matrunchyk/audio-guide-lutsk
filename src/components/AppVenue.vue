@@ -17,7 +17,7 @@
       'top-32': venue.firstRecommended && venue.recommended,
       'top-24': !(venue.firstRecommended && venue.recommended),
     }">
-      <svg-volume class="w-6 h-6"/>
+      <svg-volume class="w-6 h-6" @click="venue.showDetail(false)"/>
     </div>
     <img
       :src="venue.image"
