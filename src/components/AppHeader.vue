@@ -54,18 +54,18 @@
       v-if="!languageSelected"
       @select="selectLanguage" />
     <div
-      class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex flex-col justify-center gap-3"
+      class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
       :class="{
-        'translate-x-0': menuOpen,
-        'translate-x-96': !menuOpen,
+        'translate-x-0 flex': menuOpen,
+        'translate-x-96 sm:-translate-x-96 hidden sm:flex': !menuOpen,
       }">
-      <div>Пошук по Карті</div>
-      <div>Пошук по Списку</div>
-      <div class="flex justify-between">
+      <div class="cursor-pointer hover:text-x-red">Пошук по Карті</div>
+      <div class="cursor-pointer hover:text-x-red">Пошук по Списку</div>
+      <div class="cursor-pointer flex justify-between hover:text-x-red">
         Прокласти маршрут
-        <span class="rounded-md bg-blue-900 text-white py-0 px-3">2</span>
+        <span v-if="pinnedLocations" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ pinnedLocations }}</span>
       </div>
-      <div>Інструкція</div>
+      <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
         <img src="@/assets/logo-twotowers.svg"
              class="mr-auto"
@@ -144,6 +144,11 @@ export default {
       }, 1000);
     }
 
+    function openTutorial() {
+      Application.setMenuOpen(false);
+      Application.setTutorialOpen(true);
+    }
+
     return {
       languageSelected,
       selectLanguage,
@@ -151,8 +156,10 @@ export default {
       showLanguageList,
       languages,
       getImage,
+      openTutorial,
       Application,
       menuOpen: Application.menuOpen,
+      pinnedLocations: Application.pinnedLocations,
     };
   },
 };
