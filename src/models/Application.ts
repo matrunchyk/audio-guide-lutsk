@@ -14,6 +14,8 @@ export default class Application {
 
   static detailVenue = ref<Venue | null>(null);
 
+  static detailVenueMinimized = ref(false);
+
   static setLanguage(language: string) {
     this.language.value = language;
   }
@@ -32,5 +34,9 @@ export default class Application {
 
   static resetDetailVenue() {
     this.detailVenue.value = null;
+  }
+
+  static setDetailVenueMinimized(minimized: boolean) {
+    this.detailVenueMinimized.value = minimized;
   }
 }

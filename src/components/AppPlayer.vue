@@ -13,14 +13,6 @@
       <fast-forward class="cursor-pointer" />
       <next-track class="cursor-pointer" />
     </div>
-    <div class="flex justify-between mt-5">
-      <div class="underline text-xs">Показати на карті</div>
-      <div class="underline text-xs">Прибрати з Обраних</div>
-    </div>
-    <app-button class="mt-4 flex">
-      <icon-route class="text-white"/>
-      Прокласти маршрут
-    </app-button>
   </div>
 </template>
 
@@ -31,20 +23,16 @@ import NextTrack from '@/assets/player/next-track.svg';
 import PauseTrack from '@/assets/player/pause-track.svg';
 import PlayTrack from '@/assets/player/play-track.svg';
 import PrevTrack from '@/assets/player/prev-track.svg';
-import IconRoute from '@/assets/icon-route.svg';
-import AppButton from '@/components/AppButton.vue';
 
 export default {
   name: "AppPlayer",
   components: {
-    AppButton,
     FastForward,
     FastBackward,
     NextTrack,
     PrevTrack,
     PlayTrack,
     PauseTrack,
-    IconRoute,
   },
   setup() {
     return {
