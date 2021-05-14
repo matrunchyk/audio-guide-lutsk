@@ -22,7 +22,8 @@
     <img
       :src="venue.image"
       alt=""
-      class="w-full h-52">
+      @click="venue.showDetail()"
+      class="w-full h-52 cursor-pointer">
     <div>
       <svg-bookmark
         v-if="venue.pinned"
@@ -37,8 +38,9 @@
       <img
         class="flex-none cursor-pointer self-center"
         alt=""
-        :src="venue.icon">
-      <div class="flex-grow cursor-pointer text-white text-md flex">{{ venue.name }}</div>
+        :src="venue.icon"
+      >
+      <div class="flex-grow cursor-pointer text-white text-md flex" @click="venue.showDetail()">{{ venue.name }}</div>
     </div>
     <div class="flex stars gap-4 px-4 py-2.5 rounded-b-md">
       <div class="flex-none text-xs">Рейтинг</div>

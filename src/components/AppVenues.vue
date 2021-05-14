@@ -1,15 +1,18 @@
 <template>
-  <div class="AppVenues">
+  <div class="AppVenues relative">
     <AppVenue
       v-for="venue in venues"
       :key="venue.index"
       :venue="venue" />
+    <VenueDetail v-if="detailVenue"/>
   </div>
 </template>
 
 <script lang="ts">
 import AppVenue from '@/components/AppVenue.vue';
+import Application from '@/models/Application';
 import Venue from '@/models/Venue';
+import VenueDetail from '@/components/VenueDetail.vue';
 import faker from 'faker';
 
 const images = require.context('../assets/venues/', false, /\.jpg$/);
@@ -17,7 +20,8 @@ const images = require.context('../assets/venues/', false, /\.jpg$/);
 export default {
   name: "AppVenues",
   components: {
-    AppVenue: AppVenue,
+    AppVenue,
+    VenueDetail,
   },
   setup() {
     const venues = Array(7).fill(0).map((_, index) => new Venue({
@@ -40,6 +44,7 @@ export default {
 
     return {
       venues,
+      detailVenue: Application.detailVenue,
     };
   },
 };

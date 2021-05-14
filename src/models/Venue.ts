@@ -37,4 +37,8 @@ export default class Venue {
   public showRatingModal() {
     Application.ratingVenue.value = this;
   }
+
+  public showDetail() {
+    Application.detailVenue.value = this;
+  }
 }
