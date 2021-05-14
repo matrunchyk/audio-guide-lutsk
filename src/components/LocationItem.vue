@@ -86,15 +86,20 @@
 <script lang="ts">
 import { PropType, reactive } from 'vue';
 
+interface Location {
+  rated: boolean;
+  rating: number;
+}
+
 export default {
   name: "LocationItem",
   props: {
     location: {
-      type: Object as PropType<any>,
+      type: Object as PropType<Location>,
       required: true,
     },
   },
-  setup(props) {
+  setup(props: any) {
     const stars = reactive(Array(5).fill(0).map((_, index) => ({
       index,
       fill: props.location.rated ? '#b3b3b3' : '#f1cd0d',
