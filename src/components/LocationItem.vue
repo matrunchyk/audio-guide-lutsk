@@ -25,7 +25,7 @@
     <img
       :src="location.image"
       alt=""
-      class="w-full">
+      class="w-full h-52">
     <div>
       <img
         v-if="location.pinned"
@@ -83,14 +83,14 @@
   </div>
 </template>
 
-<script>
-import { reactive } from 'vue';
+<script lang="ts">
+import { PropType, reactive } from 'vue';
 
 export default {
   name: "LocationItem",
   props: {
     location: {
-      type: Object,
+      type: Object as PropType<any>,
       required: true,
     },
   },

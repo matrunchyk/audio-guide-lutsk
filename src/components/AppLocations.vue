@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import LocationItem from './LocationItem.vue';
 import faker from 'faker';
 
