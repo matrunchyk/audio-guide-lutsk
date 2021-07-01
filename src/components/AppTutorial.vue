@@ -1,5 +1,5 @@
 <template>
-  <div class="Tutorial absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
+  <div class="Tutorial absolute inset-0 bg-opacity-60 h-full flex justify-center content-center bg-black w-full flex-col items-center gap-1">
     <div class="w-3/4">
       <icon-model-close
         class="w-4 ml-auto cursor-pointer"

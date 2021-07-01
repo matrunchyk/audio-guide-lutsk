@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col app-player mt-4">
+  <div class="flex flex-col  app-player mt-4">
     <div class="flex tracking relative cursor-pointer mb-4">
       <div class="border w-full border-gray-200 absolute" />
       <div class="border w-1/3 border-red-600 absolute z-10" />

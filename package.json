@@ -12,6 +12,7 @@
     "faker": "^5.5.3",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.11",
+    "vue-router": "^4.0.10",
     "vue-svg-loader": "^0.17.0-beta.2"
   },
   "devDependencies": {

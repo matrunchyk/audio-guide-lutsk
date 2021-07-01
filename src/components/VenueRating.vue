@@ -1,7 +1,10 @@
 <template>
   <div class="flex-grow flex justify-center">
-    <star-empty/>
     <star-full/>
+    <star-full/>
+    <star-full/>
+    <star-full/>
+    <star-empty/>
   </div>
 </template>
 
@@ -29,7 +32,7 @@ export default {
     const venue: Venue | null = Application.ratingVenue.value;
     const stars = reactive(Array(5).fill(0).map((_, index) => ({
       index,
-      fill: venue?.rated ? '#b3b3b3' : '#f1cd0d',
+      fill: venue?.rated ? '#F1CD0F' : '#F1CD0F',
       rated: venue?.rating && venue?.rating <= index + 1,
     })));
 
