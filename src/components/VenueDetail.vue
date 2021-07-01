@@ -1,11 +1,11 @@
 <template>
-  <div class="absolute inset-0 bg-black bg-opacity-50 flex venue-detail justify-end flex-col px-2">
-    <div class="w-full pb-1">
-      <icon-model-close
-        class="w-4 ml-auto cursor-pointer"
-        @click="Application.resetDetailVenue()" />
-    </div>
-    <div class="bg-white w-full rounded-lg bottom-0 px-5 pt-2.5 pb-7">
+  <div class="w-80 inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
+    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 mb-0 fixed sm:w-1/3 pb-7">
+      <div class="w-25 pb-1">
+        <icon-model-close
+            class="w-4 ml-auto cursor-pointer"
+            @click="Application.resetDetailVenue()" />
+      </div>
       <div class="flex justify-center mb-1 cursor-pointer">
         <icon-collapse
           v-if="!venueMinimized"
@@ -25,8 +25,8 @@
       <app-player />
       <div v-if="!venueMinimized"
            class="flex justify-between mt-5">
-        <div class="underline text-xs">Показати на карті</div>
-        <div class="underline text-xs">Прибрати з Обраних</div>
+        <div class="underline text-xs cursor-pointer">Показати на карті</div>
+        <div class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
       </div>
       <app-button v-if="!venueMinimized"
                   class="mt-4 flex">
