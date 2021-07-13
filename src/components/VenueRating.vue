@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grow flex justify-center">
+  <div class="flex-grow flex mb-3 cursor-pointer justify-center">
     <star-full/>
     <star-full/>
     <star-full/>

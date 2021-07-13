@@ -1,9 +1,10 @@
 <template>
-  <div class="w-80 inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
-    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 mb-0 fixed sm:w-1/3 pb-7">
-      <div class="w-25 pb-1">
+  <div class=" inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
+
+    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 -m-1.5 fixed pb-7">
+      <div class="w-30 z-50 absolute ml-80 -mt-8">
         <icon-model-close
-            class="w-4 ml-auto cursor-pointer"
+            class="w-4 sm:-ml-8 cursor-pointer"
             @click="Application.resetDetailVenue()" />
       </div>
       <div class="flex justify-center mb-1 cursor-pointer">
