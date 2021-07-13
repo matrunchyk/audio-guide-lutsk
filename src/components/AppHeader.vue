@@ -39,13 +39,15 @@
           v-if="menuOpen"
           class="flex-none cursor-pointer w-6"
           @click="Application.setMenuOpen(false)"/>
-      <icon-hamburger
-          v-else
-          class="flex-none cursor-pointer w-6"
-          @click="Application.setMenuOpen(true)"/>
+      <div v-else class="relative space-y-0.5">
+        <icon-hamburger  class="flex-none cursor-pointer w-6 "
+            @click="Application.setMenuOpen(true)"/>
+        <div class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">2</div>
+      </div>
     </div>
     <div class="second-line sm:flex bg-white mt-0.5 py-3 sm:items-center px-4">
-      <AppToggle/>
+      <AppToggle class="" v-if="$route.name !== 'map'"/>
+      <MakeRoute v-else />
     </div>
     <div
         class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
@@ -73,6 +75,7 @@
 import {reactive, ref, shallowRef, watch} from 'vue';
 import Application from '../models/Application';
 import AppToggle from './AppToggle.vue';
+import MakeRoute from './MakeRoute.vue';
 import LogoTwotowers from '@/assets/logo-twotowers.svg';
 import LogoEu from '@/assets/logo-eu.svg';
 import LogoPlbyua from '@/assets/logo-plbyua.svg';
@@ -89,6 +92,7 @@ const images = require.context('../assets/flags/', false, /\.svg$/);
 export default {
   name: "AppHeader",
   components: {
+    MakeRoute,
     AppToggle,
     LogoTwotowers,
     LogoEu,
@@ -157,6 +161,11 @@ export default {
 </script>
 
 <style>
+.number {
+  font-size: 7px;
+  Height: 9px;
+  left: 13px;
+}
 .images-align {
   margin-left: -9px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);

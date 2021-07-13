@@ -8,11 +8,17 @@
         loading="lazy"
         title=""/>
   </div>
+  <RouteModal/>
 </template>
 
 <script>
+import RouteModal from '../components/RouteModal.vue';
+
 export default {
-  name: "map-page"
+  name: "map-page",
+  components: {
+    RouteModal
+  },
 }
 </script>
 
