@@ -29,7 +29,7 @@
         <div class="underline text-xs cursor-pointer">Показати на карті</div>
         <div class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
       </div>
-      <app-button v-if="!venueMinimized"
+      <app-button @click="generateRoute" v-if="!venueMinimized"
                   class="mt-4 flex">
         <icon-route class="text-white" />
         Прокласти маршрут
@@ -47,7 +47,8 @@ import AppButton from '@/components/AppButton.vue';
 import AppPlayer from '@/components/AppPlayer.vue';
 import Application from '@/models/Application';
 import Venue from '@/models/Venue';
-import { Ref } from 'vue';
+import { Ref} from 'vue';
+
 
 export default {
   name: "VenueDetail",
@@ -60,10 +61,19 @@ export default {
     AppButton,
   },
   setup() {
+
+    function generateRoute() {
+      console.log('marker')
+      // new google.value.maps.Marker({
+      //   position: {lat: 50.74270304771435, lng:  25.323703361173983},
+      //   map: map.value,
+      // });
+    }
     return {
       venue: Application.detailVenue as Ref<Venue>,
       venueMinimized: Application.detailVenueMinimized,
       Application,
+      generateRoute
     }
   }
 };

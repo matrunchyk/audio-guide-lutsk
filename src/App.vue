@@ -21,7 +21,8 @@
         'sm:block': $route.name !== '404',
 
       }">
-      <div id="google-map" ref="googleMap"></div>
+      <Map/>
+<!--      <div id="google-map" ref="googleMap"></div>-->
     </div>
     <language-selector
         v-if="!languageSelected"
@@ -30,13 +31,14 @@
 </template>
 
 <script lang="ts">
-import {onBeforeMount, onMounted, Ref, ref} from 'vue';
+import {onBeforeMount, ref} from 'vue';
 import Application from '@/models/Application';
 import AppHeader from './components/AppHeader.vue';
 import AppTutorial from './components/AppTutorial.vue';
 import RateVenueModal from './components/RateVenueModal.vue';
 import LanguageSelector from "@/components/LanguageSelector.vue";
-import GoogleMapsApiLoader from 'google-maps-api-loader';
+import Map from  "@/components/Map.vue"
+// import GoogleMapsApiLoader from 'google-maps-api-loader';
 
 export default {
   name: 'App',
@@ -45,14 +47,15 @@ export default {
     AppTutorial,
     RateVenueModal,
     LanguageSelector,
+    Map,
   },
 
   setup() {
     let languageSelected = ref('uk');
-    const apiKey = "AIzaSyDPLBnaFBaQa3XTLMSNnv_D_x8K0ZiHSBA";
-    const google: Ref<any> = ref()
-    const map = ref(null);
-    const googleMap = ref(null)
+    // const apiKey = "AIzaSyDPLBnaFBaQa3XTLMSNnv_D_x8K0ZiHSBA";
+    // const google: Ref<any> = ref()
+    // const map = ref(null);
+    // const googleMap = ref(null)
 
     onBeforeMount(() => {
       languageSelected.value = localStorage.getItem('languageSelected') || '';
@@ -64,24 +67,24 @@ export default {
       }
     });
 
-    onMounted(async () => {
-      const googleMapApi = await GoogleMapsApiLoader({
-        apiKey: apiKey
-      })
-      google.value = googleMapApi
-      initializeMap()
-    });
+    // onMounted(async () => {
+    //   const googleMapApi = await GoogleMapsApiLoader({
+    //     apiKey: apiKey
+    //   })
+    //   google.value = googleMapApi
+    //   initializeMap()
+    // });
 
-  function  initializeMap() {
-    const lutsk = { lat: 50.76702937034824, lng: 25.308253865549478 };
-    const mapContainer = googleMap.value;
-    map.value = new google.value.maps.Map(
-        mapContainer, {
-          zoom: 4,
-          center: lutsk,
-        }
-    )
-  }
+  // function  initializeMap() {
+  //   const lutsk = { lat: 50.76702937034824, lng: 25.308253865549478 };
+  //   const mapContainer = googleMap.value;
+  //   map.value = new google.value.maps.Map(
+  //       mapContainer, {
+  //         zoom: 15,
+  //         center: lutsk,
+  //       }
+  //   )
+  // }
 
     function selectLanguage(lang: string) {
       languageSelected.value = lang;
@@ -90,10 +93,10 @@ export default {
     }
 
     return {
-      googleMap,
+      // googleMap,
       languageSelected,
       selectLanguage,
-      initializeMap,
+      // initializeMap,
       menuOpen: Application.menuOpen,
       tutorialOpen: Application.tutorialOpen,
       ratingVenue: Application.ratingVenue,
@@ -103,11 +106,6 @@ export default {
 </script>
 
 <style scoped>
-#google-map {
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
 .left-column {
   background: #f3f3f3;
   min-width:  320px;
