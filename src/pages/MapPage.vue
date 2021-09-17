@@ -1,29 +1,53 @@
 <template>
   <div class="MapPage">
-    <iframe
-        class="flex-grow h-full sm:block w-full"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80797.7896696666!2d25.263965228817042!3d50.73976997371188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472599eba185965d%3A0xd25274a2228db86c!2z0JvRg9GG0YzQuiwg0JLQvtC70LjQvdGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1620169394908!5m2!1suk!2sua"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        title=""/>
+    <div id="google-map" ref="googleMap">
+    </div>
+
   </div>
-  <RouteModal/>
+<!--  <RouteModal/>-->
 </template>
 
 <script>
-import RouteModal from '../components/RouteModal.vue';
+// import RouteModal from '../components/RouteModal.vue';
+import GoogleMapsApiLoader from 'google-maps-api-loader'
 
 export default {
   name: "map-page",
   components: {
-    RouteModal
+    // RouteModal
   },
+  data: () => ({
+    apiKey: "AIzaSyDPLBnaFBaQa3XTLMSNnv_D_x8K0ZiHSBA"
+  }),
+  async mounted() {
+    const googleMapApi = await GoogleMapsApiLoader({
+      apiKey: this.apiKey
+    })
+    this.google = googleMapApi
+    this.initializeMap()
+  },
+  methods: {
+    initializeMap() {
+      const lutsk = { lat: 50.76702937034824, lng: 25.308253865549478 };
+      const mapContainer = this.$refs.googleMap;
+      console.log(mapContainer);
+      this.map = new this.google.maps.Map(
+          mapContainer, {
+            zoom: 4,
+            center: lutsk,
+          }
+      )
+    }
+  }
 }
 </script>
 
 <style scoped>
 .MapPage {
   height: calc(100vh - 96px);
+  width: 1000px;
+}
+#google-map {
+  height: 100%;
 }
 </style>

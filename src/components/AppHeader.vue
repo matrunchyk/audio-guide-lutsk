@@ -63,7 +63,7 @@
       </div>
       <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
-        <LogoTwotowers class="mr-auto"/>
+        <LogoTwotowers @click="linkToSourseSite" class="mr-auto"/>
         <LogoEu/>
         <LogoPlbyua/>
       </div>
@@ -130,6 +130,9 @@ export default {
         showLanguageList.value = true;
       }, 1000);
     }
+    function linkToSourseSite() {
+      window.open(' https://www.pbu2020.eu/')
+    }
 
     function openTutorial() {
       Application.setMenuOpen(false);
@@ -145,6 +148,7 @@ export default {
 
     return {
       selectLanguage,
+      linkToSourseSite,
       currentLanguageImage,
       showLanguageList,
       showLanguageDropdown,
