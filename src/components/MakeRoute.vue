@@ -2,7 +2,7 @@
   <div class="flex items-center hover:underline">
     <DistancePic/>
      <div class="ml-3 text-black font-normal text-xs">
-      Прокласти маршрут
+      Прокласти маршрути
     </div>
   </div>
 </template>
