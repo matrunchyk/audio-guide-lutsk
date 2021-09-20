@@ -26,7 +26,7 @@
       <app-player />
       <div v-if="!venueMinimized"
            class="flex justify-between mt-5">
-        <div class="underline text-xs cursor-pointer">Показати на карті</div>
+        <div @click="generateMarker" class="underline text-xs cursor-pointer">Показати на карті</div>
         <div class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
       </div>
       <app-button @click="generateRoute" v-if="!venueMinimized"
@@ -48,6 +48,7 @@ import AppPlayer from '@/components/AppPlayer.vue';
 import Application from '@/models/Application';
 import Venue from '@/models/Venue';
 import { Ref} from 'vue';
+import takeData from '@/components/use/useMap.ts'
 
 
 export default {
@@ -61,19 +62,76 @@ export default {
     AppButton,
   },
   setup() {
+    const mapData = takeData()
+
+    function generateMarker() {
+      new (mapData.getMapData()).google.maps.Marker({
+        position: {lat: 50.7445248, lng:  25.3329408},
+        map: mapData.getMapData().map,
+      });
+    }
+
+
+    function createLatLng(lat: any, lng: any) {
+      return new (mapData.getMapData()).google.maps.LatLng(lat, lng);
+    }
+
+    function createMarker(latLng: any) {
+      new (mapData.getMapData()).google.maps.Marker({
+        position: latLng,
+        map: mapData.getMapData().map,
+      })
+    }
+
+    function calculateAndDisplayRoute(
+        directionsService: any,
+        directionsRenderer: any,
+    ) {
+
+      directionsService.route({
+        origin: createLatLng(50.7445248, 25.3329408),
+        destination: createLatLng(50.74270304771435, 25.323703361173983),
+        travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING
+      }).then((response: any) => {
+        directionsRenderer.setDirections(response)
+      })
+    }
 
     function generateRoute() {
-      console.log('marker')
-      // new google.value.maps.Marker({
-      //   position: {lat: 50.74270304771435, lng:  25.323703361173983},
-      //   map: map.value,
-      // });
+      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer();
+      const directionsService = new (mapData.getMapData()).google.maps.DirectionsService();
+
+      directionsRenderer.setMap(mapData.getMapData().map);
+
+
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+               createMarker(createLatLng(50.74270304771435, 25.323703361173983));
+              calculateAndDisplayRoute(directionsService, directionsRenderer);
+          console.log(position.coords.latitude)
+          console.log(position.coords.longitude)
+        },
+        error => {
+          console.log(error.message)
+          createMarker(createLatLng(50.74270304771435, 25.323703361173983));
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        })
+      } else {
+        return;
+      }
+
     }
+
+
     return {
       venue: Application.detailVenue as Ref<Venue>,
       venueMinimized: Application.detailVenueMinimized,
       Application,
-      generateRoute
+      generateRoute,
+      generateMarker,
+      createLatLng,
+      createMarker,
+      calculateAndDisplayRoute
     }
   }
 };
