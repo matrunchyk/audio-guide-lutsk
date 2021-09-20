@@ -4,6 +4,7 @@
       <div class="flex-grow flex text-xl px-28 py-14 content-center justify-center">
         Дякуємо за відгук!
         <IconModelClose
+            @click="closeThankyouModal"
             class="w-4 absolute right-0 -mt-20  cursor-pointer"
         />
       </div>
@@ -12,7 +13,6 @@
 </template>
 
 <script>
-
 import IconModelClose from '@/assets/icon-modal-close.svg';
 
 export default {
@@ -20,6 +20,11 @@ export default {
   components: {
     IconModelClose
   },
+  methods: {
+    closeThankyouModal() {
+      console.log('close')
+    }
+  }
 
 }
 </script>
