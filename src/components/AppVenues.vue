@@ -1,5 +1,5 @@
 <template>
-  <div class="AppVenues relative">
+  <div class=" AppVenues relative ">
     <AppVenue
       v-for="venue in venues"
       :key="venue.index"
@@ -50,4 +50,5 @@ export default {
   },
 };
 </script>
+
 

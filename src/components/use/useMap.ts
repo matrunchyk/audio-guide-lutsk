@@ -6,7 +6,6 @@ export default function takeData() {
         google = googleData;
         map = mapData
     }
-
     function getMapData() {
         return {
             google,

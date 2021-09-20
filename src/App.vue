@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
+  <div class="flex h-screen">
     <div
-        class="flex-grow "
+        class="flex-grow overflow-auto h-full"
         :class="{
          'left-column': $route.name !== '404',
          'sm:flex-grow-0': $route.name !== '404',
