@@ -13,7 +13,7 @@ export default {
 
   },
   data: () => ({
-    apiKey: process.env.VUE_APP_API_KEY,
+    apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     google: null,
     map: null,
   }),
