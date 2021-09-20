@@ -1,6 +1,6 @@
 <template>
-  <div class="Map">
-    <div id="google-map" ref="googleMap"> </div>
+  <div class="z-0 Map h-screen">
+    <div class="google-map h-full" id="google-map" ref="googleMap"> </div>
   </div>
 </template>
 
@@ -69,12 +69,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.Map {
-  height: calc(100vh);
-}
-#google-map {
-  height: 100%;
-}
-</style>
