@@ -6,6 +6,7 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader'
+import takeData from '@/components/use/useMap.ts'
 
 export default {
   name: "map-page",
@@ -27,9 +28,7 @@ export default {
   },
   methods: {
     initializeMap() {
-      const directionsRenderer = new this.google.maps.DirectionsRenderer();
-      const directionsService = new this.google.maps.DirectionsService();
-      const lutsk = { lat: 50.76702937034824, lng: 25.308253865549478 };
+      const lutsk = { lat: 50.74734154237352, lng: 25.324579628477217 };
       const mapContainer = this.$refs.googleMap;
       this.map = new this.google.maps.Map(
           mapContainer, {
@@ -37,35 +36,13 @@ export default {
             center: lutsk,
           }
       )
-      directionsRenderer.setMap(this.map);
-
-      this.createMarker(this.createLatLng(50.758741155650625, 25.350550096593707));
-      this.createMarker(this.createLatLng(50.74270304771435, 25.323703361173983));
-      this.calculateAndDisplayRoute(directionsService, directionsRenderer);
+      takeData().initMap(this.google, this.map);
 
     },
-    createLatLng(lat, lng) {
-      return new this.google.maps.LatLng(lat, lng);
-    },
-    createMarker(latLng) {
-      new this.google.maps.Marker({
-        position: latLng,
-        map: this.map,
-      });
-    },
-    calculateAndDisplayRoute(
-        directionsService,
-        directionsRenderer,
-    ) {
-
-      directionsService.route({
-        origin: this.createLatLng(50.758741155650625, 25.350550096593707),
-        destination: this.createLatLng(50.74270304771435, 25.323703361173983),
-        travelMode: this.google.maps.TravelMode.WALKING
-      }).then((response) => {
-        directionsRenderer.setDirections(response)
-      })
-    }
   },
+  getCurrentPositionUser() {
+    const mapContainer = this.$refs.currentPosition;
+    console.log(mapContainer)
+  }
 }
 </script>
