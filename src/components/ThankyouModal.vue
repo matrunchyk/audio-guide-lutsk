@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     closeThankyouModal() {
-      console.log(process.env.API_KEY)
+      console.log('close')
     }
   }
 
