@@ -17,12 +17,12 @@
 </template>
 
 <script lang="ts">
-import FastBackward from '@/assets/player/fast-backward.svg';
-import FastForward from '@/assets/player/fast-forward.svg';
-import NextTrack from '@/assets/player/next-track.svg';
-import PauseTrack from '@/assets/player/pause-track.svg';
-import PlayTrack from '@/assets/player/play-track.svg';
-import PrevTrack from '@/assets/player/prev-track.svg';
+import FastBackward from '@/assets/svg/player/fast-backward.svg';
+import FastForward from '@/assets/svg/player/fast-forward.svg';
+import NextTrack from '@/assets/svg/player/next-track.svg';
+import PauseTrack from '@/assets/svg/player/pause-track.svg';
+import PlayTrack from '@/assets/svg/player/play-track.svg';
+import PrevTrack from '@/assets/svg/player/prev-track.svg';
 
 export default {
   name: "AppPlayer",

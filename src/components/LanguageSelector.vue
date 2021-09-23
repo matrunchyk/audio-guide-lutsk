@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import FlagUk from '@/assets/flags/uk.svg';
-import FlagDe from '@/assets/flags/de.svg';
-import FlagEn from '@/assets/flags/en.svg';
-import FlagPl from '@/assets/flags/pl.svg';
-import FlagRu from '@/assets/flags/ru.svg';
+import FlagUk from '@/assets/svg/flags/uk.svg';
+import FlagDe from '@/assets/svg/flags/de.svg';
+import FlagEn from '@/assets/svg/flags/en.svg';
+import FlagPl from '@/assets/svg/flags/pl.svg';
+import FlagRu from '@/assets/svg/flags/ru.svg';
 
 export default {
   name: "LanguageSelector",

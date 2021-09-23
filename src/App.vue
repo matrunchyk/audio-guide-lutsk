@@ -11,8 +11,10 @@
     >
       <AppHeader v-if="$route.name !== '404'"/>
       <router-view />
+      <RouteModal v-if="routeModalOpen"/>
       <AppTutorial v-if="tutorialOpen"/>
       <RateVenueModal v-if="ratingVenue"/>
+
     </div>
     <div
       class="hidden flex-grow"
@@ -30,12 +32,13 @@
 </template>
 
 <script lang="ts">
-import {onBeforeMount, ref} from 'vue';
+import {onBeforeMount, onMounted, ref} from 'vue';
 import Application from '@/models/Application';
 import AppHeader from './components/AppHeader.vue';
 import AppTutorial from './components/AppTutorial.vue';
 import RateVenueModal from './components/RateVenueModal.vue';
 import LanguageSelector from "@/components/LanguageSelector.vue";
+import RouteModal from "@/components/RouteModal.vue";
 import AppMap from "@/components/AppMap.vue"
 
 export default {
@@ -45,6 +48,7 @@ export default {
     AppTutorial,
     RateVenueModal,
     LanguageSelector,
+    RouteModal,
     AppMap,
   },
 
@@ -60,6 +64,9 @@ export default {
         document.body.classList.remove('overflow-hidden');
       }
     });
+    onMounted(() => {
+      Application.setVenues()
+    })
 
     function selectLanguage(lang: string) {
       languageSelected.value = lang;
@@ -73,6 +80,7 @@ export default {
       menuOpen: Application.menuOpen,
       tutorialOpen: Application.tutorialOpen,
       ratingVenue: Application.ratingVenue,
+      routeModalOpen: Application.routeModalOpen,
     }
   }
 }
