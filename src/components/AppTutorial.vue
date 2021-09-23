@@ -37,7 +37,7 @@
 
 <script>
 import Application from '@/models/Application';
-import IconModelClose from '@/assets/icon-modal-close.svg';
+import IconModelClose from '@/assets/svg/icon-modal-close.svg';
 
 export default {
   name: "AppTutorial",

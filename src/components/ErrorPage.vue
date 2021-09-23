@@ -10,7 +10,7 @@
 
 <script>
 
-import svgMan from '@/assets/man.svg';
+import svgMan from '@/assets/svg/man.svg';
 export default {
   name: "ErrorPage",
   components: {

@@ -26,8 +26,9 @@
       @click="venue.showDetail()"
       class="w-full h-52 cursor-pointer">
     <div>
+
       <svg-bookmark
-        v-if="venue.pinned"
+        v-if="venue.isFavorite"
         class="absolute right-2"
         :class="{
             'top-9': venue.firstRecommended && venue.recommended,
@@ -83,8 +84,8 @@
 <script lang="ts">
 import Venue from '@/models/Venue';
 import { PropType, reactive } from 'vue';
-import SvgVolume from "@/assets/volume.svg";
-import SvgBookmark from '@/assets/bookmark.svg';
+import SvgVolume from "@/assets/svg/volume.svg";
+import SvgBookmark from '@/assets/svg/bookmark.svg';
 
 export default {
   name: "AppVenue",
