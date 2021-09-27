@@ -10,18 +10,19 @@
 
 <script>
 
-import svgMan from '@/assets/man.svg';
+import svgMan from '@/assets/svg/man.svg';
+
 export default {
   name: "ErrorPage",
   components: {
-    svgMan
+    svgMan,
   }
-}
+};
 </script>
 
 <style scoped>
-  .buttonback {
-    background: #1F3D87;
-    color: #FFFFFF;
-  }
+.buttonback {
+  background: #1F3D87;
+  color: #FFFFFF;
+}
 </style>

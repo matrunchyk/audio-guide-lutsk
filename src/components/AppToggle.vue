@@ -24,7 +24,7 @@
 
 <script lang="ts">
 export default {
-  name: "AppToggle"
+  name: "AppToggle",
 }
 </script>
 

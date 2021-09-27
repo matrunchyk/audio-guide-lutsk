@@ -1,17 +1,16 @@
 <template>
   <div class="z-0 Map h-screen">
-    <div class="google-map h-full" id="google-map" ref="googleMap"> </div>
+    <div class="google-map h-full" id="google-map" ref="googleMap"></div>
   </div>
 </template>
 
 <script>
-import GoogleMapsApiLoader from 'google-maps-api-loader'
+import GoogleMapsApiLoader from 'google-maps-api-loader';
+import takeData from '@/components/use/useMap.ts';
+import Application from "@/models/Application";
 
 export default {
   name: "map-page",
-  components: {
-
-  },
   data: () => ({
     apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     google: null,
@@ -20,51 +19,49 @@ export default {
   async mounted() {
     const googleMapApi = await GoogleMapsApiLoader({
       apiKey: this.apiKey
-    })
-    this.google = googleMapApi
+    });
+    this.google = googleMapApi;
     this.initializeMap();
-
   },
   methods: {
     initializeMap() {
-      const directionsRenderer = new this.google.maps.DirectionsRenderer();
-      const directionsService = new this.google.maps.DirectionsService();
-      const lutsk = { lat: 50.76702937034824, lng: 25.308253865549478 };
+      const lutsk = {lat: 50.74734154237352, lng: 25.324579628477217};
       const mapContainer = this.$refs.googleMap;
       this.map = new this.google.maps.Map(
           mapContainer, {
             zoom: 14,
             center: lutsk,
           }
-      )
-      directionsRenderer.setMap(this.map);
-
-      this.createMarker(this.createLatLng(50.758741155650625, 25.350550096593707));
-      this.createMarker(this.createLatLng(50.74270304771435, 25.323703361173983));
-      this.calculateAndDisplayRoute(directionsService, directionsRenderer);
-
+      );
+      this.generateMarker();
+      this.generateMyGeoPosition();
+      takeData().initMap(this.google, this.map);
     },
-    createLatLng(lat, lng) {
-      return new this.google.maps.LatLng(lat, lng);
-    },
-    createMarker(latLng) {
-      new this.google.maps.Marker({
-        position: latLng,
+    createMarker(lat, lng, icon) {
+      return new this.google.maps.Marker({
+        position: {lat, lng},
         map: this.map,
+        icon,
       });
     },
-    calculateAndDisplayRoute(
-        directionsService,
-        directionsRenderer,
-    ) {
-
-      directionsService.route({
-        origin: this.createLatLng(50.758741155650625, 25.350550096593707),
-        destination: this.createLatLng(50.74270304771435, 25.323703361173983),
-        travelMode: this.google.maps.TravelMode.WALKING
-      }).then((response) => {
-        directionsRenderer.setDirections(response)
-      })
+    generateMyGeoPosition() {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(position => {
+            this.createMarker(position.coords.latitude, position.coords.longitude, '/marker-icons/user-location-icon.svg');
+          },
+          error => {
+            console.log(error.message);
+            this.createMarker(50.754311645428764, 25.332929592093258);
+          })
+    },
+    generateMarker() {
+      Application.venues.value.forEach((venue) => {
+        if (venue.isRecommended) {
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIconRecommended);
+        } else {
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon);
+        }
+      });
     }
   },
 }

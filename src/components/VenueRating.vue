@@ -11,9 +11,9 @@
 <script lang="ts">
 import Application from '@/models/Application';
 import Venue from '@/models/Venue';
-import { reactive } from 'vue';
-import StarEmpty from '@/assets/stars/empty.svg';
-import StarFull from '@/assets/stars/full.svg';
+import {reactive} from 'vue';
+import StarEmpty from '@/assets/svg/stars/empty.svg';
+import StarFull from '@/assets/svg/stars/full.svg';
 
 export default {
   name: "VenueRating",
@@ -42,7 +42,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-
-</style>
