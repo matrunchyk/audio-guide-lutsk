@@ -137,11 +137,11 @@ export default {
     }
 
     function linkToSourseSiteLeftIcon() {
-      window.open('https://www.pbu2020.eu/ua/projects2020/232')
+      window.open('https://www.pbu2020.eu/ua/projects2020/232');
     }
 
     function linkToSourseSiteRightIcon() {
-      window.open('https://www.pbu2020.eu/')
+      window.open('https://www.pbu2020.eu/');
     }
 
     function openTutorial() {
@@ -150,7 +150,7 @@ export default {
     }
 
     function openDefaultModal() {
-      if (recommendedNum.value) return
+      if (recommendedNum.value) return;
       Application.setMenuOpen(false);
       Application.setRouteModalOpen(true);
     }
@@ -160,7 +160,7 @@ export default {
       return router.push({name});
     }
 
-    watch(Application.language, lang => selectLanguage(lang))
+    watch(Application.language, lang => selectLanguage(lang));
 
     return {
       selectLanguage,
