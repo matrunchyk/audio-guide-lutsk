@@ -1,9 +1,9 @@
 <template>
-  <div class=" AppVenues relative ">
+  <div class="AppVenues relative">
     <AppVenue
-      v-for="venue in venues"
-      :key="venue.index"
-      :venue="venue" />
+        v-for="venue in venues"
+        :key="venue.index"
+        :venue="venue"/>
     <VenueDetail v-if="detailVenue"/>
   </div>
 </template>
@@ -20,7 +20,6 @@ export default {
     VenueDetail,
   },
   setup() {
-
     // icon: image.abstract(20, 20) + '?index=' + item.index,
     return {
       venues: Application.venues,

@@ -11,7 +11,7 @@
 <script lang="ts">
 import Application from '@/models/Application';
 import Venue from '@/models/Venue';
-import { reactive } from 'vue';
+import {reactive} from 'vue';
 import StarEmpty from '@/assets/svg/stars/empty.svg';
 import StarFull from '@/assets/svg/stars/full.svg';
 

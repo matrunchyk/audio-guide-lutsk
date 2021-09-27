@@ -40,14 +40,16 @@
           class="flex-none cursor-pointer w-6"
           @click="Application.setMenuOpen(false)"/>
       <div v-else class="relative space-y-0.5">
-        <icon-hamburger  class="flex-none cursor-pointer w-6 "
-            @click="Application.setMenuOpen(true)"/>
-        <div v-if="recommendedNum" class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">{{ recommendedNum }}</div>
+        <icon-hamburger class="flex-none cursor-pointer w-6 "
+                        @click="Application.setMenuOpen(true)"/>
+        <div v-if="recommendedNum" class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
+          {{ recommendedNum }}
+        </div>
       </div>
     </div>
     <div class="second-line sm:flex bg-white mt-0.5 py-3 sm:items-center px-4">
       <AppToggle class="" v-if="$route.name !== 'map'"/>
-      <MakeRoute v-else />
+      <MakeRoute v-else/>
     </div>
     <div
         class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
@@ -59,7 +61,7 @@
       <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('list')">Пошук по Списку</div>
       <div @click="openDefaultModal" class="cursor-pointer flex justify-between hover:text-x-red">
         Прокласти маршрут
-        <span v-if="recommendedNum"  class="rounded-md bg-blue-900 text-white py-0 px-3">{{ recommendedNum }}</span>
+        <span v-if="recommendedNum" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ recommendedNum }}</span>
       </div>
       <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
@@ -108,10 +110,9 @@ export default {
     let languages = reactive(['uk', 'pl', 'de', 'ru', 'en']);
     let showLanguageDropdown = ref(false);
     const venue = Application.detailVenue;
-    const venues = Application.venues
-    const recommendedNum = computed(() => {
-      return  venues.value.filter((venue) => venue.isFavorite === true).length;
-    })
+    const venues = Application.venues;
+    const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
+
     function getImage(lang: string) {
       return images(`./${lang}.svg`).default;
     }
@@ -134,9 +135,11 @@ export default {
         showLanguageList.value = true;
       }, 1000);
     }
+
     function linkToSourseSiteLeftIcon() {
       window.open('https://www.pbu2020.eu/ua/projects2020/232')
     }
+
     function linkToSourseSiteRightIcon() {
       window.open('https://www.pbu2020.eu/')
     }
@@ -147,9 +150,9 @@ export default {
     }
 
     function openDefaultModal() {
-      if(recommendedNum.value) return
-        Application.setMenuOpen(false);
-        Application.setRouteModalOpen(true)
+      if (recommendedNum.value) return
+      Application.setMenuOpen(false);
+      Application.setRouteModalOpen(true);
     }
 
     function switchView(name: string) {
@@ -188,6 +191,7 @@ export default {
   Height: 9px;
   left: 13px;
 }
+
 .images-align {
   margin-left: -9px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
