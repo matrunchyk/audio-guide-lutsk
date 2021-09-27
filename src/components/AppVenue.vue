@@ -117,6 +117,4 @@ export default {
 .stars {
   background: #FFFFFF;
 }
-
-
 </style>
