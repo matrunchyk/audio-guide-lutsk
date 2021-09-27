@@ -22,8 +22,6 @@ import VenueRating from '@/components/VenueRating.vue';
 import Application from '@/models/Application';
 import IconModelClose from '@/assets/svg/icon-modal-close.svg';
 import ThankyouModal from '@/components/ThankyouModal.vue';
-// import {computed} from "vue";
-
 
 export default {
   name: "RateVenueModal",
@@ -37,19 +35,16 @@ export default {
     const venues = Application.venues;
 
     function makeRated() {
-      Application.setThankYouModalOpen(true)
+      Application.setThankYouModalOpen(true);
     }
 
     return {
       venues,
       Application,
       isRatingVenueForThankModal: Application.isRatingVenueForThankModal,
-      makeRated
-    }
+      makeRated,
+    };
   }
 };
 </script>
 
-<style scoped>
-
-</style>

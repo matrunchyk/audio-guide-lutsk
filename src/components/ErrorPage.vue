@@ -15,9 +15,9 @@ import svgMan from '@/assets/svg/man.svg';
 export default {
   name: "ErrorPage",
   components: {
-    svgMan
+    svgMan,
   }
-}
+};
 </script>
 
 <style scoped>

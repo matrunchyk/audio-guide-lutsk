@@ -38,24 +38,24 @@ export default {
     PauseTrack,
   },
   setup() {
-    const isPlaying = ref(false)
-    const venue = Application.detailVenue
-    const audioPlayer = ref<HTMLAudioElement>()
+    const isPlaying = ref(false);
+    const venue = Application.detailVenue;
+    const audioPlayer = ref<HTMLAudioElement>();
 
     function togglePlayerPlay() {
       if (isPlaying.value && audioPlayer.value) {
-        audioPlayer.value?.pause()
+        audioPlayer.value?.pause();
       } else {
-        audioPlayer.value?.play()
+        audioPlayer.value?.play();
       }
-      isPlaying.value = !isPlaying.value
+      isPlaying.value = !isPlaying.value;
     }
 
     return {
       venue,
       isPlaying,
       audioPlayer,
-      togglePlayerPlay
+      togglePlayerPlay,
     };
   },
 };

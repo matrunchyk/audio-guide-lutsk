@@ -41,11 +41,11 @@ export default {
       return new this.google.maps.Marker({
         position: {lat, lng},
         map: this.map,
-        icon
-      })
+        icon,
+      });
     },
     generateMyGeoPosition() {
-      if (!navigator.geolocation) return
+      if (!navigator.geolocation) return;
       navigator.geolocation.getCurrentPosition(position => {
             this.createMarker(position.coords.latitude, position.coords.longitude, '/marker-icons/user-location-icon.svg');
           },
@@ -61,7 +61,7 @@ export default {
         } else {
           venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon);
         }
-      })
+      });
     }
   },
 }

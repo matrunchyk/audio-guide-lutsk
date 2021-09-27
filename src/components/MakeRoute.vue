@@ -15,16 +15,16 @@ import {computed} from "vue";
 export default {
   name: "MakeRoute",
   components: {
-    DistancePic
+    DistancePic,
   },
   setup() {
     const venues = Application.venues;
     const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
     return {
       venues,
-      recommendedNum
-    }
+      recommendedNum,
+    };
   }
-}
+};
 </script>
 

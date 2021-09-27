@@ -20,18 +20,12 @@ import Application from "@/models/Application";
 export default {
   name: "ThankyouModal",
   components: {
-    IconModelClose
+    IconModelClose,
   },
   setup() {
     return {
       Application,
-    }
-
+    };
   }
-
-}
+};
 </script>
-
-<style scoped>
-
-</style>

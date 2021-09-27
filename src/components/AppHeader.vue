@@ -65,9 +65,9 @@
       </div>
       <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
-        <LogoTwotowers @click="linkToSourseSiteLeftIcon" class="mr-auto"/>
+        <LogoTwotowers @click="linkToSourceSiteLeftIcon" class="mr-auto"/>
         <LogoEu/>
-        <LogoPlbyua @click="linkToSourseSiteRightIcon"/>
+        <LogoPlbyua @click="linkToSourceSiteRightIcon"/>
       </div>
     </div>
   </div>
@@ -136,11 +136,11 @@ export default {
       }, 1000);
     }
 
-    function linkToSourseSiteLeftIcon() {
+    function linkToSourceSiteLeftIcon() {
       window.open('https://www.pbu2020.eu/ua/projects2020/232');
     }
 
-    function linkToSourseSiteRightIcon() {
+    function linkToSourceSiteRightIcon() {
       window.open('https://www.pbu2020.eu/');
     }
 
@@ -164,8 +164,8 @@ export default {
 
     return {
       selectLanguage,
-      linkToSourseSiteLeftIcon,
-      linkToSourseSiteRightIcon,
+      linkToSourceSiteLeftIcon,
+      linkToSourceSiteRightIcon,
       currentLanguageImage,
       showLanguageList,
       showLanguageDropdown,
