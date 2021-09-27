@@ -10,15 +10,14 @@
         }"
     >
       <AppHeader v-if="$route.name !== '404'"/>
-      <router-view />
+      <router-view/>
       <RouteModal v-if="routeModalOpen"/>
       <AppTutorial v-if="tutorialOpen"/>
       <RateVenueModal v-if="ratingVenue"/>
-
     </div>
     <div
-      class="hidden flex-grow"
-      :class="{
+        class="hidden flex-grow"
+        :class="{
         'bg-opacity-60': menuOpen,
         'sm:block': $route.name !== '404',
 
@@ -27,7 +26,7 @@
     </div>
     <language-selector
         v-if="!languageSelected"
-        @select="selectLanguage" />
+        @select="selectLanguage"/>
   </div>
 </template>
 
@@ -57,7 +56,6 @@ export default {
 
     onBeforeMount(() => {
       languageSelected.value = localStorage.getItem('languageSelected') || '';
-
       if (!languageSelected.value) {
         document.body.classList.add('overflow-hidden');
       } else {
@@ -65,12 +63,11 @@ export default {
       }
     });
     onMounted(() => {
-      Application.setVenues()
+      Application.setVenues();
     })
 
     function selectLanguage(lang: string) {
       languageSelected.value = lang;
-
       Application.setLanguage(lang);
     }
 
@@ -89,7 +86,7 @@ export default {
 <style scoped>
 .left-column {
   background: #f3f3f3;
-  min-width:  320px;
+  min-width: 320px;
 }
 
 @media (min-width: 640px) {
