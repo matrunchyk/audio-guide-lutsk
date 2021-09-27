@@ -1,4 +1,5 @@
 <template>
+  <audio :src="venue.audioFile" preload="auto" ref="audioPlayer"></audio>
   <div class="flex flex-col  app-player mt-4">
     <div class="flex tracking relative cursor-pointer mb-4">
       <div class="border w-full border-gray-200 absolute" />
@@ -8,8 +9,8 @@
     <div class="controls flex gap-5 items-center justify-center">
       <prev-track class="cursor-pointer"/>
       <fast-backward class="cursor-pointer" />
-      <pause-track class="cursor-pointer" v-if="isPlaying" />
-      <play-track class="cursor-pointer" v-else />
+      <pause-track class="cursor-pointer"  @click="togglePlayerPlay"  v-if="isPlaying" />
+      <play-track class="cursor-pointer" @click="togglePlayerPlay" v-else />
       <fast-forward class="cursor-pointer" />
       <next-track class="cursor-pointer" />
     </div>
@@ -23,6 +24,8 @@ import NextTrack from '@/assets/svg/player/next-track.svg';
 import PauseTrack from '@/assets/svg/player/pause-track.svg';
 import PlayTrack from '@/assets/svg/player/play-track.svg';
 import PrevTrack from '@/assets/svg/player/prev-track.svg';
+import {ref} from "vue";
+import Application from "@/models/Application";
 
 export default {
   name: "AppPlayer",
@@ -35,8 +38,23 @@ export default {
     PauseTrack,
   },
   setup() {
+    const isPlaying = ref(false)
+    const venue = Application.detailVenue
+    const audioPlayer = ref<HTMLAudioElement>()
+    function togglePlayerPlay() {
+      if(isPlaying.value && audioPlayer.value) {
+        audioPlayer.value?.pause()
+      } else {
+        audioPlayer.value?.play()
+      }
+
+      isPlaying.value = !isPlaying.value
+    }
     return {
-      isPlaying: false,
+      venue,
+      isPlaying,
+      audioPlayer,
+      togglePlayerPlay
     };
   },
 };

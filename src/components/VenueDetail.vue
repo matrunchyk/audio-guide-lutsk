@@ -22,7 +22,7 @@
         alt="" />
       <div>
         <svg-bookmark
-            v-if="venue.isFavorite"
+            v-if="venue.isFavorite && !venueMinimized"
             class="absolute top-6 right-6"
             :class="{
             'top-6': venue.firstRecommended && venue.recommended,
@@ -79,6 +79,7 @@ export default {
   setup() {
     const mapData = takeData()
     const venue = Application.detailVenue;
+    const venues = Application.venues;
 
 
     function toggleFavorite() {
@@ -95,74 +96,59 @@ export default {
       mapData.getMapData().map.setZoom(14)
     }
 
-    function generateMarker() {
-      new (mapData.getMapData()).google.maps.Marker({
-        position: {lat: 50.7445248, lng:  25.3329408},
-        map: mapData.getMapData().map,
-      });
-    }
-
     function createLatLng(lat: any, lng: any) {
       return new (mapData.getMapData()).google.maps.LatLng(lat, lng);
     }
 
-    function createMarker(latLng: any) {
-      new (mapData.getMapData()).google.maps.Marker({
-        position: latLng,
-        map: mapData.getMapData().map,
-      })
-    }
-
-    function calculateAndDisplayRoute(
-
-        directionsService: any,
-        directionsRenderer: any,
-    ) {
-      if(venue.value === null) return
-      directionsService.route({
-        origin: createLatLng(50.7445248, 25.3329408),
-        destination: createLatLng(venue.value.lat, venue.value.lng),
-        travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING
-      }).then((response: any) => {
-        directionsRenderer.setDirections(response)
-      })
-    }
-
     function generateRoute() {
-      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer();
+      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer({ suppressMarkers: true });
       const directionsService = new (mapData.getMapData()).google.maps.DirectionsService();
 
       directionsRenderer.setMap(mapData.getMapData().map);
 
       calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-
-      // if(navigator.geolocation) {
-      //   navigator.geolocation.getCurrentPosition(position => {
-      //         calculateAndDisplayRoute(directionsService, directionsRenderer);
-      //     console.log(position.coords.latitude)
-      //     console.log(position.coords.longitude)
-      //   },
-      //   error => {
-      //     console.log(error.message)
-      //     calculateAndDisplayRoute(directionsService, directionsRenderer);
-      //   })
-      // } else {
-      //   return;
-      // }
-
     }
 
+    function calculateAndDisplayRoute(
+        directionsService: any,
+        directionsRenderer: any,
+    ) {
+      const waypoints: { location: any; stopover: boolean; }[] = [];
+      venues.value.forEach(item => {
+        if(item.isFavorite) {
+          waypoints.push({
+            location: createLatLng(item.lat, item.lng),
+            stopover: true
+          })
+        }
+      })
+      navigator.geolocation.getCurrentPosition(position => {
+            if(venue.value === null) return
+            directionsService.route({
+              origin: createLatLng(position.coords.latitude, position.coords.longitude),
+              destination: createLatLng(venue.value.lat, venue.value.lng),
+              waypoints: waypoints,
+              optimizeWaypoints: true,
+              provideRouteAlternatives: true,
+              travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING
+            }).then((response: any) => {
+              directionsRenderer.setDirections(response)
+            })
+          },
+          error => {
+            console.log(error.message)
+          })
 
+    }
     return {
       venue,
+      venues,
       venueMinimized: Application.detailVenueMinimized,
       Application,
+      createLatLng,
       toggleFavorite,
       generateRoute,
-      generateMarker,
-      createLatLng,
-      createMarker,
       calculateAndDisplayRoute,
       changeZoom,
       backToNormalZoom,
