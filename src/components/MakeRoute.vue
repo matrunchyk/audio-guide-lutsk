@@ -1,7 +1,7 @@
 <template>
   <div v-if="recommendedNum" class="flex items-center hover:underline">
     <DistancePic/>
-     <div class="ml-3 text-black font-normal text-xs">
+    <div class="ml-3 text-black font-normal text-xs">
       Прокласти маршрут
     </div>
   </div>
@@ -13,15 +13,13 @@ import Application from "@/models/Application";
 import {computed} from "vue";
 
 export default {
-name: "MakeRoute",
+  name: "MakeRoute",
   components: {
     DistancePic
   },
   setup() {
-    const venues = Application.venues
-    const recommendedNum = computed(() => {
-      return  venues.value.filter((venue) => venue.isFavorite === true).length;
-    })
+    const venues = Application.venues;
+    const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
     return {
       venues,
       recommendedNum

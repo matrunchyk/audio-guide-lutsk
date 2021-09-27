@@ -1,5 +1,5 @@
 import Venue from '@/models/Venue';
-import { ref } from "vue";
+import {ref} from "vue";
 import venuesArr from "@/components/venuesArr.json";
 
 const images = require.context('@/assets/svg/venues/', false, /\.jpg$/);
@@ -56,6 +56,7 @@ export default class Application {
   static setDetailVenueMinimized(minimized: boolean) {
     this.detailVenueMinimized.value = minimized;
   }
+
   static setVenues() {
     this.venues.value = venuesArr.map((item: any) => new Venue({
       index: item.index,
@@ -78,12 +79,12 @@ export default class Application {
       markerIconRecommended: item.markerIconRecommended,
       markerIconRecommendedFavorite: item.markerIconRecommendedFavorite
     }))
-        .sort((a: any, b: any) => b.recommended - a.recommended)
-        .map(
-            (venue: any, index: any, arr: any) => venue.enhanceRecommended(
-                !index && !!venue.recommended,
-                !!venue.recommended && arr[index + 1] && !arr[index + 1].recommended,
-            )
-        );
+      .sort((a: any, b: any) => b.recommended - a.recommended)
+      .map(
+        (venue: any, index: any, arr: any) => venue.enhanceRecommended(
+          !index && !!venue.recommended,
+          !!venue.recommended && arr[index + 1] && !arr[index + 1].recommended,
+        )
+      );
   }
 }

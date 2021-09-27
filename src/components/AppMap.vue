@@ -11,20 +11,17 @@ import Application from "@/models/Application";
 
 export default {
   name: "map-page",
-  components: {},
   data: () => ({
     apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     google: null,
     map: null,
-
   }),
   async mounted() {
     const googleMapApi = await GoogleMapsApiLoader({
       apiKey: this.apiKey
-    })
-    this.google = googleMapApi
-    this.initializeMap()
-
+    });
+    this.google = googleMapApi;
+    this.initializeMap();
   },
   methods: {
     initializeMap() {
@@ -35,10 +32,9 @@ export default {
             zoom: 14,
             center: lutsk,
           }
-      )
-
-      this.generateMarker()
-      this.myGeoPosition()
+      );
+      this.generateMarker();
+      this.generateMyGeoPosition();
       takeData().initMap(this.google, this.map);
     },
     createMarker(lat, lng, icon) {
@@ -48,24 +44,22 @@ export default {
         icon
       })
     },
-    myGeoPosition() {
+    generateMyGeoPosition() {
       if (!navigator.geolocation) return
       navigator.geolocation.getCurrentPosition(position => {
             this.createMarker(position.coords.latitude, position.coords.longitude, '/marker-icons/user-location-icon.svg');
           },
           error => {
-            console.log(error.message)
+            console.log(error.message);
             this.createMarker(50.754311645428764, 25.332929592093258);
           })
-
     },
     generateMarker() {
       Application.venues.value.forEach((venue) => {
-
-        if(venue.isRecommended) {
-          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIconRecommended)
+        if (venue.isRecommended) {
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIconRecommended);
         } else {
-          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon)
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon);
         }
       })
     }

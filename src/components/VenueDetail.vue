@@ -5,21 +5,21 @@
       <div class="w-30 z-50 absolute ml-80 -mt-8">
         <icon-model-close
             class="w-4 sm:-ml-8 cursor-pointer"
-            @click="Application.resetDetailVenue(), backToNormalZoom()" />
+            @click="Application.resetDetailVenue(), backToNormalZoom()"/>
       </div>
       <div class="flex justify-center mb-1 cursor-pointer">
         <icon-collapse
-          v-if="!venueMinimized"
-          @click="Application.setDetailVenueMinimized(true)"
+            v-if="!venueMinimized"
+            @click="Application.setDetailVenueMinimized(true)"
         />
         <icon-expand
-          v-else
-          @click="Application.setDetailVenueMinimized(false)" />
+            v-else
+            @click="Application.setDetailVenueMinimized(false)"/>
       </div>
       <img
-        v-if="!venueMinimized"
-        :src="venue.image"
-        alt="" />
+          v-if="!venueMinimized"
+          :src="venue.image"
+          alt=""/>
       <div>
         <svg-bookmark
             v-if="venue.isFavorite && !venueMinimized"
@@ -34,17 +34,18 @@
       <div v-if="!venueMinimized"
            class="text-xs text-center">{{ venue.description }}
       </div>
-      <app-player />
+      <app-player/>
       <div v-if="!venueMinimized"
            class="flex justify-between mt-5">
-        <div @click="changeZoom" class="underline text-xs cursor-pointer">Показати на карті</div>
-        <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">Додати в обрані</div>
+        <div @click="showOnMap" class="underline text-xs cursor-pointer">Показати на карті</div>
+        <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">Додати в обрані
+        </div>
 
         <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
       </div>
       <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
                   class="mt-4 flex">
-        <icon-route  class="text-white" />
+        <icon-route class="text-white"/>
         Прокласти маршрут
       </app-button>
     </div>
@@ -60,10 +61,7 @@ import IconRoute from '@/assets/svg/icon-route.svg';
 import AppButton from '@/components/AppButton.vue';
 import AppPlayer from '@/components/AppPlayer.vue';
 import Application from '@/models/Application';
-// import Venue from "@/models/Venue";
 import takeData from '@/components/use/useMap.ts';
-
-
 
 export default {
   name: "VenueDetail",
@@ -81,13 +79,13 @@ export default {
     const venue = Application.detailVenue;
     const venues = Application.venues;
 
-
     function toggleFavorite() {
-      if(venue.value === null) return;
+      if (venue.value === null) return;
       venue.value.toggleFavorite();
     }
-    function changeZoom() {
-      if(venue.value === null) return
+
+    function showOnMap() {
+      if (venue.value === null) return
       mapData.getMapData().map.setZoom(17)
       mapData.getMapData().map.setCenter(new (mapData.getMapData()).google.maps.LatLng(venue.value.lat, venue.value.lng));
     }
@@ -101,13 +99,11 @@ export default {
     }
 
     function generateRoute() {
-      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer({ suppressMarkers: true });
+      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
       const directionsService = new (mapData.getMapData()).google.maps.DirectionsService();
 
       directionsRenderer.setMap(mapData.getMapData().map);
-
       calculateAndDisplayRoute(directionsService, directionsRenderer);
-
     }
 
     function calculateAndDisplayRoute(
@@ -116,15 +112,15 @@ export default {
     ) {
       const waypoints: { location: any; stopover: boolean; }[] = [];
       venues.value.forEach(item => {
-        if(item.isFavorite) {
+        if (item.isFavorite) {
           waypoints.push({
             location: createLatLng(item.lat, item.lng),
             stopover: true
           })
         }
-      })
+      });
       navigator.geolocation.getCurrentPosition(position => {
-            if(venue.value === null) return
+            if (venue.value === null) return;
             directionsService.route({
               origin: createLatLng(position.coords.latitude, position.coords.longitude),
               destination: createLatLng(venue.value.lat, venue.value.lng),
@@ -135,12 +131,13 @@ export default {
             }).then((response: any) => {
               directionsRenderer.setDirections(response)
             })
+
           },
           error => {
             console.log(error.message)
           })
-
     }
+
     return {
       venue,
       venues,
@@ -150,7 +147,7 @@ export default {
       toggleFavorite,
       generateRoute,
       calculateAndDisplayRoute,
-      changeZoom,
+      showOnMap,
       backToNormalZoom,
     }
   }

@@ -1,84 +1,82 @@
 import Application from '@/models/Application';
 
 export default class Venue {
-    public index = 0;
+  public index = 0;
 
-    public name = '';
+  public name = '';
 
-    public description = '';
+  public description = '';
 
-    public image = '';
+  public image = '';
 
-    public icon = '';
+  public icon = '';
 
-    public  audioFile = '';
+  public audioFile = '';
 
-    public isRecommended = false
+  public isRecommended = false
 
-    public recommended = 0;
+  public recommended = 0;
 
-    public rated = false;
+  public rated = false;
 
-    public rating = 0;
+  public rating = 0;
 
-    public pinned = false;
+  public pinned = false;
 
-    public firstRecommended = false;
+  public firstRecommended = false;
 
-    public lastRecommended = false;
+  public lastRecommended = false;
 
-    public lat = '';
+  public lat = '';
 
-    public lng = '';
+  public lng = '';
 
-    public marker: google.maps.Marker | null = null;
+  public marker: google.maps.Marker | null = null;
 
-    public isFavorite = false;
+  public isFavorite = false;
 
-    public markerIcon = '';
+  public markerIcon = '';
 
-    public markerIconFavorite = '';
+  public markerIconFavorite = '';
 
-    public markerIconRecommended = '';
+  public markerIconRecommended = '';
 
-    public markerIconRecommendedFavorite = '';
+  public markerIconRecommendedFavorite = '';
 
-    constructor(props: Partial<Venue>) {
-        Object.assign(this, props);
+  constructor(props: Partial<Venue>) {
+    Object.assign(this, props);
 
-        return this;
+    return this;
+  }
+
+  public enhanceRecommended(firstRecommended: boolean, lastRecommended: boolean) {
+    this.firstRecommended = firstRecommended;
+    this.lastRecommended = lastRecommended;
+
+    return this;
+  }
+
+  public showRatingModal() {
+    Application.ratingVenue.value = this;
+  }
+
+  public showDetail(minimized = false) {
+    Application.detailVenueMinimized.value = minimized;
+    Application.detailVenue.value = this;
+  }
+
+  public toggleFavorite() {
+    this.isFavorite = !this.isFavorite
+    if (!this.marker) return;
+    if (this.isFavorite && this.isRecommended) {
+      this.marker.setIcon(this.markerIconRecommendedFavorite)
+    } else if (this.isFavorite) {
+      this.marker.setIcon(this.markerIconFavorite)
+    } else if (this.isRecommended) {
+      this.marker.setIcon(this.markerIconRecommended)
+    } else {
+      this.marker.setIcon(this.markerIcon)
     }
+  }
 
-    public enhanceRecommended(firstRecommended: boolean, lastRecommended: boolean) {
-        this.firstRecommended = firstRecommended;
-        this.lastRecommended = lastRecommended;
-
-        return this;
-    }
-
-    public showRatingModal() {
-        Application.ratingVenue.value = this;
-    }
-
-    public showDetail(minimized = false) {
-        Application.detailVenueMinimized.value = minimized;
-        Application.detailVenue.value = this;
-    }
-
-    public toggleFavorite() {
-        this.isFavorite = !this.isFavorite
-        if (!this.marker) return;
-         if(this.isFavorite && this.isRecommended) {
-             this.marker.setIcon(this.markerIconRecommendedFavorite)
-         } else if(this.isFavorite) {
-            this.marker.setIcon(this.markerIconFavorite)
-        } else if(this.isRecommended) {
-            this.marker.setIcon(this.markerIconRecommended)
-        } else {
-             this.marker.setIcon(this.markerIcon)
-         }
-    }
-    public makeRoute() {
-
-    }
 }

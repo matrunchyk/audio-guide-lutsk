@@ -1,9 +1,10 @@
 <template>
-  <div class=" Tutorial z-10 absolute inset-0 bg-opacity-60 h-full flex justify-center content-center bg-black w-full flex-col items-center gap-1">
+  <div
+      class=" Tutorial z-10 absolute inset-0 bg-opacity-60 h-full flex justify-center content-center bg-black w-full flex-col items-center gap-1">
     <div class="w-3/4">
       <icon-model-close
-        class="w-4 ml-auto cursor-pointer"
-        @click="Application.setTutorialOpen(false)" />
+          class="w-4 ml-auto cursor-pointer"
+          @click="Application.setTutorialOpen(false)"/>
     </div>
     <div class="w-3/4 bg-white py-5 px-12 text-sm rounded-md">
       <div class="text-center mb-2 text-xl font-semibold">Інструкція</div>

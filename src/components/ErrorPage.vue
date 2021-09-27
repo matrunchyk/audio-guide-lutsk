@@ -11,6 +11,7 @@
 <script>
 
 import svgMan from '@/assets/svg/man.svg';
+
 export default {
   name: "ErrorPage",
   components: {
@@ -20,8 +21,8 @@ export default {
 </script>
 
 <style scoped>
-  .buttonback {
-    background: #1F3D87;
-    color: #FFFFFF;
-  }
+.buttonback {
+  background: #1F3D87;
+  color: #FFFFFF;
+}
 </style>

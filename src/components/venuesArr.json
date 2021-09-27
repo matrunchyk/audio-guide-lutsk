@@ -15,7 +15,7 @@
       "lat": "50.7410223727235",
       "lng": "25.337945734982117"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-castle-icon.svg",
@@ -39,7 +39,7 @@
       "lat": "50.739339724806996",
       "lng": "25.323488561382682"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-church-icon.svg",
@@ -63,7 +63,7 @@
       "lat": "50.745886410046644",
       "lng": "25.320154666668728"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-church-icon.svg",
@@ -87,7 +87,7 @@
       "lat": "50.742301229552254",
       "lng": "25.32008249194806"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-museum-icon.svg",
@@ -111,7 +111,7 @@
       "lat": "50.76095486721951",
       "lng": "25.354870706741472"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-castle-icon.svg",
@@ -135,7 +135,7 @@
       "lat": "50.75090976820419",
       "lng": "25.33837878321215"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-church-icon.svg",
@@ -159,7 +159,7 @@
       "lat": "50.75367238538315",
       "lng": "25.32802171114685"
     },
-    "isFavorite":  false,
+    "isFavorite": false,
     "favoriteNum": 0,
     "marker": null,
     "markerIcon": "/marker-icons/marker-museum-icon.svg",
