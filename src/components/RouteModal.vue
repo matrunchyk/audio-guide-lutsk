@@ -30,9 +30,5 @@ export default {
       Application,
     };
   },
-}
+};
 </script>
-
-<style scoped>
-
-</style>

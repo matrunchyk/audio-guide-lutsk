@@ -4,9 +4,8 @@ import venuesArr from "@/components/venuesArr.json";
 
 const images = require.context('@/assets/svg/venues/', false, /\.jpg$/);
 
-
 export default class Application {
-  static venues = ref<Venue[]>([])
+  static venues = ref<Venue[]>([]);
   static language = ref('uk');
 
   static menuOpen = ref(false);
@@ -17,7 +16,7 @@ export default class Application {
 
   static pinnedVenues = ref(0);
 
-  static isRatingVenueForThankModal = ref(false)
+  static isRatingVenueForThankModal = ref(false);
 
   static ratingVenue = ref<Venue | null>(null);
 
@@ -34,7 +33,7 @@ export default class Application {
   }
 
   static setRouteModalOpen(routeModalOpen: boolean) {
-    this.routeModalOpen.value = routeModalOpen
+    this.routeModalOpen.value = routeModalOpen;
   }
 
   static setTutorialOpen(tutorialOpen: boolean) {
@@ -46,7 +45,7 @@ export default class Application {
   }
 
   static setThankYouModalOpen(isRatingVenueForThankModal: boolean) {
-    this.isRatingVenueForThankModal.value = isRatingVenueForThankModal
+    this.isRatingVenueForThankModal.value = isRatingVenueForThankModal;
   }
 
   static resetDetailVenue() {
@@ -77,7 +76,7 @@ export default class Application {
       markerIcon: item.markerIcon,
       markerIconFavorite: item.markerIconFavorite,
       markerIconRecommended: item.markerIconRecommended,
-      markerIconRecommendedFavorite: item.markerIconRecommendedFavorite
+      markerIconRecommendedFavorite: item.markerIconRecommendedFavorite,
     }))
       .sort((a: any, b: any) => b.recommended - a.recommended)
       .map(

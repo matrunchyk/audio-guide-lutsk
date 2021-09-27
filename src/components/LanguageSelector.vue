@@ -49,7 +49,7 @@ export default {
     FlagRu,
   },
   emits: ['select'],
-}
+};
 </script>
 
 <style scoped>

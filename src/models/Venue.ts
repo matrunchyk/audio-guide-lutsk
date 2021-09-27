@@ -13,7 +13,7 @@ export default class Venue {
 
   public audioFile = '';
 
-  public isRecommended = false
+  public isRecommended = false;
 
   public recommended = 0;
 
@@ -66,17 +66,16 @@ export default class Venue {
   }
 
   public toggleFavorite() {
-    this.isFavorite = !this.isFavorite
+    this.isFavorite = !this.isFavorite;
     if (!this.marker) return;
     if (this.isFavorite && this.isRecommended) {
-      this.marker.setIcon(this.markerIconRecommendedFavorite)
+      this.marker.setIcon(this.markerIconRecommendedFavorite);
     } else if (this.isFavorite) {
-      this.marker.setIcon(this.markerIconFavorite)
+      this.marker.setIcon(this.markerIconFavorite);
     } else if (this.isRecommended) {
-      this.marker.setIcon(this.markerIconRecommended)
+      this.marker.setIcon(this.markerIconRecommended);
     } else {
-      this.marker.setIcon(this.markerIcon)
+      this.marker.setIcon(this.markerIcon);
     }
   }
-
 }

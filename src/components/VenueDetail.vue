@@ -75,7 +75,7 @@ export default {
     SvgBookmark,
   },
   setup() {
-    const mapData = takeData()
+    const mapData = takeData();
     const venue = Application.detailVenue;
     const venues = Application.venues;
 
@@ -85,13 +85,13 @@ export default {
     }
 
     function showOnMap() {
-      if (venue.value === null) return
-      mapData.getMapData().map.setZoom(17)
+      if (venue.value === null) return;
+      mapData.getMapData().map.setZoom(17);
       mapData.getMapData().map.setCenter(new (mapData.getMapData()).google.maps.LatLng(venue.value.lat, venue.value.lng));
     }
 
     function backToNormalZoom() {
-      mapData.getMapData().map.setZoom(14)
+      mapData.getMapData().map.setZoom(14);
     }
 
     function createLatLng(lat: any, lng: any) {
@@ -115,8 +115,8 @@ export default {
         if (item.isFavorite) {
           waypoints.push({
             location: createLatLng(item.lat, item.lng),
-            stopover: true
-          })
+            stopover: true,
+          });
         }
       });
       navigator.geolocation.getCurrentPosition(position => {
@@ -127,11 +127,10 @@ export default {
               waypoints: waypoints,
               optimizeWaypoints: true,
               provideRouteAlternatives: true,
-              travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING
+              travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING,
             }).then((response: any) => {
-              directionsRenderer.setDirections(response)
-            })
-
+              directionsRenderer.setDirections(response);
+            });
           },
           error => {
             console.log(error.message)
@@ -149,7 +148,7 @@ export default {
       calculateAndDisplayRoute,
       showOnMap,
       backToNormalZoom,
-    }
+    };
   }
 };
 </script>
