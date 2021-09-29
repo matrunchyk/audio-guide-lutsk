@@ -4,7 +4,7 @@
     <div @click="updateProgressBarTime($event)" ref="progressBar"
          class="w-full py-1.5 flex tracking relative cursor-pointer mb-4">
       <div class="border w-full border-gray-200 absolute"/>
-      <div :style="{width: progress}" class="border bg-red-600 border-red-600 absolute z-10"/>
+      <div :style="{width: progress}" class="border border-red-600 absolute z-10"/>
       <div :style="{left: progress}" class="h-2 w-2 absolute z-20 top-0.5 bg-red-600 rounded-full tracking-dot"/>
     </div>
     <div class="controls flex gap-5 items-center justify-center">
@@ -90,9 +90,5 @@ export default {
 <style scoped>
 .tracking-dot {
   top: 3px;
-}
-
-.progress-bar {
-  width: 270px;
 }
 </style>
