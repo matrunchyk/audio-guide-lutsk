@@ -1,4 +1,5 @@
 import Application from '@/models/Application';
+import takeData from '@/components/use/useMap.ts';
 
 export default class Venue {
   public index = 0;
@@ -77,5 +78,49 @@ export default class Venue {
     } else {
       this.marker.setIcon(this.markerIcon);
     }
+  }
+
+  public createLatLng(lat: any, lng: any) {
+    return new (takeData().getMapData()).google.maps.LatLng(lat, lng);
+  }
+
+  public generateRoute() {
+    const directionsRenderer = new (takeData().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
+    const directionsService = new (takeData().getMapData()).google.maps.DirectionsService();
+
+    directionsRenderer.setMap(takeData().getMapData().map);
+
+    this.calculateAndDisplayRoute(directionsService, directionsRenderer);
+  }
+
+  public calculateAndDisplayRoute(
+    directionsService: any,
+    directionsRenderer: any,
+  ) {
+    const waypoints: { location: any; stopover: boolean; }[] = [];
+    Application.venues.value.forEach(item => {
+      if (item.isFavorite) {
+        waypoints.push({
+          location: this.createLatLng(item.lat, item.lng),
+          stopover: true,
+        });
+      }
+    });
+    navigator.geolocation.getCurrentPosition(position => {
+        if (!this) return;
+        directionsService.route({
+          origin: this.createLatLng(position.coords.latitude, position.coords.longitude),
+          destination: this.createLatLng(this.lat, this.lng),
+          waypoints: waypoints,
+          optimizeWaypoints: true,
+          provideRouteAlternatives: true,
+          travelMode: (takeData().getMapData()).google.maps.TravelMode.WALKING,
+        }).then((response: any) => {
+          directionsRenderer.setDirections(response);
+        });
+      },
+      error => {
+        console.log(error.message);
+      })
   }
 }

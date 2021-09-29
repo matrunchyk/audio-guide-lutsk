@@ -38,12 +38,12 @@
 
 <script>
 import Application from '@/models/Application';
-import IconModelClose from '@/assets/svg/icon-modal-close.svg';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "AppTutorial",
   components: {
-    IconModelClose,
+    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
   },
   setup() {
     return {
