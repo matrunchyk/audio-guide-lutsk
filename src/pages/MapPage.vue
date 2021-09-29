@@ -2,18 +2,15 @@
   <div class="MapPage">
     <AppMap/>
   </div>
-<!--  <RouteModal/>-->
 </template>
 
 <script>
-// import RouteModal from '../components/RouteModal.vue';
-import AppMap from "@/components/AppMap.vue"
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "map-page",
   components: {
-    // RouteModal
-    AppMap,
+    AppMap: defineAsyncComponent(() => import('@/components/AppMap.vue')),
   },
 }
 </script>
