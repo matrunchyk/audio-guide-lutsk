@@ -83,15 +83,13 @@
 
 <script lang="ts">
 import Venue from '@/models/Venue';
-import {PropType, reactive} from 'vue';
-import SvgVolume from "@/assets/svg/volume.svg";
-import SvgBookmark from '@/assets/svg/bookmark.svg';
+import {defineAsyncComponent, PropType, reactive} from 'vue';
 
 export default {
   name: "AppVenue",
   components: {
-    SvgVolume,
-    SvgBookmark,
+    SvgVolume: defineAsyncComponent(() => import('@/assets/svg/volume.svg')),
+    SvgBookmark: defineAsyncComponent(() => import('@/assets/svg/bookmark.svg')),
   },
   props: {
     venue: {

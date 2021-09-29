@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import IconModelClose from '@/assets/svg/icon-modal-close.svg';
 import Application from "@/models/Application";
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "ThankyouModal",
   components: {
-    IconModelClose,
+    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
   },
   setup() {
     return {

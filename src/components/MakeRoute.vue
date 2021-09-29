@@ -1,27 +1,35 @@
 <template>
-  <div v-if="recommendedNum" class="flex items-center hover:underline">
+  <div class="flex items-center hover:underline">
     <DistancePic/>
-    <div class="ml-3 text-black font-normal text-xs">
+    <div @click="generateRoute" class="ml-3 text-black font-normal text-xs">
       Прокласти маршрут
     </div>
   </div>
 </template>
 
 <script>
-import DistancePic from '../assets/svg/distance.svg';
 import Application from "@/models/Application";
-import {computed} from "vue";
+import {computed, defineAsyncComponent} from "vue";
 
 export default {
   name: "MakeRoute",
   components: {
-    DistancePic,
+    DistancePic: defineAsyncComponent(() => import('../assets/svg/distance.svg')),
   },
   setup() {
     const venues = Application.venues;
     const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
+
+    function generateRoute() {
+      venues.value.forEach(venue => {
+        if (!venue.isFavorite) return;
+        venue.generateRoute();
+      })
+    }
+
     return {
       venues,
+      generateRoute,
       recommendedNum,
     };
   }
