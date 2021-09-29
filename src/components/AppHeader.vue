@@ -183,9 +183,8 @@ export default {
 
 <style>
 .app-header {
-  width: 320px;
+  min-width: 320px;
 }
-
 .number {
   font-size: 7px;
   Height: 9px;
@@ -204,6 +203,11 @@ export default {
 @media (max-width: 640px) {
   .app-header {
     width: 100%;
+  }
+}
+@media (min-width: 640px) {
+  .app-header {
+    max-width: 20%;
   }
 }
 </style>
