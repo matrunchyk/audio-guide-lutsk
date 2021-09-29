@@ -1,5 +1,5 @@
 <template>
-  <div class="AppVenues relative">
+  <div class="app-venues relative mt-16">
     <AppVenue
         v-for="venue in venues"
         :key="venue.index"
@@ -9,15 +9,14 @@
 </template>
 
 <script lang="ts">
-import AppVenue from '@/components/AppVenue.vue';
 import Application from '@/models/Application';
-import VenueDetail from '@/components/VenueDetail.vue';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "AppVenues",
   components: {
-    AppVenue,
-    VenueDetail,
+    AppVenue: defineAsyncComponent(() => import('@/components/AppVenue.vue')),
+    VenueDetail: defineAsyncComponent(() => import('@/components/VenueDetail.vue')),
   },
   setup() {
     // icon: image.abstract(20, 20) + '?index=' + item.index,
@@ -28,5 +27,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media (max-width: 640px) {
+  .app-venues {
+    margin-top: 100px;
+  }
+}
+</style>
 
 

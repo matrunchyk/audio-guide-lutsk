@@ -15,15 +15,14 @@
 </template>
 
 <script lang="ts">
-import IconModelClose from '@/assets/svg/icon-modal-close.svg';
-import AppButton from '@/components/AppButton.vue';
 import Application from '@/models/Application';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "RouteModal",
   components: {
-    IconModelClose,
-    AppButton,
+    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
+    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
   },
   setup() {
     return {

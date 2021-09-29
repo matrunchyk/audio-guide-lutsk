@@ -17,19 +17,16 @@
 </template>
 
 <script lang="ts">
-import AppButton from '@/components/AppButton.vue';
-import VenueRating from '@/components/VenueRating.vue';
 import Application from '@/models/Application';
-import IconModelClose from '@/assets/svg/icon-modal-close.svg';
-import ThankyouModal from '@/components/ThankyouModal.vue';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "RateVenueModal",
   components: {
-    VenueRating,
-    IconModelClose,
-    AppButton,
-    ThankyouModal,
+    VenueRating: defineAsyncComponent(() => import('@/components/VenueRating.vue')),
+    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
+    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
+    ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
   },
   setup() {
     const venues = Application.venues;
