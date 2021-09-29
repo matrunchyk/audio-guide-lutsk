@@ -77,7 +77,7 @@ export default {
 }
 </script>
 
-<style >
+<style scoped>
 .left-column {
   background: #f3f3f3;
   min-width: 320px;
