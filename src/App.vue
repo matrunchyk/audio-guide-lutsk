@@ -31,24 +31,18 @@
 </template>
 
 <script lang="ts">
-import {onBeforeMount, onMounted, ref} from 'vue';
+import {defineAsyncComponent, onBeforeMount, onMounted, ref} from 'vue';
 import Application from '@/models/Application';
-import AppHeader from './components/AppHeader.vue';
-import AppTutorial from './components/AppTutorial.vue';
-import RateVenueModal from './components/RateVenueModal.vue';
-import LanguageSelector from "@/components/LanguageSelector.vue";
-import RouteModal from "@/components/RouteModal.vue";
-import AppMap from "@/components/AppMap.vue"
 
 export default {
   name: 'App',
   components: {
-    AppHeader,
-    AppTutorial,
-    RateVenueModal,
-    LanguageSelector,
-    RouteModal,
-    AppMap,
+    AppHeader: defineAsyncComponent(() => import('@/components/AppHeader.vue')),
+    AppTutorial: defineAsyncComponent(() => import('@/components/AppTutorial.vue')),
+    RateVenueModal: defineAsyncComponent(() => import('@/components/RateVenueModal.vue')),
+    LanguageSelector: defineAsyncComponent(() => import('@/components/LanguageSelector.vue')),
+    RouteModal: defineAsyncComponent(() => import('@/components/RouteModal.vue')),
+    AppMap: defineAsyncComponent(() => import('@/components/AppMap.vue')),
   },
 
   setup() {

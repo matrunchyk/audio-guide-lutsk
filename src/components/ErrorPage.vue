@@ -9,13 +9,12 @@
 </template>
 
 <script>
-
-import svgMan from '@/assets/svg/man.svg';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "ErrorPage",
   components: {
-    svgMan,
+    svgMan: defineAsyncComponent(() => import('@/assets/svg/man.svg')),
   }
 };
 </script>

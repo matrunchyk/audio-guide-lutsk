@@ -33,20 +33,16 @@
 </template>
 
 <script>
-import FlagUk from '@/assets/svg/flags/uk.svg';
-import FlagDe from '@/assets/svg/flags/de.svg';
-import FlagEn from '@/assets/svg/flags/en.svg';
-import FlagPl from '@/assets/svg/flags/pl.svg';
-import FlagRu from '@/assets/svg/flags/ru.svg';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "LanguageSelector",
   components: {
-    FlagUk,
-    FlagDe,
-    FlagEn,
-    FlagPl,
-    FlagRu,
+    FlagUk: defineAsyncComponent(() => import('@/assets/svg/flags/uk.svg')),
+    FlagDe: defineAsyncComponent(() => import('@/assets/svg/flags/de.svg')),
+    FlagEn: defineAsyncComponent(() => import('@/assets/svg/flags/en.svg')),
+    FlagPl: defineAsyncComponent(() => import('@/assets/svg/flags/pl.svg')),
+    FlagRu: defineAsyncComponent(() => import('@/assets/svg/flags/ru.svg')),
   },
   emits: ['select'],
 };

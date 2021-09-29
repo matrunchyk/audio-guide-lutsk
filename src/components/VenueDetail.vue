@@ -5,7 +5,7 @@
       <div class="w-30 z-50 absolute ml-80 -mt-8">
         <icon-model-close
             class="w-4 sm:-ml-8 cursor-pointer"
-            @click="Application.resetDetailVenue(), backToNormalZoom()"/>
+            @click="backToNormalZoom()"/>
       </div>
       <div class="flex justify-center mb-1 cursor-pointer">
         <icon-collapse
@@ -53,26 +53,20 @@
 </template>
 
 <script lang="ts">
-import IconCollapse from '@/assets/svg/icon-collapse.svg';
-import SvgBookmark from '@/assets/svg/bookmark.svg';
-import IconExpand from '@/assets/svg/icon-expand.svg';
-import IconModelClose from '@/assets/svg/icon-modal-close.svg';
-import IconRoute from '@/assets/svg/icon-route.svg';
-import AppButton from '@/components/AppButton.vue';
-import AppPlayer from '@/components/AppPlayer.vue';
 import Application from '@/models/Application';
 import takeData from '@/components/use/useMap.ts';
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "VenueDetail",
   components: {
-    AppPlayer,
-    IconCollapse,
-    IconExpand,
-    IconModelClose,
-    IconRoute,
-    AppButton,
-    SvgBookmark,
+    AppPlayer: defineAsyncComponent(() => import('@/components/AppPlayer.vue')),
+    IconCollapse: defineAsyncComponent(() => import('@/assets/svg/icon-collapse.svg')),
+    IconExpand: defineAsyncComponent(() => import('@/assets/svg/icon-expand.svg')),
+    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
+    IconRoute: defineAsyncComponent(() => import('@/assets/svg/icon-route.svg')),
+    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
+    SvgBookmark: defineAsyncComponent(() => import('@/assets/svg/bookmark.svg')),
   },
   setup() {
     const mapData = takeData();
@@ -84,6 +78,13 @@ export default {
       venue.value.toggleFavorite();
     }
 
+    function generateRoute() {
+      venues.value.forEach(venue => {
+        if (!venue.isFavorite) return;
+        venue.generateRoute();
+      });
+    }
+
     function showOnMap() {
       if (venue.value === null) return;
       mapData.getMapData().map.setZoom(17);
@@ -91,50 +92,8 @@ export default {
     }
 
     function backToNormalZoom() {
+      Application.resetDetailVenue();
       mapData.getMapData().map.setZoom(14);
-    }
-
-    function createLatLng(lat: any, lng: any) {
-      return new (mapData.getMapData()).google.maps.LatLng(lat, lng);
-    }
-
-    function generateRoute() {
-      const directionsRenderer = new (mapData.getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
-      const directionsService = new (mapData.getMapData()).google.maps.DirectionsService();
-
-      directionsRenderer.setMap(mapData.getMapData().map);
-      calculateAndDisplayRoute(directionsService, directionsRenderer);
-    }
-
-    function calculateAndDisplayRoute(
-        directionsService: any,
-        directionsRenderer: any,
-    ) {
-      const waypoints: { location: any; stopover: boolean; }[] = [];
-      venues.value.forEach(item => {
-        if (item.isFavorite) {
-          waypoints.push({
-            location: createLatLng(item.lat, item.lng),
-            stopover: true,
-          });
-        }
-      });
-      navigator.geolocation.getCurrentPosition(position => {
-            if (venue.value === null) return;
-            directionsService.route({
-              origin: createLatLng(position.coords.latitude, position.coords.longitude),
-              destination: createLatLng(venue.value.lat, venue.value.lng),
-              waypoints: waypoints,
-              optimizeWaypoints: true,
-              provideRouteAlternatives: true,
-              travelMode: (mapData.getMapData()).google.maps.TravelMode.WALKING,
-            }).then((response: any) => {
-              directionsRenderer.setDirections(response);
-            });
-          },
-          error => {
-            console.log(error.message);
-          })
     }
 
     return {
@@ -142,10 +101,8 @@ export default {
       venues,
       venueMinimized: Application.detailVenueMinimized,
       Application,
-      createLatLng,
       toggleFavorite,
       generateRoute,
-      calculateAndDisplayRoute,
       showOnMap,
       backToNormalZoom,
     };

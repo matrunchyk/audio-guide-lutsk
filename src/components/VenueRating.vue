@@ -11,15 +11,13 @@
 <script lang="ts">
 import Application from '@/models/Application';
 import Venue from '@/models/Venue';
-import {reactive} from 'vue';
-import StarEmpty from '@/assets/svg/stars/empty.svg';
-import StarFull from '@/assets/svg/stars/full.svg';
+import {defineAsyncComponent, reactive} from 'vue';
 
 export default {
   name: "VenueRating",
   components: {
-    StarEmpty,
-    StarFull,
+    StarEmpty: defineAsyncComponent(() => import('@/assets/svg/stars/empty.svg')),
+    StarFull: defineAsyncComponent(() => import('@/assets/svg/stars/full.svg')),
   },
   props: {
     rated: {
