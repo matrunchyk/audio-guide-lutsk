@@ -42,14 +42,14 @@
       <div v-else class="relative space-y-0.5">
         <icon-hamburger class="flex-none cursor-pointer w-6 "
                         @click="Application.setMenuOpen(true)"/>
-        <div v-if="recommendedNum" class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
-          {{ recommendedNum }}
+        <div v-if="isFavoriteNum" class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
+          {{ isFavoriteNum }}
         </div>
       </div>
     </div>
     <div class="second-line sm:flex bg-white py-3 sm:items-center px-4">
       <AppToggle class="" v-if="$route.name !== 'map'"/>
-      <MakeRoute v-else-if="recommendedNum"/>
+      <MakeRoute v-else-if="isFavoriteNum"/>
     </div>
     <div
         class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
@@ -61,7 +61,7 @@
       <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('list')">Пошук по Списку</div>
       <div @click="generateRouteInHeader" class="cursor-pointer flex justify-between hover:text-x-red">
         Прокласти маршрут
-        <span v-if="recommendedNum" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ recommendedNum }}</span>
+        <span v-if="isFavoriteNum" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ isFavoriteNum }}</span>
       </div>
       <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
@@ -74,7 +74,8 @@
 </template>
 
 <script lang="ts">
-import {computed, defineAsyncComponent, reactive, ref, shallowRef, watch} from 'vue';
+import LanguageRepository from "@/repositories/LanguageRepository";
+import {computed, defineAsyncComponent, reactive, ref, shallowRef} from 'vue';
 import Application from '../models/Application';
 import router from '@/router';
 
@@ -95,12 +96,14 @@ export default {
     IconClose: defineAsyncComponent(() => import('@/assets/svg/icon-close.svg')),
     IconHamburger: defineAsyncComponent(() => import('@/assets/svg/icon-hamburger.svg')),
   },
-  setup() {
+  async setup() {
+    const languageRepository = ref(new LanguageRepository());
+    await languageRepository.value.many();
     let showLanguageList = ref(true);
-    let languages = reactive(['uk', 'pl', 'de', 'ru', 'en']);
+    let languages = reactive(languageRepository.value.dataset.all().map(l => l.code));
     let showLanguageDropdown = ref(false);
     const venues = Application.venues;
-    const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
+    const isFavoriteNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
     let currentLanguageImage = shallowRef(getImage('uk'));
 
     function getImage(lang: string) {
@@ -141,7 +144,7 @@ export default {
       if (window.screen.width <= 640) {
         switchView('map');
       }
-      if (!recommendedNum.value) {
+      if (!isFavoriteNum.value) {
         openDefaultModal();
       }
     }
@@ -156,7 +159,7 @@ export default {
       return router.push({name});
     }
 
-    watch(Application.language, lang => selectLanguage(lang));
+    // watch(Application.language, lang => selectLanguage(lang));
 
     return {
       selectLanguage,
@@ -171,7 +174,8 @@ export default {
       getImage,
       openTutorial,
       switchView,
-      recommendedNum,
+      languageRepository,
+      isFavoriteNum,
       venues,
       Application,
       menuOpen: Application.menuOpen,

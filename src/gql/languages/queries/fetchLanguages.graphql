@@ -1,0 +1,7 @@
+#import "../fragments/Language.graphql"
+
+query fetchLanguages {
+  fetchLanguages {
+    ...Language
+  }
+}

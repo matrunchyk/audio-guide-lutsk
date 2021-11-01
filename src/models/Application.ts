@@ -8,7 +8,7 @@ export default class Application {
   static venues = ref<Venue[]>([]);
   static language = ref('uk');
 
-  static menuOpen = ref(false);
+  static menuOpen = ref(false);e
 
   static routeModalOpen = ref(false);
 

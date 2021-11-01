@@ -1,0 +1,27 @@
+
+query fetchLocations {
+  fetchLocations {
+    uuid
+    imageData
+    isRecommended
+    isEnabled
+    latLng {
+      lat
+      lng
+    }
+    createdAt
+    createdBy {
+      name
+    }
+    localizations {
+      uuid
+      audioData
+      locationDescription
+      locationTitle
+      language {
+        uuid
+        code
+      }
+    }
+  }
+}

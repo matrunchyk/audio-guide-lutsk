@@ -1,0 +1,4 @@
+fragment LatLngCoords on LatLngCoords {
+  lat
+  lng
+}

@@ -9,7 +9,9 @@
          'flex': $route.name === '404'
         }"
     >
-      <AppHeader v-if="$route.name !== '404'"/>
+      <Suspense>
+        <AppHeader v-if="$route.name !== '404'"/>
+      </Suspense>
       <router-view/>
       <RouteModal v-if="routeModalOpen"/>
       <AppTutorial v-if="tutorialOpen"/>
