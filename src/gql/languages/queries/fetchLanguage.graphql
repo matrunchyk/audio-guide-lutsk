@@ -1,0 +1,7 @@
+query fetchLanguage($uuid: String!) {
+  fetchLanguage(uuid: $uuid) {
+    title
+    code
+    isEnabled
+  }
+}

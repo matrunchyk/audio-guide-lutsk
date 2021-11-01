@@ -8,13 +8,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@graphql-codegen/typescript-graphql-files-modules": "^2.1.0",
     "@types/google-maps": "^3.2.3",
     "@types/googlemaps": "^3.43.3",
+    "@vue/cli-service": "^5.0.0-beta.0",
     "core-js": "^3.11.2",
     "faker": "^5.5.3",
     "google-maps-api-loader": "^1.1.1",
+    "graphql": "^15.7.2",
+    "graphql-tag": "^2.12.5",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.11",
+    "vue-oop": "^1.7.4",
     "vue-router": "^4.0.10",
     "vue-svg-loader": "^0.17.0-beta.2"
   },
@@ -26,7 +31,6 @@
     "@vue/cli-plugin-babel": "^5.0.0-beta.0",
     "@vue/cli-plugin-eslint": "^5.0.0-beta.0",
     "@vue/cli-plugin-typescript": "^4.5.13",
-    "@vue/cli-service": "^5.0.0-beta.0",
     "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-typescript": "^7.0.0",
     "autoprefixer": "^10.2.5",
@@ -51,11 +55,11 @@
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-expressions": "off"
+    }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
+    "> 4%"
   ]
 }
