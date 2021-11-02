@@ -75,9 +75,10 @@
 
 <script lang="ts">
 import LanguageRepository from "@/repositories/LanguageRepository";
-import {computed, defineAsyncComponent, reactive, ref, shallowRef} from 'vue';
+import {computed, defineAsyncComponent, reactive, ref, shallowRef, watch} from 'vue';
 import Application from '../models/Application';
 import router from '@/router';
+import LocationRepository from "@/repositories/LocationRepository";
 
 const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
 
@@ -97,6 +98,10 @@ export default {
     IconHamburger: defineAsyncComponent(() => import('@/assets/svg/icon-hamburger.svg')),
   },
   async setup() {
+    const locationRepository  = ref(new  LocationRepository());
+    await locationRepository.value.many();
+    let loc = locationRepository.value.dataset.all().map(item => item.localizations);
+    console.log(loc);
     const languageRepository = ref(new LanguageRepository());
     await languageRepository.value.many();
     let showLanguageList = ref(true);
@@ -159,7 +164,8 @@ export default {
       return router.push({name});
     }
 
-    // watch(Application.language, lang => selectLanguage(lang));
+    // eslint-disable-next-line vue/no-watch-after-await
+    watch(Application.language, lang => selectLanguage(lang));
 
     return {
       selectLanguage,
