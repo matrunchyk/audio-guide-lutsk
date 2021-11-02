@@ -1,12 +1,15 @@
 import Venue from '@/models/Venue';
 import {ref} from "vue";
 import venuesArr from "@/components/venuesArr.json";
+import LocationRepository from "@/repositories/LocationRepository";
 
 const images = require.context('@/assets/svg/venues/', false, /\.jpg$/);
 
 export default class Application {
   static venues = ref<Venue[]>([]);
   static language = ref('uk');
+
+  static locationRepository  = ref(new  LocationRepository());
 
   static menuOpen = ref(false);e
 
@@ -56,27 +59,28 @@ export default class Application {
     this.detailVenueMinimized.value = minimized;
   }
 
-  static setVenues() {
-    this.venues.value = venuesArr.map((item: any) => new Venue({
-      index: item.index,
-      name: item.name,
-      description: item.description,
-      image: images(`./${item.index}.jpg`).default,
-      icon: item.icon,
-      audioFile: item.audioFile,
+  static async setVenues() {
+    await this.locationRepository.value.many();
+    this.venues.value = this.locationRepository.value.dataset.all().map((item: any) => new Venue({
+      name: 'abc',
+      description: 'abc',
+      // image: images(`./${item.index}.jpg`).default,
+      image: item.imageData,
+      // icon: item.icon,
+      // audioFile: item.audioFile,
       isRecommended: item.isRecommended,
-      recommended: item.recommended,
-      rated: item.rated,
-      rating: item.rating,
-      pinned: item.pinned,
+      // recommended: item.recommended,
+      // rated: item.rated,
+      // rating: item.rating,
+      // pinned: item.pinned,
       lat: item.latLng.lat,
       lng: item.latLng.lng,
-      isFavorite: item.isFavorite,
-      marker: item.marker,
-      markerIcon: item.markerIcon,
-      markerIconFavorite: item.markerIconFavorite,
-      markerIconRecommended: item.markerIconRecommended,
-      markerIconRecommendedFavorite: item.markerIconRecommendedFavorite,
+      isFavorite: item.isEnabled,
+      // marker: item.marker,
+      // markerIcon: item.markerIcon,
+      // markerIconFavorite: item.markerIconFavorite,
+      // markerIconRecommended: item.markerIconRecommended,
+      // markerIconRecommendedFavorite: item.markerIconRecommendedFavorite,
     }))
       .sort((a: any, b: any) => b.recommended - a.recommended)
       .map(
