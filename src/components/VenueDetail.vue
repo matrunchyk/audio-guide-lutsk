@@ -1,10 +1,11 @@
 <template>
   <div class=" inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
 
-    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 -m-1.5 fixed pb-7">
-      <div class="w-30 z-50 absolute ml-80 -mt-8">
+    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
+    :class="{'venue-player':  venueMinimized}">
+      <div class="w-30 z-50 absolute right-0 -mt-8">
         <icon-model-close
-            class="w-4 sm:-ml-8 cursor-pointer"
+            class="w-4 cursor-pointer"
             @click="backToNormalZoom()"/>
       </div>
       <div class="flex justify-center mb-1 cursor-pointer">
@@ -113,5 +114,10 @@ export default {
 <style scoped>
 .venue-detail {
   height: calc(100vh - 54px);
+}
+@media (max-width: 640px) {
+  .venue-player {
+    width: 100%;
+  }
 }
 </style>
