@@ -18,7 +18,7 @@
       'top-24': !(venue.firstRecommended && venue.recommended),
     }"
         onmouseover="this.svg='whitesound.svg';">
-      <svg-volume class="w-6 volume h-6" @click="venue.showDetail(false)"/>
+      <svg-volume class="volume" @click="venue.showDetail(false)"/>
     </div>
     <img
         :src="venue.image"

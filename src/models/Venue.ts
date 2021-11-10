@@ -113,7 +113,6 @@ export default class Venue {
           destination: this.createLatLng(this.lat, this.lng),
           waypoints: waypoints,
           optimizeWaypoints: true,
-          provideRouteAlternatives: true,
           travelMode: (takeData().getMapData()).google.maps.TravelMode.WALKING,
         }).then((response: any) => {
           directionsRenderer.setDirections(response);
