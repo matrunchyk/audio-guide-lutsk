@@ -18,7 +18,8 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
-import {defineAsyncComponent} from "vue";
+import {defineAsyncComponent, ref} from "vue";
+import LocationRating from "@/models/LocationRating";
 
 export default {
   name: "RateVenueModal",
@@ -28,10 +29,18 @@ export default {
     AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
     ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
   },
-  setup() {
+  async setup() {
     const venues = Application.venues;
+    const locationRating = ref(new LocationRating());
 
-    function makeRated() {
+    async function makeRated() {
+      // @ts-ignore
+      locationRating.value.guestUuid = localStorage.getItem('guestUuid');
+      locationRating.value.rating = 3;
+      // @ts-ignore
+      locationRating.value.locationUuid = '3051ccaa-5855-40b2-a64f-a37309031c4a';
+      await locationRating.value.create();
+      // console.log(locationRating.value);
       Application.setThankYouModalOpen(true);
     }
 
@@ -40,6 +49,7 @@ export default {
       Application,
       isRatingVenueForThankModal: Application.isRatingVenueForThankModal,
       makeRated,
+      locationRating,
     };
   }
 };

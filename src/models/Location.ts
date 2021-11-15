@@ -1,5 +1,6 @@
 import BaseModel from './BaseModel';
 import Localization from "./Localization";
+import LocationRating from "@/models/LocationRating";
 
 export default class Location extends BaseModel {
 
@@ -11,6 +12,10 @@ export default class Location extends BaseModel {
 
   localizations: Localization[];
 
+  typeNum: number
+
+  locationRatings: LocationRating[];
+
   latLng: { lat: string, lng: string };
 
   defaults() {
@@ -20,6 +25,7 @@ export default class Location extends BaseModel {
       isEnabled: false,
       isRecommended: false,
       imageData: '',
+      typeNum: 0,
     };
-  }ee
+  }
 }

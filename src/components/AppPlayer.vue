@@ -1,5 +1,5 @@
 <template>
-  <audio @timeupdate="updateTime" :src="venue.audioFile" preload="auto" ref="audioPlayer"></audio>
+  <audio @timeupdate="updateTime" :src="locationAudio" preload="auto" ref="audioPlayer"></audio>
   <div class="flex flex-col  app-player mt-4">
     <div @click="updateProgressBarTime($event)" ref="progressBar"
          class="w-full py-1.5 flex tracking relative cursor-pointer mb-4">
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import {defineAsyncComponent, ref} from "vue";
+import {computed, defineAsyncComponent, ref} from "vue";
 import Application from "@/models/Application";
 
 export default {
@@ -34,7 +34,9 @@ export default {
     const audioPlayer = ref<HTMLAudioElement>();
     const progressBar = ref<HTMLProgressElement>();
     const progress = ref('');
-
+    // @ts-ignore
+    const locationAudio = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).audioData);
+    // console.log(locationAudio.value);
     function togglePlayerPlay() {
       if (isPlaying.value && audioPlayer.value) {
         audioPlayer.value?.pause();
@@ -76,6 +78,7 @@ export default {
       isPlaying,
       audioPlayer,
       progressBar,
+      locationAudio,
       updateTime,
       rewindBackward,
       rewindForward,

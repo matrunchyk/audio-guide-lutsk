@@ -22,5 +22,5 @@ export default class Localization extends BaseModel {
       location: null,
       language: null,
     };
-  };
+  }
 }

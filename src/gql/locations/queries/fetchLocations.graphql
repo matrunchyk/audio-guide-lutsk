@@ -5,6 +5,7 @@ query fetchLocations {
     imageData
     isRecommended
     isEnabled
+    typeNum
     latLng {
       lat
       lng

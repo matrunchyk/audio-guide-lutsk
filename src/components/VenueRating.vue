@@ -1,9 +1,9 @@
 <template>
   <div class="flex-grow flex mb-3 cursor-pointer justify-center">
     <star-full/>
-    <star-full/>
-    <star-full/>
-    <star-full/>
+    <star-empty/>
+    <star-empty/>
+    <star-empty/>
     <star-empty/>
   </div>
 </template>

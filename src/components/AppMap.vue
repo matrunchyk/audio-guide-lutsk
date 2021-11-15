@@ -6,8 +6,7 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader';
-import takeData from '@/components/use/useMap.ts';
-import Application from "@/models/Application";
+import useMap from '@/components/use/useMap.ts';
 
 export default {
   name: "map-page",
@@ -33,36 +32,10 @@ export default {
             center: lutsk,
           }
       );
-      this.generateMarker();
-      this.generateMyGeoPosition();
-      takeData().initMap(this.google, this.map);
+      useMap().generateMyGeoPosition();
+      useMap().initMap(this.google, this.map);
     },
-    createMarker(lat, lng, icon) {
-      return new this.google.maps.Marker({
-        position: {lat, lng},
-        map: this.map,
-        icon,
-      });
-    },
-    generateMyGeoPosition() {
-      if (!navigator.geolocation) return;
-      navigator.geolocation.getCurrentPosition(position => {
-            this.createMarker(position.coords.latitude, position.coords.longitude, '/marker-icons/user-location-icon.svg');
-          },
-          error => {
-            console.log(error.message);
-            this.createMarker(50.754311645428764, 25.332929592093258);
-          })
-    },
-    generateMarker() {
-      Application.venues.value.forEach((venue) => {
-        if (venue.isRecommended) {
-          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIconRecommended);
-        } else {
-          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon);
-        }
-      });
-    }
+
   },
 }
 </script>
