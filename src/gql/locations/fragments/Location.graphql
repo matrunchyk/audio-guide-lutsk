@@ -1,17 +1,19 @@
-#import "../../users/fragments/User.graphql"
 #import "./LatLngCoords.graphql"
 
 fragment Location on Location {
   uuid
   createdAt
-  createdBy {
-    ...User
-  }
   imageData
   isEnabled
   isRecommended
+  typeNum
   latLng {
     ...LatLngCoords
+  }
+  locationRatings {
+    guestUuid
+    uuid
+    rating
   }
   localizations {
     audioData

@@ -78,8 +78,6 @@ import LanguageRepository from "@/repositories/LanguageRepository";
 import {computed, defineAsyncComponent, reactive, ref, shallowRef, watch} from 'vue';
 import Application from '../models/Application';
 import router from '@/router';
-import LocationRepository from "@/repositories/LocationRepository";
-
 const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
 
 // noinspection JSUnusedGlobalSymbols
@@ -98,10 +96,6 @@ export default {
     IconHamburger: defineAsyncComponent(() => import('@/assets/svg/icon-hamburger.svg')),
   },
   async setup() {
-    const locationRepository  = ref(new  LocationRepository());
-    await locationRepository.value.many();
-    let loc = locationRepository.value.dataset.all().map(item => item.localizations);
-    console.log(loc);
     const languageRepository = ref(new LanguageRepository());
     await languageRepository.value.many();
     let showLanguageList = ref(true);
@@ -109,17 +103,17 @@ export default {
     let showLanguageDropdown = ref(false);
     const venues = Application.venues;
     const isFavoriteNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
-    let currentLanguageImage = shallowRef(getImage('uk'));
-
+    let currentLanguageImage = shallowRef(getImage(localStorage.getItem('languageSelected') || 'uk'));
     function getImage(lang: string) {
+
       return images(`./${lang}.svg`).default;
     }
-
     function selectLanguage(lang: string) {
       localStorage.setItem('languageSelected', lang);
       showLanguageDropdown.value = false;
       currentLanguageImage.value = images('./' + lang + ".svg").default;
       Application.setLanguage(lang);
+      // console.log(Application.languageCode);
       showLanguageList.value = false;
       languages.sort((a) => (a === lang ? -1 : 1));
 
@@ -202,7 +196,6 @@ export default {
 }
 
 .images-align {
-  margin-left: -9px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 

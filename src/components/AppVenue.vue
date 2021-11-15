@@ -2,20 +2,20 @@
   <div
       class="p-1.5 m-1.5 relative VenueItem bg-transparent"
       :class="{
-      'bg-red-100 border-l border-r border-red-300 my-0': venue.recommended,
+      'bg-red-100 border-l border-r border-red-300 my-0': venue.isRecommended,
       'rounded-t-md border-t mt-1.5': venue.firstRecommended,
       'rounded-b-md border-b mb-1.5': venue.lastRecommended,
     }"
   >
     <div
-        v-if="venue.firstRecommended && venue.recommended"
+        v-if="venue.firstRecommended && venue.isRecommended"
         class="text-recommended text-x-red mt-1 mb-2">Рекомендовано
     </div>
     <div
         class="sound bg-x-red flex justify-center items-center rounded-full absolute right-3 w-12 h-12 cursor-pointer"
         :class="{
-      'top-32': venue.firstRecommended && venue.recommended,
-      'top-24': !(venue.firstRecommended && venue.recommended),
+      'top-32': venue.firstRecommended && venue.isRecommended,
+      'top-24': !(venue.firstRecommended && venue.isRecommended),
     }"
         onmouseover="this.svg='whitesound.svg';">
       <svg-volume class="volume" @click="venue.showDetail(false)"/>
@@ -31,8 +31,8 @@
           v-if="venue.isFavorite"
           class="absolute right-2"
           :class="{
-            'top-9': venue.firstRecommended && venue.recommended,
-            'top-0.5': !(venue.firstRecommended && venue.recommended),
+            'top-9': venue.firstRecommended && venue.isRecommended,
+            'top-0.5': !(venue.firstRecommended && venue.isRecommended),
            }"
       />
     </div>
@@ -42,7 +42,7 @@
           alt=""
           :src="venue.icon"
       >
-      <div class="flex-grow cursor-pointer text-white text-md flex" @click="venue.showDetail()">{{ venue.name }}</div>
+      <div class="flex-grow cursor-pointer text-white text-md flex" @click="venue.showDetail()">{{ locationTitle }}</div>
     </div>
     <div class="flex stars gap-4 px-4 py-2.5 rounded-b-md">
       <div class="flex-none text-xs">Рейтинг</div>
@@ -75,7 +75,7 @@
         </svg>
       </div>
       <div class="flex-none text-xs underline cursor-pointer" @click="venue.showRatingModal()">
-        {{ venue.rated ? 'Оцінити' : 'Змінити оцінку' }}
+        {{ venue.rated ? 'Змінити оцінку' : 'Оцінити' }}
       </div>
     </div>
   </div>
@@ -83,7 +83,8 @@
 
 <script lang="ts">
 import Venue from '@/models/Venue';
-import {defineAsyncComponent, PropType, reactive} from 'vue';
+import Application from "@/models/Application";
+import {computed, defineAsyncComponent, PropType, reactive} from 'vue';
 
 export default {
   name: "AppVenue",
@@ -98,14 +99,15 @@ export default {
     },
   },
   setup(props: any) {
+    const locationTitle = computed(() => props.venue.localizations.find(l => l.language.code === Application.language.value).locationTitle || '');
     const stars = reactive(Array(5).fill(0).map((_, index) => ({
       index,
       fill: props.venue.rated ? '#b3b3b3' : '#f1cd0d',
       rated: props.venue.rating <= index + 1,
     })));
-
     return {
       stars,
+      locationTitle,
     };
   },
 };

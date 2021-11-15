@@ -15,7 +15,9 @@
       <router-view/>
       <RouteModal v-if="routeModalOpen"/>
       <AppTutorial v-if="tutorialOpen"/>
+      <Suspense>
       <RateVenueModal v-if="ratingVenue"/>
+      </Suspense>
     </div>
     <div
         class="hidden flex-grow"
@@ -26,15 +28,18 @@
       }">
       <AppMap/>
     </div>
+    <Suspense>
     <language-selector
         v-if="!languageSelected"
         @select="selectLanguage"/>
+    </Suspense>
   </div>
 </template>
 
 <script lang="ts">
 import {defineAsyncComponent, onBeforeMount, onMounted, ref} from 'vue';
 import Application from '@/models/Application';
+import { v4 as uuid } from 'uuid';
 
 export default {
   name: 'App',
@@ -49,9 +54,12 @@ export default {
 
   setup() {
     let languageSelected = ref('uk');
-
     onBeforeMount(() => {
+      if (!localStorage.getItem('guestUuid')) {
+        localStorage.setItem('guestUuid', uuid());
+      }
       languageSelected.value = localStorage.getItem('languageSelected') || '';
+      Application.language.value = localStorage.getItem('languageSelected') || 'uk';
       if (!languageSelected.value) {
         document.body.classList.add('overflow-hidden');
       } else {

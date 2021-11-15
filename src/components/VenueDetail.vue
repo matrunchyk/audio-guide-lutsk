@@ -31,9 +31,9 @@
            }"
         />
       </div>
-      <div class="mt-2 mb-3 text-center font-semibold">{{ venue.name }}</div>
+      <div class="mt-2 mb-3 text-center font-semibold">{{ locationTitle }}</div>
       <div v-if="!venueMinimized"
-           class="text-xs text-center">{{ venue.description }}
+           class="text-xs text-center">{{ locationDescription }}
       </div>
       <app-player/>
       <div v-if="!venueMinimized"
@@ -55,8 +55,8 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
-import takeData from '@/components/use/useMap.ts';
-import {defineAsyncComponent} from "vue";
+import useMap from '@/components/use/useMap.ts';
+import {computed, defineAsyncComponent} from "vue";
 
 export default {
   name: "VenueDetail",
@@ -70,10 +70,13 @@ export default {
     SvgBookmark: defineAsyncComponent(() => import('@/assets/svg/bookmark.svg')),
   },
   setup() {
-    const mapData = takeData();
+    const mapData = useMap();
     const venue = Application.detailVenue;
     const venues = Application.venues;
-
+    //@ts-ignore
+    const locationTitle = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).locationTitle || '');
+    //@ts-ignore
+    const locationDescription = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).locationDescription || '');
     function toggleFavorite() {
       if (venue.value === null) return;
       venue.value.toggleFavorite();
@@ -106,6 +109,8 @@ export default {
       generateRoute,
       showOnMap,
       backToNormalZoom,
+      locationTitle,
+      locationDescription,
     };
   }
 };
