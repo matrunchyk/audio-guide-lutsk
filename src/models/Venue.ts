@@ -1,18 +1,14 @@
 import Application from '@/models/Application';
-import takeData from '@/components/use/useMap.ts';
+import useMap from '@/components/use/useMap.ts';
 
 export default class Venue {
   public index = 0;
 
-  public name = '';
-
-  public description = '';
+  public localizations = [];
 
   public image = '';
 
   public icon = '';
-
-  public audioFile = '';
 
   public isRecommended = false;
 
@@ -21,6 +17,8 @@ export default class Venue {
   public rated = false;
 
   public rating = 0;
+
+  public averageRating = 0;
 
   public pinned = false;
 
@@ -81,14 +79,14 @@ export default class Venue {
   }
 
   public createLatLng(lat: any, lng: any) {
-    return new (takeData().getMapData()).google.maps.LatLng(lat, lng);
+    return new (useMap().getMapData()).google.maps.LatLng(lat, lng);
   }
 
   public generateRoute() {
-    const directionsRenderer = new (takeData().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
-    const directionsService = new (takeData().getMapData()).google.maps.DirectionsService();
+    const directionsRenderer = new (useMap().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
+    const directionsService = new (useMap().getMapData()).google.maps.DirectionsService();
 
-    directionsRenderer.setMap(takeData().getMapData().map);
+    directionsRenderer.setMap(useMap().getMapData().map);
 
     this.calculateAndDisplayRoute(directionsService, directionsRenderer);
   }
@@ -113,7 +111,7 @@ export default class Venue {
           destination: this.createLatLng(this.lat, this.lng),
           waypoints: waypoints,
           optimizeWaypoints: true,
-          travelMode: (takeData().getMapData()).google.maps.TravelMode.WALKING,
+          travelMode: (useMap().getMapData()).google.maps.TravelMode.WALKING,
         }).then((response: any) => {
           directionsRenderer.setDirections(response);
         });

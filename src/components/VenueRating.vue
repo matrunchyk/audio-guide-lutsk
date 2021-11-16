@@ -1,17 +1,16 @@
 <template>
   <div class="flex-grow flex mb-3 cursor-pointer justify-center">
-    <star-full/>
-    <star-full/>
-    <star-full/>
-    <star-full/>
-    <star-empty/>
+    <component @click="setRating(1)" class="flex-none" :is="star >= 1 ? 'star-full' : 'star-empty'"></component>
+    <component @click="setRating(2)" class="flex-none" :is="star >= 2 ? 'star-full' : 'star-empty'"></component>
+    <component @click="setRating(3)" class="flex-none" :is="star >= 3 ? 'star-full' : 'star-empty'"></component>
+    <component @click="setRating(4)" class="flex-none" :is="star >= 4 ? 'star-full' : 'star-empty'"></component>
+    <component @click="setRating(5)" class="flex-none" :is="star >= 5 ? 'star-full' : 'star-empty'"></component>
   </div>
 </template>
 
 <script lang="ts">
 import Application from '@/models/Application';
-import Venue from '@/models/Venue';
-import {defineAsyncComponent, reactive} from 'vue';
+import {computed, defineAsyncComponent} from 'vue';
 
 export default {
   name: "VenueRating",
@@ -27,16 +26,18 @@ export default {
     },
   },
   setup() {
-    const venue: Venue | null = Application.ratingVenue.value;
-    const stars = reactive(Array(5).fill(0).map((_, index) => ({
-      index,
-      fill: venue?.rated ? '#F1CD0F' : '#F1CD0F',
-      rated: venue?.rating && venue?.rating <= index + 1,
-    })));
+    const venue = Application.ratingVenue;
+    //@ts-ignore
+    const star = computed(() => venue.value.rating);
+    function setRating(num) {
+      if (!venue.value) return;
+      venue.value.rating = num;
+    }
 
     return {
-      stars,
-    }
-  }
+      star,
+      setRating,
+    };
+  },
 };
 </script>

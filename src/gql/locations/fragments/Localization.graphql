@@ -1,0 +1,16 @@
+#import "./Location.graphql"
+#import "../../languages/fragments/Language.graphql"
+
+
+fragment Localization on Localization {
+  audioData
+  language {
+    ...Language
+  }
+  location {
+    ...Location
+  }
+  locationDescription
+  locationTitle
+  uuid
+}

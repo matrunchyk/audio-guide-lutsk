@@ -1,0 +1,8 @@
+
+fragment Language on Language {
+  code
+  createdAt
+  isEnabled
+  title
+  uuid
+}

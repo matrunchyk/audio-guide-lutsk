@@ -9,7 +9,7 @@
       <div class="pb-4 text-center text-sm">Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
       </div>
       <venue-rating/>
-      <app-button @click="makeRated">Оцінити</app-button>
+      <app-button @click="makeRated">{{ venue.rated ? 'Змінити оцінку' : 'Оцінити' }}</app-button>
 
     </div>
     <ThankyouModal v-if="isRatingVenueForThankModal"/>
@@ -18,7 +18,8 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
-import {defineAsyncComponent} from "vue";
+import {defineAsyncComponent, ref} from "vue";
+import LocationRating from "@/models/LocationRating";
 
 export default {
   name: "RateVenueModal",
@@ -28,10 +29,25 @@ export default {
     AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
     ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
   },
-  setup() {
+  async setup() {
     const venues = Application.venues;
+    const venue = Application.ratingVenue;
+    const locationRating = ref(new LocationRating());
 
-    function makeRated() {
+    async function makeRated() {
+      // @ts-ignore
+      locationRating.value.guestUuid = localStorage.getItem('guestUuid');
+      if (!venue.value) return;
+      locationRating.value.rating = venue.value.rating;
+      // @ts-ignore
+      locationRating.value.locationUuid = venue.value.index;
+      if (venue.value.rated) {
+        await locationRating.value.update();
+      } else {
+        await locationRating.value.create();
+      }
+      venue.value.rated = true;
+      venue.value.averageRating = venue.value.rating;
       Application.setThankYouModalOpen(true);
     }
 
@@ -40,6 +56,8 @@ export default {
       Application,
       isRatingVenueForThankModal: Application.isRatingVenueForThankModal,
       makeRated,
+      venue,
+      locationRating,
     };
   }
 };
