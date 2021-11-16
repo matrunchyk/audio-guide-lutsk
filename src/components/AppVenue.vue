@@ -53,13 +53,107 @@
             viewBox="0 0 16 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            v-for="(star, index) in stars"
-            :key="index"
             class="mr-1">
           <g clip-path="url(#clip0)">
             <path
                 d="M8.44311 0.583618L10.3511 5.09956L15.2359 5.5192C15.5747 5.54845 15.7125 5.97117 15.4553 6.1937L11.7502 9.40375L12.8605 14.1792C12.9375 14.511 12.5779 14.7721 12.2869 14.5957L8.08892 12.064L3.89098 14.5957C3.59916 14.7713 3.24035 14.5103 3.31735 14.1792L4.42766 9.40375L0.721741 6.19293C0.464568 5.9704 0.601624 5.54768 0.941186 5.51843L5.82595 5.09879L7.73396 0.583618C7.8664 0.269465 8.31068 0.269465 8.44311 0.583618Z"
-                :fill="star.fill"
+                :fill="venue.averageRating >= 1 ? '#f1cd0d' : '#b3b3b3'"
+                stroke="none"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                  width="15"
+                  height="15"
+                  fill="white"
+                  transform="translate(0.588379)"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+            width="16"
+            height="15"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-1">
+          <g clip-path="url(#clip0)">
+            <path
+                d="M8.44311 0.583618L10.3511 5.09956L15.2359 5.5192C15.5747 5.54845 15.7125 5.97117 15.4553 6.1937L11.7502 9.40375L12.8605 14.1792C12.9375 14.511 12.5779 14.7721 12.2869 14.5957L8.08892 12.064L3.89098 14.5957C3.59916 14.7713 3.24035 14.5103 3.31735 14.1792L4.42766 9.40375L0.721741 6.19293C0.464568 5.9704 0.601624 5.54768 0.941186 5.51843L5.82595 5.09879L7.73396 0.583618C7.8664 0.269465 8.31068 0.269465 8.44311 0.583618Z"
+                :fill="venue.averageRating >= 2 ? '#f1cd0d' : '#b3b3b3'"
+                stroke="none"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                  width="15"
+                  height="15"
+                  fill="white"
+                  transform="translate(0.588379)"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+            width="16"
+            height="15"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-1">
+          <g clip-path="url(#clip0)">
+            <path
+                d="M8.44311 0.583618L10.3511 5.09956L15.2359 5.5192C15.5747 5.54845 15.7125 5.97117 15.4553 6.1937L11.7502 9.40375L12.8605 14.1792C12.9375 14.511 12.5779 14.7721 12.2869 14.5957L8.08892 12.064L3.89098 14.5957C3.59916 14.7713 3.24035 14.5103 3.31735 14.1792L4.42766 9.40375L0.721741 6.19293C0.464568 5.9704 0.601624 5.54768 0.941186 5.51843L5.82595 5.09879L7.73396 0.583618C7.8664 0.269465 8.31068 0.269465 8.44311 0.583618Z"
+                :fill="venue.averageRating >= 3 ? '#f1cd0d' : '#b3b3b3'"
+                stroke="none"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                  width="15"
+                  height="15"
+                  fill="white"
+                  transform="translate(0.588379)"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+            width="16"
+            height="15"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-1">
+          <g clip-path="url(#clip0)">
+            <path
+                d="M8.44311 0.583618L10.3511 5.09956L15.2359 5.5192C15.5747 5.54845 15.7125 5.97117 15.4553 6.1937L11.7502 9.40375L12.8605 14.1792C12.9375 14.511 12.5779 14.7721 12.2869 14.5957L8.08892 12.064L3.89098 14.5957C3.59916 14.7713 3.24035 14.5103 3.31735 14.1792L4.42766 9.40375L0.721741 6.19293C0.464568 5.9704 0.601624 5.54768 0.941186 5.51843L5.82595 5.09879L7.73396 0.583618C7.8664 0.269465 8.31068 0.269465 8.44311 0.583618Z"
+                :fill="venue.averageRating >= 4 ? '#f1cd0d' : '#b3b3b3'"
+                stroke="none"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                  width="15"
+                  height="15"
+                  fill="white"
+                  transform="translate(0.588379)"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+            width="16"
+            height="15"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-1">
+          <g clip-path="url(#clip0)">
+            <path
+                d="M8.44311 0.583618L10.3511 5.09956L15.2359 5.5192C15.5747 5.54845 15.7125 5.97117 15.4553 6.1937L11.7502 9.40375L12.8605 14.1792C12.9375 14.511 12.5779 14.7721 12.2869 14.5957L8.08892 12.064L3.89098 14.5957C3.59916 14.7713 3.24035 14.5103 3.31735 14.1792L4.42766 9.40375L0.721741 6.19293C0.464568 5.9704 0.601624 5.54768 0.941186 5.51843L5.82595 5.09879L7.73396 0.583618C7.8664 0.269465 8.31068 0.269465 8.44311 0.583618Z"
+                :fill="venue.averageRating >= 5 ? '#f1cd0d' : '#b3b3b3'"
                 stroke="none"
             />
           </g>
@@ -84,7 +178,7 @@
 <script lang="ts">
 import Venue from '@/models/Venue';
 import Application from "@/models/Application";
-import {computed, defineAsyncComponent, PropType, reactive} from 'vue';
+import {computed, defineAsyncComponent, PropType} from 'vue';
 
 export default {
   name: "AppVenue",
@@ -100,13 +194,7 @@ export default {
   },
   setup(props: any) {
     const locationTitle = computed(() => props.venue.localizations.find(l => l.language.code === Application.language.value).locationTitle || '');
-    const stars = reactive(Array(5).fill(0).map((_, index) => ({
-      index,
-      fill: props.venue.rated ? '#b3b3b3' : '#f1cd0d',
-      rated: props.venue.rating <= index + 1,
-    })));
     return {
-      stars,
       locationTitle,
     };
   },

@@ -19,7 +19,6 @@ export default {
     VenueDetail: defineAsyncComponent(() => import('@/components/VenueDetail.vue')),
   },
   setup() {
-    // icon: image.abstract(20, 20) + '?index=' + item.index,
     return {
       venues: Application.venues,
       detailVenue: Application.detailVenue,
