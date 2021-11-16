@@ -10,8 +10,6 @@ export default class Venue {
 
   public icon = '';
 
-  public audioFile = '';
-
   public isRecommended = false;
 
   public recommended = 0;
@@ -19,6 +17,8 @@ export default class Venue {
   public rated = false;
 
   public rating = 0;
+
+  public averageRating = 0;
 
   public pinned = false;
 

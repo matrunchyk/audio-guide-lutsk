@@ -24,8 +24,6 @@ export default class Application {
 
   static ratingVenue = ref<Venue | null>(null);
 
-  static ratingVal = 4;
-
   static detailVenue = ref<Venue | null>(null);
 
   static detailVenueMinimized = ref(false);
@@ -69,11 +67,10 @@ export default class Application {
       image: item.imageData,
       localizations: item.localizations,
       icon: item.typeNum === 1 ? "/icons/icon-castle.svg" : item.typeNum === 2 ? "/icons/icon-church.svg" : item.typeNum === 3 ? "/icons/icon-museum.svg" : item.typeNum === 4 ? "/icons/icon-flag.svg" : "" ,
-      // audioFile: item.audioFile,
       isRecommended: item.isRecommended,
-      rated: false,
-      rating: this.ratingVal,
-      // pinned: item.pinned,
+      rated: !!item.locationRatings.find(r => r.guestUuid === localStorage.getItem('guestUuid')),
+      averageRating: item.locationRatings.reduce((sum, a) => sum + a.rating, 0) / item.locationRatings.length,
+      rating: item.locationRatings.find(r => r.guestUuid === localStorage.getItem('guestUuid')) ? item.locationRatings.find(r => r.guestUuid === localStorage.getItem('guestUuid')).rating : 0,
       lat: item.latLng.lat,
       lng: item.latLng.lng,
       isFavorite: false,

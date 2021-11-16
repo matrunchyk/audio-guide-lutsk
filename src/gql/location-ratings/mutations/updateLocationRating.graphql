@@ -2,8 +2,6 @@
 
 mutation updateLocationRating($locationRating: LocationRatingInput!) {
     updateLocationRating(locationRating: $locationRating) {
-        uuid
-        guestUuid
-        rating
+        ...LocationRating
     },
 }

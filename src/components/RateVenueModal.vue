@@ -9,7 +9,7 @@
       <div class="pb-4 text-center text-sm">Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
       </div>
       <venue-rating/>
-      <app-button @click="makeRated">Оцінити</app-button>
+      <app-button @click="makeRated">{{ venue.rated ? 'Змінити оцінку' : 'Оцінити' }}</app-button>
 
     </div>
     <ThankyouModal v-if="isRatingVenueForThankModal"/>
@@ -31,16 +31,23 @@ export default {
   },
   async setup() {
     const venues = Application.venues;
+    const venue = Application.ratingVenue;
     const locationRating = ref(new LocationRating());
 
     async function makeRated() {
       // @ts-ignore
       locationRating.value.guestUuid = localStorage.getItem('guestUuid');
-      locationRating.value.rating = 3;
+      if (!venue.value) return;
+      locationRating.value.rating = venue.value.rating;
       // @ts-ignore
-      locationRating.value.locationUuid = '3051ccaa-5855-40b2-a64f-a37309031c4a';
-      await locationRating.value.create();
-      // console.log(locationRating.value);
+      locationRating.value.locationUuid = venue.value.index;
+      if (venue.value.rated) {
+        await locationRating.value.update();
+      } else {
+        await locationRating.value.create();
+      }
+      venue.value.rated = true;
+      venue.value.averageRating = venue.value.rating;
       Application.setThankYouModalOpen(true);
     }
 
@@ -49,6 +56,7 @@ export default {
       Application,
       isRatingVenueForThankModal: Application.isRatingVenueForThankModal,
       makeRated,
+      venue,
       locationRating,
     };
   }

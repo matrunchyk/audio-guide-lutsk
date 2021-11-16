@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="second-line sm:flex bg-white py-3 sm:items-center px-4">
+    <div class="second-line sm:flex bg-white py-3 sm:items-center px-8">
       <AppToggle class="" v-if="$route.name !== 'map'"/>
       <MakeRoute v-else-if="isFavoriteNum"/>
     </div>
@@ -75,7 +75,7 @@
 
 <script lang="ts">
 import LanguageRepository from "@/repositories/LanguageRepository";
-import {computed, defineAsyncComponent, reactive, ref, shallowRef, watch} from 'vue';
+import {computed, defineAsyncComponent, reactive, ref, shallowRef} from 'vue';
 import Application from '../models/Application';
 import router from '@/router';
 const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
@@ -113,7 +113,6 @@ export default {
       showLanguageDropdown.value = false;
       currentLanguageImage.value = images('./' + lang + ".svg").default;
       Application.setLanguage(lang);
-      // console.log(Application.languageCode);
       showLanguageList.value = false;
       languages.sort((a) => (a === lang ? -1 : 1));
 
@@ -158,9 +157,6 @@ export default {
       return router.push({name});
     }
 
-    // eslint-disable-next-line vue/no-watch-after-await
-    watch(Application.language, lang => selectLanguage(lang));
-
     return {
       selectLanguage,
       linkToSourceSiteLeftIcon,
@@ -188,6 +184,7 @@ export default {
 <style>
 .app-header {
   min-width: 320px;
+  justify-content: space-between;
 }
 .number {
   font-size: 7px;
