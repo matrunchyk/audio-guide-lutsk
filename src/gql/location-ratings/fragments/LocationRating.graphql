@@ -1,0 +1,6 @@
+
+fragment LocationRating on LocationRating {
+    guestUuid
+    rating
+    uuid
+}

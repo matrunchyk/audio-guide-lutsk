@@ -5,7 +5,7 @@
       <div class="flex-grow flex text-xl px-28 py-14 content-center justify-center">
         Дякуємо за відгук!
         <IconModelClose
-            @click="Application.setThankYouModalOpen(false)"
+            @click="closeModal"
             class="w-4 absolute right-0 -mt-20  cursor-pointer"
         />
       </div>
@@ -23,8 +23,13 @@ export default {
     IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
   },
   setup() {
+    function closeModal() {
+      Application.resetRatingVenue();
+      Application.setThankYouModalOpen(false)
+    }
     return {
       Application,
+      closeModal,
     };
   }
 };

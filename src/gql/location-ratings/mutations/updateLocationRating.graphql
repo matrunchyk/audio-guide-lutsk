@@ -1,0 +1,7 @@
+#import "../fragments/LocationRating.graphql"
+
+mutation updateLocationRating($locationRating: LocationRatingInput!) {
+    updateLocationRating(locationRating: $locationRating) {
+        ...LocationRating
+    },
+}

@@ -1,0 +1,23 @@
+#import "./LatLngCoords.graphql"
+
+fragment Location on Location {
+  uuid
+  createdAt
+  imageData
+  isEnabled
+  isRecommended
+  typeNum
+  latLng {
+    ...LatLngCoords
+  }
+  locationRatings {
+    guestUuid
+    uuid
+    rating
+  }
+  localizations {
+    audioData
+    locationDescription
+    locationTitle
+  }
+}
