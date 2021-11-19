@@ -2,19 +2,34 @@ import Application from "@/models/Application";
 
 let google: any = null;
 let map: any = null;
+let directionsRenderer: any = null;
+let directionsService: any = null;
 
 export default function useMap() {
   function initMap(googleData: any, mapData: any) {
     google = googleData;
     map = mapData;
+    directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
+    directionsService = new google.maps.DirectionsService();
   }
 
   function createMarker(lat, lng, icon) {
-    return new google.maps.Marker({
+    if (!google) return;
+    const marker = new google.maps.Marker({
       position: {lat, lng},
       map: map,
       icon,
     });
+    marker.addListener("click", () => {
+      Application.venues.value.forEach(venue => {
+        if (+venue.lat === lat) {
+          venue.showDetail();
+        }
+      });
+      map.setZoom(15);
+      map.setCenter(marker.getPosition() as google.maps.LatLng);
+    });
+    return marker;
   }
   function generateMyGeoPosition() {
     if (!navigator.geolocation) return;
@@ -40,6 +55,8 @@ export default function useMap() {
     return {
       google,
       map,
+      directionsRenderer,
+      directionsService,
     }
   }
 

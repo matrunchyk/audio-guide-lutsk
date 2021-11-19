@@ -1,7 +1,7 @@
 <template>
-  <div class=" inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
+  <div class="venue-detail inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
 
-    <div class="bg-white rounded-lg bottom-0 px-5 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
+    <div class="venue-detail-content bg-white rounded-lg bottom-0 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
     :class="{'venue-player':  venueMinimized}">
       <div class="w-30 z-50 absolute right-0 -mt-8">
         <icon-model-close
@@ -18,6 +18,7 @@
             @click="Application.setDetailVenueMinimized(false)"/>
       </div>
       <img
+          class="px-3"
           v-if="!venueMinimized"
           :src="venue.image"
           alt=""/>
@@ -33,11 +34,11 @@
       </div>
       <div class="mt-2 mb-3 text-center font-semibold">{{ locationTitle }}</div>
       <div v-if="!venueMinimized"
-           class="text-xs text-center">{{ locationDescription }}
+           class="px-3 text-xs text-center">{{ locationDescription }}
       </div>
-      <app-player/>
+      <app-player />
       <div v-if="!venueMinimized"
-           class="flex justify-between mt-5">
+           class="flex justify-between mt-5 px-3">
         <div @click="showOnMap" class="underline text-xs cursor-pointer">Показати на карті</div>
         <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">Додати в обрані
         </div>
@@ -45,7 +46,7 @@
         <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
       </div>
       <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
-                  class="mt-4 flex">
+                  class="mt-4 flex ">
         <icon-route class="text-white"/>
         Прокласти маршрут
       </app-button>
@@ -57,6 +58,7 @@
 import Application from '@/models/Application';
 import useMap from '@/components/use/useMap.ts';
 import {computed, defineAsyncComponent} from "vue";
+import router from "@/router";
 
 export default {
   name: "VenueDetail",
@@ -78,7 +80,11 @@ export default {
     //@ts-ignore
     const locationDescription = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).locationDescription || '');
     function toggleFavorite() {
-      if (venue.value === null) return;
+      if (!venue.value) return;
+      venue.value.isFavorite = !venue.value.isFavorite;
+      if (!venue.value.isFavorite) {
+        (mapData.getMapData()).directionsRenderer.setDirections({routes: []});
+      }
       venue.value.toggleFavorite();
     }
 
@@ -87,16 +93,28 @@ export default {
         if (!venue.isFavorite) return;
         venue.generateRoute();
       });
+      if (window.innerWidth <= 640) {
+        switchView('map');
+      }
+    }
+
+    function switchView(name: string) {
+      Application.setMenuOpen(false);
+      return router.push({name});
     }
 
     function showOnMap() {
-      if (venue.value === null) return;
+      if (!venue.value) return;
+      if (window.innerWidth <= 640) {
+        switchView('map');
+      }
       mapData.getMapData().map.setZoom(17);
       mapData.getMapData().map.setCenter(new (mapData.getMapData()).google.maps.LatLng(venue.value.lat, venue.value.lng));
     }
 
     function backToNormalZoom() {
       Application.resetDetailVenue();
+      if (!mapData.getMapData().map) return;
       mapData.getMapData().map.setZoom(14);
     }
 
@@ -111,6 +129,7 @@ export default {
       backToNormalZoom,
       locationTitle,
       locationDescription,
+      switchView,
     };
   }
 };
@@ -120,9 +139,16 @@ export default {
 .venue-detail {
   height: calc(100vh - 54px);
 }
+.venue-player {
+  min-width: 300px;
+}
 @media (max-width: 640px) {
+  .venue-detail-content {
+    width: 99%;
+    left: 0px;
+  }
   .venue-player {
-    width: 100%;
+    width: 99%;
   }
 }
 </style>

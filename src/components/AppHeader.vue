@@ -135,13 +135,13 @@ export default {
     }
 
     function generateRouteInHeader() {
+      if (window.innerWidth <= 640) {
+        switchView('map');
+      }
       venues.value.forEach(venue => {
         if (!venue.isFavorite) return;
         venue.generateRoute();
       });
-      if (window.screen.width <= 640) {
-        switchView('map');
-      }
       if (!isFavoriteNum.value) {
         openDefaultModal();
       }
