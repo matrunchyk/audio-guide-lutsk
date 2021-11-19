@@ -7,9 +7,10 @@
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader';
 import useMap from '@/components/use/useMap.ts';
+import Application from "../models/Application";
 
 export default {
-  name: "map-page",
+  name: "appMap",
   data: () => ({
     apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     google: null,
@@ -32,10 +33,29 @@ export default {
             center: lutsk,
           }
       );
+      if (window.innerWidth <= 640) {
+        this.generateMarker();
+      }
       useMap().generateMyGeoPosition();
       useMap().initMap(this.google, this.map);
     },
-
+    createMarker(lat, lng, icon) {
+      return new this.google.maps.Marker({
+        position: {lat, lng},
+        map: this.map,
+        icon,
+      });
+    },
+    generateMarker() {
+      Application.venues.value.forEach((venue) => {
+        if (venue.isRecommended) {
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIconRecommended);
+        } else {
+          venue.marker = this.createMarker(+venue.lat, +venue.lng, venue.markerIcon);
+        }
+        venue.toggleFavorite();
+      });
+    }
   },
 }
 </script>

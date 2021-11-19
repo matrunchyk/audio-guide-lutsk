@@ -1,6 +1,6 @@
 <template>
   <audio @timeupdate="updateTime" :src="`data:audio/mp3;base64, ${locationAudio}`" preload="auto" ref="audioPlayer"></audio>
-  <div class="flex flex-col  app-player mt-4">
+  <div class="flex flex-col  app-player mt-4 px-3">
     <div @click="updateProgressBarTime($event)" ref="progressBar"
          class="w-full py-1.5 flex tracking relative cursor-pointer mb-4">
       <div class="border w-full border-gray-200 absolute"/>

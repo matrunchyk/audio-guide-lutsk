@@ -65,7 +65,6 @@ export default class Venue {
   }
 
   public toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
     if (!this.marker) return;
     if (this.isFavorite && this.isRecommended) {
       this.marker.setIcon(this.markerIconRecommendedFavorite);
@@ -83,12 +82,12 @@ export default class Venue {
   }
 
   public generateRoute() {
-    const directionsRenderer = new (useMap().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
-    const directionsService = new (useMap().getMapData()).google.maps.DirectionsService();
+    // const directionsRenderer = new (useMap().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
+    // const directionsService = new (useMap().getMapData()).google.maps.DirectionsService();
+    // @ts-ignore
+    (useMap().getMapData()).directionsRenderer.setMap(useMap().getMapData().map);
 
-    directionsRenderer.setMap(useMap().getMapData().map);
-
-    this.calculateAndDisplayRoute(directionsService, directionsRenderer);
+    this.calculateAndDisplayRoute((useMap().getMapData()).directionsService, (useMap().getMapData()).directionsRenderer);
   }
 
   public calculateAndDisplayRoute(

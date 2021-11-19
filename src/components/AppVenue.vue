@@ -44,7 +44,7 @@
       >
       <div class="flex-grow cursor-pointer text-white text-md flex" @click="venue.showDetail()">{{ locationTitle }}</div>
     </div>
-    <div class="flex stars gap-4 px-4 py-2.5 rounded-b-md">
+    <div class="flex stars gap-4 px-2 py-2.5 rounded-b-md">
       <div class="flex-none text-xs">Рейтинг</div>
       <div class="flex-grow flex">
         <svg
