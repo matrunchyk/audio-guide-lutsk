@@ -20,6 +20,8 @@ export default class Application {
 
   static pinnedVenues = ref(0);
 
+  static isSortedByRating = ref(false);
+
   static isRatingVenueForThankModal = ref(false);
 
   static ratingVenue = ref<Venue | null>(null);

@@ -1,7 +1,7 @@
 <template>
   <div class="venue-detail inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
 
-    <div class="venue-detail-content bg-white rounded-lg bottom-0 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
+    <div class="venue-detail-content bg-white rounded-lg bottom-0 left-0.5 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
     :class="{'venue-player':  venueMinimized}">
       <div class="w-30 z-50 absolute right-0 -mt-8">
         <icon-model-close
@@ -141,6 +141,10 @@ export default {
 }
 .venue-player {
   min-width: 300px;
+}
+.venue-detail-content {
+  min-width: 300px;
+  width: 19.5%;
 }
 @media (max-width: 640px) {
   .venue-detail-content {

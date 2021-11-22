@@ -2,13 +2,13 @@
   <div
       class="p-1.5 m-1.5 relative VenueItem bg-transparent"
       :class="{
-      'bg-red-100 border-l border-r border-red-300 my-0': venue.isRecommended,
-      'rounded-t-md border-t mt-1.5': venue.firstRecommended,
-      'rounded-b-md border-b mb-1.5': venue.lastRecommended,
+      'bg-red-100 border-l border-r border-red-300 my-0': venue.isRecommended && !isSorted,
+      'rounded-t-md border-t mt-1.5': venue.firstRecommended && !isSorted,
+      'rounded-b-md border-b mb-1.5': venue.lastRecommended && !isSorted,
     }"
   >
     <div
-        v-if="venue.firstRecommended && venue.isRecommended"
+        v-if="venue.firstRecommended && !isSorted && venue.isRecommended"
         class="text-recommended text-x-red mt-1 mb-2">Рекомендовано
     </div>
     <div
@@ -193,9 +193,11 @@ export default {
     },
   },
   setup(props: any) {
+    const isSorted = computed( () => Application.isSortedByRating.value);
     const locationTitle = computed(() => props.venue.localizations.find(l => l.language.code === Application.language.value).locationTitle || '');
     return {
       locationTitle,
+      isSorted,
     };
   },
 };
