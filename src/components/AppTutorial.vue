@@ -6,7 +6,7 @@
           class="w-4 ml-auto cursor-pointer"
           @click="Application.setTutorialOpen(false)"/>
     </div>
-    <div class="tutorial-content w-3/4 bg-white py-5 px-12 text-sm rounded-md">
+    <div class="tutorial-content overflow-auto w-3/4 bg-white py-5 px-12 text-sm rounded-md">
       <div class="text-center mb-2 text-xl font-semibold">Інструкція</div>
       <div class="text-tutorial pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
