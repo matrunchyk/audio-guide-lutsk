@@ -82,12 +82,10 @@ export default class Venue {
   }
 
   public generateRoute() {
-    // const directionsRenderer = new (useMap().getMapData()).google.maps.DirectionsRenderer({suppressMarkers: true});
-    // const directionsService = new (useMap().getMapData()).google.maps.DirectionsService();
     // @ts-ignore
-    (useMap().getMapData()).directionsRenderer.setMap(useMap().getMapData().map);
+    useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
 
-    this.calculateAndDisplayRoute((useMap().getMapData()).directionsService, (useMap().getMapData()).directionsRenderer);
+    this.calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
   }
 
   public calculateAndDisplayRoute(
