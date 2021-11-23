@@ -26,7 +26,7 @@
         'sm:block': $route.name !== '404',
 
       }">
-      <AppMap/>
+      <AppMap v-if="windowWidth >= 640"/>
     </div>
     <Suspense>
     <language-selector
@@ -53,6 +53,7 @@ export default {
   },
 
   setup() {
+    const windowWidth = ref(window.innerWidth)
     let languageSelected = ref('uk');
     onBeforeMount(() => {
       if (!localStorage.getItem('guestUuid')) {
@@ -68,7 +69,7 @@ export default {
     });
     onMounted(() => {
       Application.setVenues();
-    })
+    });
 
     function selectLanguage(lang: string) {
       languageSelected.value = lang;
@@ -76,6 +77,7 @@ export default {
     }
 
     return {
+      windowWidth,
       languageSelected,
       selectLanguage,
       menuOpen: Application.menuOpen,
