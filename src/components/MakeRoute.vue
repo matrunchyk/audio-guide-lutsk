@@ -9,7 +9,7 @@
 
 <script>
 import Application from "@/models/Application";
-import {computed, defineAsyncComponent} from "vue";
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "MakeRoute",
@@ -18,7 +18,6 @@ export default {
   },
   setup() {
     const venues = Application.venues;
-    const recommendedNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
 
     function generateRoute() {
       venues.value.forEach(venue => {
@@ -30,7 +29,6 @@ export default {
     return {
       venues,
       generateRoute,
-      recommendedNum,
     };
   }
 };
