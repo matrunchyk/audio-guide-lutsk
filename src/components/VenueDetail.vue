@@ -39,16 +39,16 @@
       <app-player />
       <div v-if="!venueMinimized"
            class="flex justify-between mt-5 px-3">
-        <div @click="showOnMap" class="underline text-xs cursor-pointer">Показати на карті</div>
-        <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">Додати в обрані
+        <div @click="showOnMap" class="underline text-xs cursor-pointer">{{ $t('venues.show_on_map') }}</div>
+        <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
         </div>
 
-        <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">Прибрати з Обраних</div>
+        <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.remove_from_favourites') }}</div>
       </div>
       <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
                   class="mt-4 flex ">
         <icon-route class="text-white"/>
-        Прокласти маршрут
+        {{ $t('make_route') }}
       </app-button>
     </div>
   </div>
@@ -137,7 +137,7 @@ export default {
 
 <style scoped>
 .venue-detail {
-  height: calc(100vh - 54px);
+  height: 100%;
 }
 .venue-player {
   min-width: 300px;

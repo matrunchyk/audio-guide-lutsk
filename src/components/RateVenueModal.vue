@@ -5,11 +5,11 @@
       <icon-model-close
           class="w-4 absolute right-0 -mt-10  cursor-pointer"
           @click="Application.resetRatingVenue()"/>
-      <div class="text-center mb-2 text-xl font-semibold">Оцінити локацію</div>
-      <div class="pb-4 text-center text-sm">Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+      <div class="text-center mb-2 text-xl font-semibold">{{ $t('modals.make_rate') }}</div>
+      <div class="pb-4 text-center text-sm">{{ $t('modals.make_rate_content') }}
       </div>
       <venue-rating/>
-      <app-button @click="makeRated">{{ venue.rated ? 'Змінити оцінку' : 'Оцінити' }}</app-button>
+      <app-button @click="makeRated">{{ venue.rated ? $t('venues.change_rating') : $t('venues.rate') }}</app-button>
 
     </div>
     <ThankyouModal v-if="isRatingVenueForThankModal"/>
