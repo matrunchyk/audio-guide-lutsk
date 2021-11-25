@@ -37,6 +37,13 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
       offlineGoogleAnalytics: true,
+      exclude: [
+        /\.map$/,
+        /img\/icons\//,
+        /favicon\.ico$/,
+        /^manifest.*\.js?$/,
+        /^_redirects$/,
+      ]
     },
     iconPaths: {
       faviconSVG: 'img/icons/icon-vector.svg',
