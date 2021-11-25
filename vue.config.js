@@ -34,7 +34,7 @@ module.exports = {
       start_url: "/?source=pwa",
       id: "audio-guide-lutsk",
       display: "standalone",
-      scope: "/",
+      description: "Lutsk Audio Guide | Аудіо-гід по Луцьку",
       icons: [
         {
           "src": "icons/icon-vector.svg",
