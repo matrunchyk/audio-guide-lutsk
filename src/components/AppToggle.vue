@@ -16,7 +16,7 @@
       </div>
       <!-- label -->
       <div class="ml-3 text-black font-normal text-xs">
-        Сортувати за Рейтингом
+        {{ $t('header.sort_by_rating') }}
       </div>
     </label>
   </div>

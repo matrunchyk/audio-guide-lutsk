@@ -9,7 +9,7 @@
   >
     <div
         v-if="venue.firstRecommended && !isSorted && venue.isRecommended"
-        class="text-recommended text-x-red mt-1 mb-2">Рекомендовано
+        class="text-recommended text-x-red mt-1 mb-2"> {{ $t('venues.recommended') }}
     </div>
     <div
         class="sound bg-x-red flex justify-center items-center rounded-full absolute right-3 w-12 h-12 cursor-pointer"
@@ -45,7 +45,7 @@
       <div class="flex-grow cursor-pointer text-white text-md flex" @click="venue.showDetail()">{{ locationTitle }}</div>
     </div>
     <div class="flex stars gap-4 px-2 py-2.5 rounded-b-md">
-      <div class="flex-none text-xs">Рейтинг</div>
+      <div class="flex-none text-xs">{{ $t('venues.rating') }}</div>
       <div class="flex-grow flex">
         <svg
             width="16"
@@ -169,7 +169,7 @@
         </svg>
       </div>
       <div class="flex-none text-xs underline cursor-pointer" @click="venue.showRatingModal()">
-        {{ venue.rated ? 'Змінити оцінку' : 'Оцінити' }}
+        {{ venue.rated ? $t('venues.change_rating') : $t('venues.rate') }}
       </div>
     </div>
   </div>

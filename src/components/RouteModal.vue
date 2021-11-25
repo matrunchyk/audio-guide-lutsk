@@ -5,10 +5,10 @@
       <IconModelClose
           @click="Application.setRouteModalOpen(false)"
           class="w-4 absolute right-0 -mt-10  cursor-pointer"/>
-      <div class="text-center mb-2 text-xl font-semibold">Прокласти маршрут</div>
-      <div class="pb-4 text-center text-sm">Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+      <div class="text-center mb-2 text-xl font-semibold">{{ $t('make_route') }}</div>
+      <div class="pb-4 text-center text-sm">{{ $t('modals.make_route_content') }}
       </div>
-      <AppButton @click="Application.setRouteModalOpen(false)">Зрозуміло</AppButton>
+      <AppButton @click="Application.setRouteModalOpen(false)">{{ $t('buttons.agree') }}</AppButton>
 
     </div>
   </div>
