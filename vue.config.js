@@ -1,11 +1,11 @@
 module.exports = {
   chainWebpack: (config) => {
     config.module
-        .rule('graphql')
-        .test(/\.graphql$/)
-        .use('graphql-tag/loader')
-          .loader('graphql-tag/loader')
-          .end()
+    .rule('graphql')
+    .test(/\.graphql$/)
+    .use('graphql-tag/loader')
+    .loader('graphql-tag/loader')
+    .end();
   },
   configureWebpack: {
     module: {
@@ -25,10 +25,10 @@ module.exports = {
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     iconPaths: {
-      favicon32: 'img/icons/favicon-32x32.png',
-      favicon16: 'img/icons/favicon-16x16.png',
-      appleTouchIcon: 'img/icons/apple-icon-152x152.png',
-      msTileImage: 'img/icons/msapplication-icon-144x144.png'
+      favicon32: 'icons/purpose-maskable/favicon-32x32.png',
+      favicon16: 'icons/purpose-maskable/favicon-16x16.png',
+      appleTouchIcon: 'icons/purpose-maskable/apple-icon-152x152.png',
+      msTileImage: 'icons/purpose-maskable/msapplication-icon-144x144.png',
     },
     manifestOptions: {
       start_url: "/?source=pwa",
@@ -37,57 +37,105 @@ module.exports = {
       scope: "/",
       icons: [
         {
-          "src": "img/icons/icon-vector.svg",
+          "src": "icons/icon-vector.svg",
           "sizes": "512x512",
-          "type": "image/svg+xml"
+          "type": "image/svg+xml",
         },
         {
-          "src": "img/icons/icon-512x512.png",
+          "src": "icons/purpose-maskable/icon-512x512.png",
           "sizes": "512x512",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-192x192.png",
+          "src": "icons/purpose-maskable/icon-192x192.png",
           "sizes": "192x192",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-384x384.png",
+          "src": "icons/purpose-maskable/icon-384x384.png",
           "sizes": "384x384",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-152x152.png",
+          "src": "icons/purpose-maskable/icon-152x152.png",
           "sizes": "152x152",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-144x144.png",
+          "src": "icons/purpose-maskable/icon-144x144.png",
           "sizes": "144x144",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-128x128.png",
+          "src": "icons/purpose-maskable/icon-128x128.png",
           "sizes": "128x128",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-96x96.png",
+          "src": "icons/purpose-maskable/icon-96x96.png",
           "sizes": "96x96",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
         },
         {
-          "src": "img/icons/icon-72x72.png",
+          "src": "icons/purpose-maskable/icon-72x72.png",
           "sizes": "72x72",
           "type": "image/png",
-          "purpose": "any maskable"
+          "purpose": "maskable",
+        },
+        {
+          "src": "icons/purpose-any/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-384x384.png",
+          "sizes": "384x384",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-152x152.png",
+          "sizes": "152x152",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-144x144.png",
+          "sizes": "144x144",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-128x128.png",
+          "sizes": "128x128",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any",
+        },
+        {
+          "src": "icons/purpose-any/icon-72x72.png",
+          "sizes": "72x72",
+          "type": "image/png",
+          "purpose": "any",
         },
       ],
       "shortcuts": [
@@ -96,16 +144,16 @@ module.exports = {
           "short_name": "Map",
           "description": "Use map view",
           "url": "/map?source=pwa",
-          "icons": [{"src": "/icons/map.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+          "icons": [{ "src": "/icons/map.png", "sizes": "192x192", "type": "image/png" }],
         },
         {
           "name": "List",
           "short_name": "List",
           "description": "Use list view",
           "url": "/?source=pwa",
-          "icons": [{"src": "/icons/list.svg", "sizes": "192x192", "type": "image/svg+xml" }]
-        }
+          "icons": [{ "src": "/icons/list.png", "sizes": "192x192", "type": "image/png" }],
+        },
       ],
-    }
-  }
+    },
+  },
 };
