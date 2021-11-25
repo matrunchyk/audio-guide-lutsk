@@ -3,7 +3,7 @@
       class=" z-10 absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
     <div class=" bg-white flex rounded-md relative px-2 w-3/4">
       <div class="thank-you-modal-content flex-grow flex text-xl px-28 py-14 content-center justify-center">
-        Дякуємо за відгук!
+        {{ $t('modals.thank_you') }}
         <IconModelClose
             @click="closeModal"
             class="close-modal w-4 absolute right-0 -mt-20  cursor-pointer"

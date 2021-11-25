@@ -2,7 +2,7 @@
   <div class="flex items-center hover:underline">
     <DistancePic/>
     <div @click="generateRoute" class="ml-3 text-black font-normal text-xs">
-      Прокласти маршрут
+      {{ $t('make_route') }}
     </div>
   </div>
 </template>
