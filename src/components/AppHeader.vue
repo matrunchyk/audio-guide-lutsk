@@ -57,13 +57,13 @@
         'translate-x-0 flex': menuOpen,
         'translate-x-96 sm:-translate-x-96 hidden sm:flex': !menuOpen,
       }">
-      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('map')">Пошук по Карті</div>
-      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('list')">Пошук по Списку</div>
+      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('map')">{{ $t('header.search_by_map') }}</div>
+      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('list')">{{ $t('header.search_by_list') }}</div>
       <div @click="generateRouteInHeader" class="cursor-pointer flex justify-between hover:text-x-red">
-        Прокласти маршрут
+        {{ $t('make_route') }}
         <span v-if="isFavoriteNum" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ isFavoriteNum }}</span>
       </div>
-      <div @click="openTutorial" class="cursor-pointer hover:text-x-red">Інструкція</div>
+      <div @click="openTutorial" class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}</div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
         <LogoTwotowers @click="linkToSourceSiteLeftIcon" class="mr-auto"/>
         <LogoEu/>
