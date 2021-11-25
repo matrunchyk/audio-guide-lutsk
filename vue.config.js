@@ -49,9 +49,9 @@ module.exports = {
       faviconSVG: 'img/icons/icon-vector.svg',
       favicon32: 'img/icons/purpose-maskable/favicon-32x32.png',
       favicon16: 'img/icons/purpose-maskable/favicon-16x16.png',
-      appleTouchIcon: 'img/icons/purpose-maskable/apple-icon-152x152.png',
+      appleTouchIcon: 'apple-touch-icon-152x152.png',
       msTileImage: 'img/icons/purpose-maskable/msapplication-icon-144x144.png',
-      maskIcon: null,
+      maskIcon: 'img/icons/safari-pinned-tab.svg',
     },
     manifestOptions: {
       start_url: "/?source=pwa",
