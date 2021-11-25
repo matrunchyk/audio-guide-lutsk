@@ -6,18 +6,38 @@ import { setI18n } from './i18n';
 import './index.css';
 import router from './router';
 import './registerServiceWorker';
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
 
 const app = createApp(App);
+
 setI18n(app);
+
 // @ts-ignore
 app.use(VueOOP, {
     graphql: true,
     schemaUrl: process.env.VUE_APP_API_ENDPOINT_GRAPHQL,
     httpEndpoint: process.env.VUE_APP_API_ENDPOINT_GRAPHQL,
 });
-// @ts-ignore
+
 app.use(VueGtag, {
   config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID || '' }
 });
+
+Sentry.init({
+  app,
+  dsn: process.env.VUE_APP_SENTRY_DSN || "",
+  integrations: [
+    new Integrations.BrowserTracing({
+      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      tracingOrigins: [process.env.VUE_APP_DOMAIN_NAME || '', /^\//],
+    }),
+  ],
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
 app.use(router);
 app.mount('#app');
