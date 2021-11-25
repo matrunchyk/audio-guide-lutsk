@@ -5,6 +5,7 @@ import App from './App.vue'
 import { setI18n } from './i18n';
 import './index.css';
 import router from './router';
+import './registerServiceWorker';
 
 const app = createApp(App);
 setI18n(app);
