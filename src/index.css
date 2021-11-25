@@ -5,3 +5,7 @@
 #app {
     font-family: 'Open Sans', sans-serif;
 }
+
+body {
+    overscroll-behavior-y: none;
+}

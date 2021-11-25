@@ -2,72 +2,85 @@
   <div class="app-header sm:flex  fixed z-10 ">
     <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse sm:flex-1 items-center">
       <svg-map
-          class="flex-none sm:hidden cursor-pointer"
-          :class="{
+        class="flex-none sm:hidden cursor-pointer"
+        :class="{
             'opacity-30': $route.name === 'map',
           }"
-          @click="switchView('map')"
+        @click="switchView('map')"
       />
       <div class="flex-grow sm:hidden h-5 w-5 cursor-pointer self-center flex">
         <svg-list
-            :class="{
+          :class="{
             'opacity-30': $route.name === 'list',
           }"
-            @click="switchView('list')"
+          @click="switchView('list')"
         />
       </div>
       <div class="flex">
-        <div class="bg-white w-10 rounded absolute z-40 images-align pb-1.5 -mt-1 -ml-1" :class="{
+        <div class="bg-white w-10 rounded absolute z-40 images-align pb-1.5 -mt-1 -ml-1"
+             :class="{
           hidden: !showLanguageDropdown,
           block: showLanguageDropdown,
         }">
           <component
-              v-for="lang in languages"
-              :key="lang"
-              class="mx-auto pt-1 hover:block cursor-pointer"
-              :is="getImage(lang)"
-              @click="selectLanguage(lang)"
+            v-for="lang in languages"
+            :key="lang"
+            class="mx-auto pt-1 hover:block cursor-pointer"
+            :is="getImage(lang)"
+            @click="selectLanguage(lang)"
           />
         </div>
         <component
-            class="flex-none cursor-pointer current-language"
-            @click="showLanguageDropdown = !showLanguageDropdown"
-            :is="currentLanguageImage"/>
+          class="flex-none cursor-pointer current-language"
+          @click="showLanguageDropdown = !showLanguageDropdown"
+          :is="currentLanguageImage" />
       </div>
-      <svg-divider class="flex-none"/>
+      <svg-divider class="flex-none" />
       <icon-close
-          v-if="menuOpen"
-          class="flex-none cursor-pointer w-6"
-          @click="Application.setMenuOpen(false)"/>
-      <div v-else class="relative space-y-0.5">
+        v-if="menuOpen"
+        class="flex-none cursor-pointer w-6"
+        @click="Application.setMenuOpen(false)" />
+      <div v-else
+           class="relative space-y-0.5">
         <icon-hamburger class="flex-none cursor-pointer w-6 "
-                        @click="Application.setMenuOpen(true)"/>
-        <div v-if="isFavoriteNum" class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
+                        @click="Application.setMenuOpen(true)" />
+        <div v-if="isFavoriteNum"
+             class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
           {{ isFavoriteNum }}
         </div>
       </div>
     </div>
     <div class="second-line sm:flex bg-white py-3 sm:items-center px-8">
-      <AppToggle class="" v-if="$route.name !== 'map'"/>
-      <MakeRoute v-else-if="isFavoriteNum"/>
+      <AppToggle class=""
+                 v-if="$route.name !== 'map'" />
+      <MakeRoute v-else-if="isFavoriteNum" />
     </div>
     <div
-        class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
-        :class="{
+      class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
+      :class="{
         'translate-x-0 flex': menuOpen,
         'translate-x-96 sm:-translate-x-96 hidden sm:flex': !menuOpen,
       }">
-      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('map')">{{ $t('header.search_by_map') }}</div>
-      <div class="cursor-pointer hover:text-x-red block sm:hidden" @click="switchView('list')">{{ $t('header.search_by_list') }}</div>
-      <div @click="generateRouteInHeader" class="cursor-pointer flex justify-between hover:text-x-red">
-        {{ $t('make_route') }}
-        <span v-if="isFavoriteNum" class="rounded-md bg-blue-900 text-white py-0 px-3">{{ isFavoriteNum }}</span>
+      <div class="cursor-pointer hover:text-x-red block sm:hidden"
+           @click="switchView('map')">{{ $t('header.search_by_map') }}
       </div>
-      <div @click="openTutorial" class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}</div>
+      <div class="cursor-pointer hover:text-x-red block sm:hidden"
+           @click="switchView('list')">{{ $t('header.search_by_list') }}
+      </div>
+      <div @click="generateRouteInHeader"
+           class="cursor-pointer flex justify-between hover:text-x-red">
+        {{ $t('make_route') }}
+        <span v-if="isFavoriteNum"
+              class="rounded-md bg-blue-900 text-white py-0 px-3">{{ isFavoriteNum }}</span>
+      </div>
+      <div @click="openTutorial"
+           class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}
+      </div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
-        <LogoTwotowers @click="linkToSourceSiteLeftIcon" class="mr-auto"/>
-        <LogoEu/>
-        <LogoPlbyua @click="linkToSourceSiteRightIcon"/>
+        <LogoTwotowers @click="linkToSourceSiteLeftIcon"
+                       class="mr-auto" />
+        <LogoEu />
+        <LogoPlbyua @click="linkToSourceSiteRightIcon" />
       </div>
     </div>
   </div>
@@ -75,9 +88,11 @@
 
 <script lang="ts">
 import LanguageRepository from "@/repositories/LanguageRepository";
-import {computed, defineAsyncComponent, reactive, ref, shallowRef} from 'vue';
-import Application from '../models/Application';
 import router from '@/router';
+import { computed, defineAsyncComponent, reactive, ref, shallowRef } from 'vue';
+import { event } from 'vue-gtag';
+import Application from '../models/Application';
+
 const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
 
 // noinspection JSUnusedGlobalSymbols
@@ -104,10 +119,12 @@ export default {
     const venues = Application.venues;
     const isFavoriteNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
     let currentLanguageImage = shallowRef(getImage(localStorage.getItem('languageSelected') || 'uk'));
+
     function getImage(lang: string) {
 
       return images(`./${lang}.svg`).default;
     }
+
     function selectLanguage(lang: string) {
       localStorage.setItem('languageSelected', lang);
       showLanguageDropdown.value = false;
@@ -119,6 +136,8 @@ export default {
       setTimeout(() => {
         showLanguageList.value = true;
       }, 1000);
+
+      event('select-language', { lang });
     }
 
     function linkToSourceSiteLeftIcon() {
@@ -132,6 +151,7 @@ export default {
     function openTutorial() {
       Application.setMenuOpen(false);
       Application.setTutorialOpen(true);
+      event('open-tutorial', { open: 'true' });
     }
 
     function generateRouteInHeader() {
@@ -154,7 +174,9 @@ export default {
 
     function switchView(name: string) {
       Application.setMenuOpen(false);
-      return router.push({name});
+      return router.push({ name }).finally(() => {
+        event('switch-view', { name });
+      })
     }
 
     return {
@@ -183,13 +205,14 @@ export default {
 
 <style>
 .app-header {
-  min-width: 320px;
+  min-width:       320px;
   justify-content: space-between;
 }
+
 .number {
   font-size: 7px;
-  Height: 9px;
-  left: 13px;
+  Height:    9px;
+  left:      13px;
 }
 
 .images-align {
@@ -205,6 +228,7 @@ export default {
     width: 100%;
   }
 }
+
 @media (min-width: 640px) {
   .app-header {
     max-width: 20%;
