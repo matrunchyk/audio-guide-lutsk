@@ -159,14 +159,14 @@ module.exports = {
           "short_name": "Map",
           "description": "Use map view",
           "url": "/map?source=pwa",
-          "icons": [{ "src": "/icons/map.png", "sizes": "192x192", "type": "image/png" }],
+          "icons": [{ "src": "img/icons/map.png", "sizes": "192x192", "type": "image/png" }],
         },
         {
           "name": "List",
           "short_name": "List",
           "description": "Use list view",
           "url": "/?source=pwa",
-          "icons": [{ "src": "/icons/list.png", "sizes": "192x192", "type": "image/png" }],
+          "icons": [{ "src": "img/icons/list.png", "sizes": "192x192", "type": "image/png" }],
         },
       ],
       "screenshots" : [
