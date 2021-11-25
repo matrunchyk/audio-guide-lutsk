@@ -24,6 +24,10 @@ module.exports = {
     msTileColor: '#e31f25',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'service-worker.js',
+    },
     iconPaths: {
       favicon32: 'icons/purpose-maskable/favicon-32x32.png',
       favicon16: 'icons/purpose-maskable/favicon-16x16.png',
