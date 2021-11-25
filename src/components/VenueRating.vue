@@ -11,6 +11,7 @@
 <script lang="ts">
 import Application from '@/models/Application';
 import {computed, defineAsyncComponent} from 'vue';
+import { event } from 'vue-gtag';
 
 export default {
   name: "VenueRating",
@@ -32,6 +33,11 @@ export default {
     function setRating(num) {
       if (!venue.value) return;
       venue.value.rating = num;
+
+      event('venue-set-rating', {
+        // @ts-ignore
+        value: `venue: ${venue.value?.localizations?.[0]?.name}, rating: ${num}`,
+      });
     }
 
     return {

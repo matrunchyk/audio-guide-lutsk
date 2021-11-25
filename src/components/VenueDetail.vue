@@ -59,6 +59,7 @@ import Application from '@/models/Application';
 import useMap from '@/components/use/useMap.ts';
 import {computed, defineAsyncComponent} from "vue";
 import router from "@/router";
+import { event } from 'vue-gtag';
 
 export default {
   name: "VenueDetail",
@@ -86,6 +87,11 @@ export default {
         (mapData.getMapData()).directionsRenderer.setDirections({routes: []});
       }
       venue.value.toggleFavorite();
+
+      event('venue-toggle-favorite', {
+        // @ts-ignore
+        value: `venue: ${venue.value?.localizations?.[0]?.name}, isFavorite: ${!venue.value.isFavorite}`,
+      });
     }
 
     function generateRoute() {

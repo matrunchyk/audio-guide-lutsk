@@ -19,6 +19,7 @@
 <script lang="ts">
 import {computed, defineAsyncComponent, ref} from "vue";
 import Application from "@/models/Application";
+import { event } from 'vue-gtag';
 
 export default {
   name: "AppPlayer",
@@ -43,6 +44,10 @@ export default {
         audioPlayer.value?.play();
       }
       isPlaying.value = !isPlaying.value;
+      event('venue-toggle-play', {
+        // @ts-ignore
+        value: `venue: ${venue.value?.localizations?.[0]?.name}, isPlaying: ${!isPlaying.value}`,
+      });
     }
 
     function updateTime() {

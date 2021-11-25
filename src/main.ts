@@ -17,7 +17,7 @@ app.use(VueOOP, {
 });
 // @ts-ignore
 app.use(VueGtag, {
-  config: { id: "UA-2918085-54" }
+  config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID || '' }
 });
 app.use(router);
 app.mount('#app');
