@@ -1,5 +1,6 @@
 import Application from '@/models/Application';
 import useMap from '@/components/use/useMap.ts';
+import { event } from 'vue-gtag';
 
 export default class Venue {
   public index = 0;
@@ -111,10 +112,14 @@ export default class Venue {
           travelMode: (useMap().getMapData()).google.maps.TravelMode.WALKING,
         }).then((response: any) => {
           directionsRenderer.setDirections(response);
+          event('calculate-route-success', {
+            value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${this.lat}, ${this.lng}`,
+          });
         });
       },
       error => {
         console.log(error.message);
+        event('calculate-route-error', { error: error.message });
       })
   }
 }
