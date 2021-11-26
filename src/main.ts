@@ -1,3 +1,4 @@
+import { LogLevel } from '@sentry/types/dist/loglevel';
 import {createApp} from 'vue';
 import VueOOP from "vue-oop";
 import VueGtag from "vue-gtag";
@@ -26,7 +27,15 @@ app.use(VueGtag, {
 
 Sentry.init({
   app,
+  debug: process.env.VUE_APP_SENTRY_DSN,
+  logLevel: LogLevel.Debug,
   dsn: process.env.VUE_APP_SENTRY_DSN || "",
+  beforeSend: (event, hint) => {
+    if (process.env.VUE_APP_SENTRY_DEBUG && hint) {
+      setTimeout(() => console.error(hint.originalException || hint.syntheticException), 0);
+    }
+    return event;
+  },
   integrations: [
     new Integrations.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
