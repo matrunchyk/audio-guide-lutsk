@@ -15,7 +15,7 @@
         <div class="dot absolute w-4 h-4 bg-white rounded-full shadow -left-1 -top-1 transition duration-300" ></div>
       </div>
       <!-- label -->
-      <div class="ml-3 text-black font-normal text-xs">
+      <div class="ml-1 text-black font-normal text-xs">
         {{ $t('header.sort_by_rating') }}
       </div>
     </label>

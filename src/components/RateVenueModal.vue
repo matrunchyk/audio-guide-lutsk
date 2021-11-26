@@ -1,6 +1,6 @@
 <template>
   <div
-      class="z-10 Tutorial absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
+      class="z-50 Tutorial absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
     <div class="w-10/12 relative sm:w-2/5 bg-white py-5 text-sm rounded-xl">
       <icon-model-close
           class="w-4 absolute right-0 -mt-10  cursor-pointer"
