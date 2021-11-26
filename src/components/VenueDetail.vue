@@ -1,57 +1,58 @@
 <template>
-  <div class="venue-detail inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2">
+    <div class="inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2"
+         :style="{ height:  !venueMinimized ? '100%' : '0%'}">
 
-    <div class="venue-detail-content bg-white rounded-lg bottom-0 left-0.5 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
-    :class="{'venue-player':  venueMinimized}">
-      <div class="w-30 z-50 absolute right-0 -mt-8">
-        <icon-model-close
+      <div class="venue-detail-content bg-white rounded-lg bottom-0 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
+           :class="{'venue-player':  venueMinimized}">
+        <div class="w-30 z-50 absolute right-0 -mt-8">
+          <icon-model-close
             class="w-4 cursor-pointer"
             @click="backToNormalZoom()"/>
-      </div>
-      <div class="flex justify-center mb-1 cursor-pointer">
-        <icon-collapse
+        </div>
+        <div class="flex justify-center mb-1 cursor-pointer">
+          <icon-collapse
             v-if="!venueMinimized"
             @click="Application.setDetailVenueMinimized(true)"
-        />
-        <icon-expand
+          />
+          <icon-expand
             v-else
             @click="Application.setDetailVenueMinimized(false)"/>
-      </div>
-      <img
+        </div>
+        <img
           class="px-3"
           v-if="!venueMinimized"
           :src="venue.image"
           alt=""/>
-      <div>
-        <svg-bookmark
+        <div>
+          <svg-bookmark
             v-if="venue.isFavorite && !venueMinimized"
             class="absolute top-6 right-6"
             :class="{
             'top-6': venue.firstRecommended && venue.recommended,
              'top-6': !(venue.firstRecommended && venue.recommended),
            }"
-        />
-      </div>
-      <div class="mt-2 mb-3 text-center font-semibold">{{ locationTitle }}</div>
-      <div v-if="!venueMinimized"
-           class="px-3 text-xs text-center">{{ locationDescription }}
-      </div>
-      <app-player />
-      <div v-if="!venueMinimized"
-           class="flex justify-between mt-5 px-3">
-        <div @click="showOnMap" class="underline text-xs cursor-pointer">{{ $t('venues.show_on_map') }}</div>
-        <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
+          />
         </div>
+        <div class="mt-2 mb-3 text-center font-semibold">{{ locationTitle }}</div>
+        <div v-if="!venueMinimized"
+             class="px-3 text-xs text-center">{{ locationDescription }}
+        </div>
+        <app-player />
+        <div v-if="!venueMinimized"
+             class="flex justify-between mt-5 px-3">
+          <div @click="showOnMap" class="underline text-xs cursor-pointer">{{ $t('venues.show_on_map') }}</div>
+          <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
+          </div>
 
-        <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.remove_from_favourites') }}</div>
+          <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.remove_from_favourites') }}</div>
+        </div>
+        <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
+                    class="mt-4 flex ">
+          <icon-route class="text-white"/>
+          {{ $t('make_route') }}
+        </app-button>
       </div>
-      <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
-                  class="mt-4 flex ">
-        <icon-route class="text-white"/>
-        {{ $t('make_route') }}
-      </app-button>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -142,15 +143,15 @@ export default {
 </script>
 
 <style scoped>
+.venue-detail-minimized {
+  height: 0%;
+}
 .venue-detail {
   height: 100%;
 }
 .venue-player {
   min-width: 300px;
-}
-.venue-detail-content {
-  min-width: 300px;
-  width: 19.5%;
+  width: 19%;
 }
 @media (max-width: 640px) {
   .venue-detail-content {

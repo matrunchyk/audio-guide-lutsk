@@ -205,7 +205,8 @@ export default {
 
 <style>
 .app-header {
-  min-width:       320px;
+  min-width: 305px;
+  width: 20%;
   justify-content: space-between;
 }
 
@@ -229,9 +230,9 @@ export default {
   }
 }
 
-@media (min-width: 640px) {
-  .app-header {
-    max-width: 20%;
-  }
-}
+/*@media (min-width: 640px) {*/
+/*  .app-header {*/
+/*    max-width: 20%;*/
+/*  }*/
+/*}*/
 </style>
