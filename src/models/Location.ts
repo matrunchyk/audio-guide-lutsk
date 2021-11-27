@@ -4,7 +4,7 @@ import LocationRating from "@/models/LocationRating";
 
 export default class Location extends BaseModel {
 
-  imageData: string;
+  imageUrl: string;
 
   isRecommended: boolean;
 
@@ -24,7 +24,7 @@ export default class Location extends BaseModel {
       localizations: [],
       isEnabled: false,
       isRecommended: false,
-      imageData: '',
+      imageUrl: '',
       typeNum: 0,
     };
   }

@@ -1,5 +1,5 @@
 <template>
-  <audio @timeupdate="updateTime" :src="`data:audio/mp3;base64, ${locationAudio}`" preload="auto" ref="audioPlayer"></audio>
+  <audio @timeupdate="updateTime" :src="locationAudio" preload="auto" ref="audioPlayer"></audio>
   <div class="flex flex-col  app-player mt-4 px-3">
     <div @click="updateProgressBarTime($event)" ref="progressBar"
          class="w-full py-1.5 flex tracking relative cursor-pointer mb-4">
@@ -36,7 +36,7 @@ export default {
     const progressBar = ref<HTMLProgressElement>();
     const progress = ref('');
     // @ts-ignore
-    const locationAudio = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).audioData);
+    const locationAudio = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).audioUrl);
     function togglePlayerPlay() {
       if (isPlaying.value && audioPlayer.value) {
         audioPlayer.value?.pause();

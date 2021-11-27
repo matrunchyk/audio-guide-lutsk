@@ -3,7 +3,7 @@
 
 
 fragment Localization on Localization {
-  audioData
+  audioUrl
   language {
     ...Language
   }

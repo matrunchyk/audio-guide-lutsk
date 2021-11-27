@@ -66,7 +66,7 @@ export default class Application {
     await this.locationRepository.value.many();
     this.venues.value = this.locationRepository.value.dataset.all().map((item: any) => new Venue({
       index: item.uuid,
-      image: item.imageData,
+      image: item.imageUrl,
       localizations: item.localizations,
       icon: item.typeNum === 1 ? "/icons/icon-castle.svg" : item.typeNum === 2 ? "/icons/icon-church.svg" : item.typeNum === 3 ? "/icons/icon-museum.svg" : item.typeNum === 4 ? "/icons/icon-flag.svg" : "" ,
       isRecommended: item.isRecommended,

@@ -3,7 +3,7 @@
 fragment Location on Location {
   uuid
   createdAt
-  imageData
+  imageUrl
   isEnabled
   isRecommended
   typeNum
@@ -16,7 +16,7 @@ fragment Location on Location {
     rating
   }
   localizations {
-    audioData
+    audioUrl
     locationDescription
     locationTitle
   }
