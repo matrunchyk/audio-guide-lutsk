@@ -231,9 +231,10 @@ export default defineComponent({
 
 <style>
 .app-header {
-  min-width:       320px;
+  min-width:       348px;
   width:           20%;
   justify-content: space-between;
+  z-index:         99;
 }
 
 .number {

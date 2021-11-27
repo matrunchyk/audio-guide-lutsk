@@ -30,24 +30,21 @@
           v-else
           @click="Application.setDetailVenueMinimized(false)" />
       </div>
-      <img
-        class="px-3 object-cover w-auto"
+      <div
+        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-96 iphone678:h-80"
         v-if="!venueMinimized"
-        :src="venueImage"
-        width="294"
-        height="208"
-        alt="" />
+        :style="{backgroundImage: `url(${venue.image})`}" />
       <div>
         <img
           src="@/assets/svg/bookmark.svg"
           alt=""
           width="25"
           height="25"
-          v-if="venueIsFavorite && !venueMinimized"
+          v-if="venue.isFavorite && !venueMinimized"
           class="absolute top-6 right-6"
           :class="{
-            'top-6': venueFirstRecommended && venueRecommended,
-             'top-6': !(venueFirstRecommended && venueRecommended),
+            'top-6': venue.firstRecommended && venue.recommended,
+             'top-6': !(venue.firstRecommended && venue.recommended),
            }"
         />
       </div>
@@ -61,7 +58,7 @@
         <div @click="showOnMap"
              class="underline text-xs cursor-pointer">{{ $t('venues.show_on_map') }}
         </div>
-        <div v-if="!venueIsFavorite"
+        <div v-if="!venue.isFavorite"
              @click="toggleFavorite"
              class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
         </div>
@@ -72,7 +69,7 @@
         </div>
       </div>
       <app-button @click="generateRoute"
-                  v-if="!venueMinimized && venueIsFavorite"
+                  v-if="!venueMinimized && venue.isFavorite"
                   class="mt-4 flex ">
         <img src="@/assets/svg/icon-route.svg"
              alt=""
@@ -88,8 +85,9 @@
 <script lang="ts">
 import useMap from '@/components/use/useMap';
 import Application from '@/models/Application';
+import Venue from '@/models/Venue';
 import router from "@/router";
-import { computed, defineAsyncComponent, defineComponent } from "vue";
+import { computed, defineAsyncComponent, defineComponent, Ref } from "vue";
 import { event } from 'vue-gtag';
 
 export default defineComponent({
@@ -100,8 +98,8 @@ export default defineComponent({
   },
   setup() {
     const mapData = useMap();
-    const venue = Application.detailVenue;
-    const venues = Application.venues;
+    const venue = Application.detailVenue as Ref<Venue>;
+    const venues = Application.venues as Ref<Venue[]>;
     const venueLocalization = venue.value?.localizations?.find(l => l.language.code === Application.language.value);
     const locationTitle = computed(() => venueLocalization?.locationTitle || '');
     const locationDescription = computed(() => venueLocalization?.locationDescription || '');
@@ -150,10 +148,7 @@ export default defineComponent({
     }
 
     return {
-      venueImage: venue.value?.image,
-      venueIsFavorite: venue.value?.isFavorite,
-      venueFirstRecommended: venue.value?.firstRecommended,
-      venueRecommended: venue.value?.recommended,
+      venue,
       venueMinimized: Application.detailVenueMinimized,
       Application,
       toggleFavorite,

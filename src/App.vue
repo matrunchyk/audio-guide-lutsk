@@ -41,6 +41,7 @@ import Application from '@/models/Application';
 import Venue from '@/models/Venue';
 import { v4 as uuid } from 'uuid';
 import { defineAsyncComponent, defineComponent, onBeforeMount, onMounted, Ref, ref } from 'vue';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default defineComponent({
   name: 'App',
@@ -68,8 +69,12 @@ export default defineComponent({
         document.body.classList.remove('overflow-hidden');
       }
     });
-    onMounted(() => {
-      Application.setVenues();
+    onMounted(async () => {
+      Application.showLoader();
+
+      await Application.setVenues();
+
+      Application.hideLoader();
     });
 
     function selectLanguage(lang: string) {

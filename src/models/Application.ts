@@ -1,14 +1,17 @@
 import useMap from '@/components/use/useMap';
 import Venue from '@/models/Venue';
 import LocationRepository from "@/repositories/LocationRepository";
-import { ref } from "vue";
+import { Ref, ref } from "vue";
+import { useLoading } from 'vue3-loading-overlay';
 
 export default class Application {
-  static venues = ref<Venue[]>([]);
+  static venues = ref<Venue[]>([]) as Ref<Venue[]>;
+
+  private static loader = useLoading();
 
   static language = ref('uk');
 
-  static locationRepository = ref(new LocationRepository());
+  static locationRepository = ref(new LocationRepository()) as Ref<LocationRepository>;
 
   static menuOpen = ref(false);
 
@@ -22,11 +25,19 @@ export default class Application {
 
   static isRatingVenueForThankModal = ref(false);
 
-  static ratingVenue = ref<Venue | null>(null);
+  static ratingVenue = ref<Venue | null>(null) as Ref<Venue | null>;
 
-  static detailVenue = ref<Venue | null>(null);
+  static detailVenue = ref<Venue | null>(null) as Ref<Venue | null>;
 
   static detailVenueMinimized = ref(false);
+
+  static showLoader() {
+    this.loader.show();
+  }
+
+  static hideLoader() {
+    this.loader.hide();
+  }
 
   static setLanguage(language: string) {
     this.language.value = language;
@@ -63,7 +74,7 @@ export default class Application {
   static async setVenues() {
     await this.locationRepository.value.many();
 
-    const guestUuid = localStorage.getItem('guestUuid');
+    const guestUuid = localStorage.getItem('guestUuid') || '';
 
     this.venues.value = this.locationRepository.value.dataset.all().map((item: any) => {
       const ratings = item.locationRatings || [];
