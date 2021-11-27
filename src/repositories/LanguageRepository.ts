@@ -1,3 +1,4 @@
+import collect from 'collect.js';
 import BaseRepository from './BaseRepository';
 import Language from "../models/Language";
 
@@ -12,4 +13,9 @@ export default class LanguageRepository extends BaseRepository<Language> {
 
   // @ts-ignore
   fetchManyQuery = () => import('@/gql/languages/queries/fetchLanguages.graphql');
+
+  async processResponse(responseType, data) {
+    this.dataset = collect(data);
+    return this.dataset;
+  }
 }

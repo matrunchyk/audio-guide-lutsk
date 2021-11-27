@@ -1,11 +1,14 @@
 import Application from '@/models/Application';
-import useMap from '@/components/use/useMap.ts';
+import useMap from '@/components/use/useMap';
+import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
 
 export default class Venue {
   public index = 0;
 
-  public localizations = [];
+  public uuid: string;
+
+  public localizations: Localization[] = [];
 
   public image = '';
 
@@ -111,6 +114,7 @@ export default class Venue {
           optimizeWaypoints: true,
           travelMode: (useMap().getMapData()).google.maps.TravelMode.WALKING,
         }).then((response: any) => {
+          useMap().subscribeEvents();
           directionsRenderer.setDirections(response);
           event('calculate-route-success', {
             value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${this.lat}, ${this.lng}`,

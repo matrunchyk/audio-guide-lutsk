@@ -4,6 +4,7 @@ let google: any = null;
 let map: any = null;
 let directionsRenderer: any = null;
 let directionsService: any = null;
+let eventsSubscribed = false;
 
 export default function useMap() {
   function initMap(googleData: any, mapData: any) {
@@ -60,10 +61,19 @@ export default function useMap() {
     }
   }
 
+  function subscribeEvents() {
+    if (eventsSubscribed) return;
+    google.maps.event.addListener(directionsService, 'directions_changed', () => {
+      console.log('directions_changed')
+    });
+    eventsSubscribed = true;
+  }
+
   return {
     initMap,
     getMapData,
     generateMyGeoPosition,
     generateMarker,
+    subscribeEvents,
   };
 }

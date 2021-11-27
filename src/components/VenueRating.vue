@@ -1,24 +1,35 @@
 <template>
   <div class="flex-grow flex mb-3 cursor-pointer justify-center">
-    <component @click="setRating(1)" class="flex-none" :is="star >= 1 ? 'star-full' : 'star-empty'"></component>
-    <component @click="setRating(2)" class="flex-none" :is="star >= 2 ? 'star-full' : 'star-empty'"></component>
-    <component @click="setRating(3)" class="flex-none" :is="star >= 3 ? 'star-full' : 'star-empty'"></component>
-    <component @click="setRating(4)" class="flex-none" :is="star >= 4 ? 'star-full' : 'star-empty'"></component>
-    <component @click="setRating(5)" class="flex-none" :is="star >= 5 ? 'star-full' : 'star-empty'"></component>
+    <img alt=""
+         @click="setRating(1)"
+         class="flex-none"
+         :src="star >= 1 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+    <img alt=""
+         @click="setRating(2)"
+         class="flex-none"
+         :src="star >= 2 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+    <img alt=""
+         @click="setRating(3)"
+         class="flex-none"
+         :src="star >= 3 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+    <img alt=""
+         @click="setRating(4)"
+         class="flex-none"
+         :src="star >= 4 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+    <img alt=""
+         @click="setRating(5)"
+         class="flex-none"
+         :src="star >= 5 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
   </div>
 </template>
 
 <script lang="ts">
 import Application from '@/models/Application';
-import {computed, defineAsyncComponent} from 'vue';
+import { computed, defineComponent } from 'vue';
 import { event } from 'vue-gtag';
 
-export default {
+export default defineComponent({
   name: "VenueRating",
-  components: {
-    StarEmpty: defineAsyncComponent(() => import('@/assets/svg/stars/empty.svg')),
-    StarFull: defineAsyncComponent(() => import('@/assets/svg/stars/full.svg')),
-  },
   props: {
     rated: {
       type: Boolean,
@@ -28,14 +39,13 @@ export default {
   },
   setup() {
     const venue = Application.ratingVenue;
-    //@ts-ignore
-    const star = computed(() => venue.value.rating);
+    const star = computed(() => venue.value?.rating);
+
     function setRating(num) {
       if (!venue.value) return;
       venue.value.rating = num;
 
       event('venue-set-rating', {
-        // @ts-ignore
         value: `venue: ${venue.value?.localizations?.[0]?.name}, rating: ${num}`,
       });
     }
@@ -45,5 +55,5 @@ export default {
       setRating,
     };
   },
-};
+});
 </script>

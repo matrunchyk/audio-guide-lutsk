@@ -2,36 +2,44 @@
     <div class="inset-0 bg-black bg-opacity-50 flex justify-end absolute px-2"
          :style="{ height:  !venueMinimized ? '100%' : '0%'}">
 
-      <div class="venue-detail-content bg-white rounded-lg bottom-0 px-1 pt-2.5 -m-1.5 ml-0.5 fixed pb-7"
+      <div class="venue-detail-content bg-white rounded-lg bottom-0 pt-2.5 -m-1.5 fixed pb-7 left-3"
            :class="{'venue-player':  venueMinimized}">
         <div class="w-30 z-50 absolute right-0 -mt-8">
-          <icon-model-close
+          <img
+            src="@/assets/svg/icon-modal-close.svg"
+            alt=""
             class="w-4 cursor-pointer"
             @click="backToNormalZoom()"/>
         </div>
         <div class="flex justify-center mb-1 cursor-pointer">
-          <icon-collapse
+          <img
+            src="@/assets/svg/icon-collapse.svg"
+            alt=""
             v-if="!venueMinimized"
             @click="Application.setDetailVenueMinimized(true)"
           />
-          <icon-expand
+          <img
+            src="@/assets/svg/icon-expand.svg"
+            alt=""
             v-else
             @click="Application.setDetailVenueMinimized(false)"/>
         </div>
         <img
-          class="px-3 object-cover"
+          class="px-3 object-cover w-auto"
           v-if="!venueMinimized"
-          :src="venue.image"
+          :src="venueImage"
           width="294"
           height="208"
           alt=""/>
         <div>
-          <svg-bookmark
-            v-if="venue.isFavorite && !venueMinimized"
+          <img
+            src="@/assets/svg/bookmark.svg"
+            alt=""
+            v-if="venueIsFavorite && !venueMinimized"
             class="absolute top-6 right-6"
             :class="{
-            'top-6': venue.firstRecommended && venue.recommended,
-             'top-6': !(venue.firstRecommended && venue.recommended),
+            'top-6': venueFirstRecommended && venueRecommended,
+             'top-6': !(venueFirstRecommended && venueRecommended),
            }"
           />
         </div>
@@ -43,14 +51,14 @@
         <div v-if="!venueMinimized"
              class="flex justify-between mt-5 px-3">
           <div @click="showOnMap" class="underline text-xs cursor-pointer">{{ $t('venues.show_on_map') }}</div>
-          <div v-if="!venue.isFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
+          <div v-if="!venueIsFavorite" @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.add_to_favourites') }}
           </div>
 
           <div v-else @click="toggleFavorite" class="underline text-xs cursor-pointer">{{ $t('venues.remove_from_favourites') }}</div>
         </div>
-        <app-button @click="generateRoute" v-if="!venueMinimized && venue.isFavorite"
+        <app-button @click="generateRoute" v-if="!venueMinimized && venueIsFavorite"
                     class="mt-4 flex ">
-          <icon-route class="text-white"/>
+          <img src="@/assets/svg/icon-route.svg" alt="" class="text-white"/>
           {{ $t('make_route') }}
         </app-button>
       </div>
@@ -59,30 +67,25 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
-import useMap from '@/components/use/useMap.ts';
-import {computed, defineAsyncComponent} from "vue";
+import useMap from '@/components/use/useMap';
+import { computed, defineAsyncComponent, defineComponent } from "vue";
 import router from "@/router";
 import { event } from 'vue-gtag';
 
-export default {
+export default defineComponent({
   name: "VenueDetail",
   components: {
     AppPlayer: defineAsyncComponent(() => import('@/components/AppPlayer.vue')),
-    IconCollapse: defineAsyncComponent(() => import('@/assets/svg/icon-collapse.svg')),
-    IconExpand: defineAsyncComponent(() => import('@/assets/svg/icon-expand.svg')),
-    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
-    IconRoute: defineAsyncComponent(() => import('@/assets/svg/icon-route.svg')),
     AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
-    SvgBookmark: defineAsyncComponent(() => import('@/assets/svg/bookmark.svg')),
   },
   setup() {
     const mapData = useMap();
     const venue = Application.detailVenue;
     const venues = Application.venues;
-    //@ts-ignore
-    const locationTitle = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).locationTitle || '');
-    //@ts-ignore
-    const locationDescription = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).locationDescription || '');
+    const venueLocalization = venue.value?.localizations?.find(l => l.language.code === Application.language.value);
+    const locationTitle = computed(() => venueLocalization?.locationTitle || '');
+    const locationDescription = computed(() => venueLocalization?.locationDescription || '');
+
     function toggleFavorite() {
       if (!venue.value) return;
       venue.value.isFavorite = !venue.value.isFavorite;
@@ -92,8 +95,7 @@ export default {
       venue.value.toggleFavorite();
 
       event('venue-toggle-favorite', {
-        // @ts-ignore
-        value: `venue: ${venue.value?.localizations?.[0]?.name}, isFavorite: ${!venue.value.isFavorite}`,
+        value: `venue: ${venue.value?.localizations?.[0]?.name}, isFavorite: ${!venue.value?.isFavorite}`,
       });
     }
 
@@ -128,8 +130,10 @@ export default {
     }
 
     return {
-      venue,
-      venues,
+      venueImage: venue.value?.image,
+      venueIsFavorite: venue.value?.isFavorite,
+      venueFirstRecommended: venue.value?.firstRecommended,
+      venueRecommended: venue.value?.recommended,
       venueMinimized: Application.detailVenueMinimized,
       Application,
       toggleFavorite,
@@ -141,15 +145,12 @@ export default {
       switchView,
     };
   }
-};
+});
 </script>
 
 <style scoped>
-.venue-detail-minimized {
-  height: 0%;
-}
-.venue-detail {
-  height: 100%;
+.venue-detail-content {
+  width: 309px;
 }
 .venue-player {
   min-width: 300px;
@@ -157,8 +158,7 @@ export default {
 }
 @media (max-width: 640px) {
   .venue-detail-content {
-    width: 99%;
-    left: 0px;
+    width: 97%;
   }
   .venue-player {
     width: 99%;

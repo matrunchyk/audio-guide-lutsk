@@ -1,7 +1,11 @@
 <template>
   <div class="app-header sm:flex  fixed z-10 ">
     <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse sm:flex-1 items-center">
-      <svg-map
+      <img
+        src="@/assets/svg/map.svg"
+        alt=""
+        width="20"
+        height="19"
         class="flex-none sm:hidden cursor-pointer"
         :class="{
             'opacity-30': $route.name === 'map',
@@ -9,7 +13,11 @@
         @click="switchView('map')"
       />
       <div class="flex-grow sm:hidden h-5 w-5 cursor-pointer self-center flex">
-        <svg-list
+        <img
+          src="@/assets/svg/list.svg"
+          width="20"
+          height="19"
+          alt=""
           :class="{
             'opacity-30': $route.name === 'list',
           }"
@@ -22,28 +30,40 @@
           hidden: !showLanguageDropdown,
           block: showLanguageDropdown,
         }">
-          <component
+          <img
             v-for="lang in languages"
             :key="lang"
+            alt=""
             class="mx-auto pt-1 hover:block cursor-pointer"
-            :is="getImage(lang)"
+            :src="getImage(lang)"
             @click="selectLanguage(lang)"
           />
         </div>
-        <component
+        <img
+          alt=""
           class="flex-none cursor-pointer current-language"
           @click="showLanguageDropdown = !showLanguageDropdown"
-          :is="currentLanguageImage" />
+          :src="currentLanguageImage" />
       </div>
-      <svg-divider class="flex-none" />
-      <icon-close
+      <img src="@/assets/svg/divider.svg"
+           alt=""
+           width="1"
+           height="30"
+           class="flex-none" />
+      <img
+        src="@/assets/svg/icon-close.svg"
+        alt=""
         v-if="menuOpen"
         class="flex-none cursor-pointer w-6"
         @click="Application.setMenuOpen(false)" />
       <div v-else
            class="relative space-y-0.5">
-        <icon-hamburger class="flex-none cursor-pointer w-6 "
-                        @click="Application.setMenuOpen(true)" />
+        <img src="@/assets/svg/icon-hamburger.svg"
+             alt=""
+             width="23"
+             height="14"
+             class="flex-none cursor-pointer w-6 "
+             @click="Application.setMenuOpen(true)" />
         <div v-if="isFavoriteNum"
              class="absolute  bg-blue-900 text-white number rounded-sm w-4 pl-1.5">
           {{ isFavoriteNum }}
@@ -77,10 +97,15 @@
            class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}
       </div>
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
-        <LogoTwotowers @click="linkToSourceSiteLeftIcon"
-                       class="mr-auto" />
-        <LogoEu />
-        <LogoPlbyua @click="linkToSourceSiteRightIcon" />
+        <img @click="linkToSourceSiteLeftIcon"
+             src="@/assets/svg/logo-twotowers.svg"
+             alt=""
+             class="mr-auto" />
+        <img src="@/assets/svg/logo-eu.svg"
+             alt="" />
+        <img src="@/assets/svg/logo-plbyua.svg"
+             alt=""
+             @click="linkToSourceSiteRightIcon" />
       </div>
     </div>
   </div>
@@ -89,31 +114,23 @@
 <script lang="ts">
 import LanguageRepository from "@/repositories/LanguageRepository";
 import router from '@/router';
-import { computed, defineAsyncComponent, reactive, ref, shallowRef } from 'vue';
+import { computed, defineAsyncComponent, defineComponent, reactive, ref, shallowRef } from 'vue';
 import { event } from 'vue-gtag';
 import Application from '../models/Application';
 
 const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
 
-// noinspection JSUnusedGlobalSymbols
-export default {
+export default defineComponent({
   name: "AppHeader",
   components: {
     MakeRoute: defineAsyncComponent(() => import('./MakeRoute.vue')),
     AppToggle: defineAsyncComponent(() => import('./AppToggle.vue')),
-    LogoTwotowers: defineAsyncComponent(() => import('@/assets/svg/logo-twotowers.svg')),
-    LogoEu: defineAsyncComponent(() => import('@/assets/svg/logo-eu.svg')),
-    LogoPlbyua: defineAsyncComponent(() => import('@/assets/svg/logo-plbyua.svg')),
-    SvgMap: defineAsyncComponent(() => import('@/assets/svg/map.svg')),
-    SvgList: defineAsyncComponent(() => import('@/assets/svg/list.svg')),
-    SvgDivider: defineAsyncComponent(() => import('@/assets/svg/divider.svg')),
-    IconClose: defineAsyncComponent(() => import('@/assets/svg/icon-close.svg')),
-    IconHamburger: defineAsyncComponent(() => import('@/assets/svg/icon-hamburger.svg')),
   },
   async setup() {
     const languageRepository = ref(new LanguageRepository());
     await languageRepository.value.many();
     let showLanguageList = ref(true);
+
     let languages = reactive(languageRepository.value.dataset.all().map(l => l.code));
     let showLanguageDropdown = ref(false);
     const venues = Application.venues;
@@ -121,14 +138,13 @@ export default {
     let currentLanguageImage = shallowRef(getImage(localStorage.getItem('languageSelected') || 'uk'));
 
     function getImage(lang: string) {
-
-      return images(`./${lang}.svg`).default;
+      return images(`./${lang}.svg`);
     }
 
     function selectLanguage(lang: string) {
       localStorage.setItem('languageSelected', lang);
       showLanguageDropdown.value = false;
-      currentLanguageImage.value = images('./' + lang + ".svg").default;
+      currentLanguageImage.value = images('./' + lang + ".svg");
       Application.setLanguage(lang);
       showLanguageList.value = false;
       languages.sort((a) => (a === lang ? -1 : 1));
@@ -188,25 +204,23 @@ export default {
       showLanguageDropdown,
       languages,
       generateRouteInHeader,
-      openDefaultModal,
       getImage,
       openTutorial,
       switchView,
       languageRepository,
       isFavoriteNum,
-      venues,
       Application,
       menuOpen: Application.menuOpen,
       pinnedVenues: Application.pinnedVenues,
     };
   },
-};
+});
 </script>
 
 <style>
 .app-header {
-  min-width: 305px;
-  width: 20%;
+  min-width:       305px;
+  width:           20%;
   justify-content: space-between;
 }
 
