@@ -72,6 +72,7 @@ export default {
     });
 
     function selectLanguage(lang: string) {
+      localStorage.setItem('languageSelected', lang);
       languageSelected.value = lang;
       Application.setLanguage(lang);
     }

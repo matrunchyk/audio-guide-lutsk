@@ -1,6 +1,6 @@
 <template>
   <div class="z-0 Map h-screen">
-    <div class="google-map h-full" id="google-map" ref="googleMap"></div>
+    <div class="google-map h-full z-30" id="google-map" ref="googleMap"></div>
   </div>
 </template>
 

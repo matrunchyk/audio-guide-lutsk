@@ -12,7 +12,7 @@ export default class Application {
 
   static locationRepository  = ref(new  LocationRepository());
 
-  static menuOpen = ref(false);e
+  static menuOpen = ref(false);
 
   static routeModalOpen = ref(false);
 
@@ -68,7 +68,7 @@ export default class Application {
       index: item.uuid,
       image: item.imageUrl,
       localizations: item.localizations,
-      icon: item.typeNum === 1 ? "/icons/icon-castle.svg" : item.typeNum === 2 ? "/icons/icon-church.svg" : item.typeNum === 3 ? "/icons/icon-museum.svg" : item.typeNum === 4 ? "/icons/icon-flag.svg" : "" ,
+      icon: item.typeNum === 1 ? "img/icons/icon-castle.svg" : item.typeNum === 2 ? "img/icons/icon-church.svg" : item.typeNum === 3 ? "img/icons/icon-museum.svg" : item.typeNum === 4 ? "img/icons/icon-flag.svg" : "" ,
       isRecommended: item.isRecommended,
       rated: !!item.locationRatings.find(r => r.guestUuid === localStorage.getItem('guestUuid')),
       averageRating: item.locationRatings.reduce((sum, a) => sum + a.rating, 0) / item.locationRatings.length,
