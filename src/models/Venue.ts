@@ -1,5 +1,5 @@
-import Application from '@/models/Application';
 import useMap from '@/components/use/useMap';
+import Application from '@/models/Application';
 import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
 
@@ -96,6 +96,7 @@ export default class Venue {
     directionsService: any,
     directionsRenderer: any,
   ) {
+    Application.showLoader();
     const waypoints: { location: any; stopover: boolean; }[] = [];
     Application.venues.value.forEach(item => {
       if (item.isFavorite) {
@@ -114,8 +115,8 @@ export default class Venue {
           optimizeWaypoints: true,
           travelMode: (useMap().getMapData()).google.maps.TravelMode.WALKING,
         }).then((response: any) => {
-          useMap().subscribeEvents();
           directionsRenderer.setDirections(response);
+          Application.hideLoader();
           event('calculate-route-success', {
             value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${this.lat}, ${this.lng}`,
           });
