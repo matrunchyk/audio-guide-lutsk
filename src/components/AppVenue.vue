@@ -12,7 +12,7 @@
         class="text-recommended text-x-red mt-1 mb-2"> {{ $t('venues.recommended') }}
     </div>
     <div
-        class="sound bg-x-red flex justify-center items-center rounded-full absolute right-3 w-12 h-12 cursor-pointer"
+        class="sound bg-red-600 flex justify-center items-center rounded-full absolute right-3 w-12 h-12 cursor-pointer"
         :class="{
       'top-32': venue.firstRecommended && venue.isRecommended,
       'top-24': !(venue.firstRecommended && venue.isRecommended),
@@ -24,7 +24,7 @@
         :src="venue.image"
         alt=""
         @click="venue.showDetail()"
-        class="w-full h-52 cursor-pointer">
+        class="w-full h-52 cursor-pointer object-cover">
     <div>
 
       <svg-bookmark
@@ -36,7 +36,7 @@
            }"
       />
     </div>
-    <div class="flex icon bg-x-red gap-4 pl-4 py-2.5">
+    <div class="flex icon bg-red-600 gap-4 pl-4 py-2.5">
       <img
           class="flex-none cursor-pointer self-center"
           alt=""
