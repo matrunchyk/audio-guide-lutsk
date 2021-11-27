@@ -10,7 +10,7 @@
         class="w-4 absolute right-0 -mt-10  cursor-pointer"
         @click="Application.resetRatingVenue()" />
       <div class="text-center mb-2 text-xl font-semibold">{{ $t('modals.make_rate') }}</div>
-      <div class="pb-4 text-center text-sm">{{ $t('modals.make_rate_content') }}
+      <div class="p-4 text-center text-sm">{{ $t('modals.make_rate_content') }}
       </div>
       <venue-rating />
       <app-button @click="makeRated">{{ venue.rated ? $t('venues.change_rating') : $t('venues.rate') }}</app-button>
@@ -39,10 +39,14 @@ export default defineComponent({
     const locationRating = ref(new LocationRating()) as Ref<LocationRating>;
 
     async function makeRated() {
+      Application.showLoader();
       locationRating.value.guestUuid = localStorage.getItem('guestUuid') || '';
       if (!venue.value) return;
       locationRating.value.rating = venue.value.rating;
       locationRating.value.locationUuid = venue.value.uuid;
+      console.log(locationRating.value)
+      console.log(locationRating.value.locationUuid)
+      console.log(venue.value)
       if (venue.value.rated) {
         await locationRating.value.update();
       } else {
@@ -50,6 +54,7 @@ export default defineComponent({
       }
       venue.value.rated = true;
       venue.value.averageRating = venue.value.rating;
+      Application.hideLoader();
       Application.setThankYouModalOpen(true);
     }
 

@@ -4,8 +4,6 @@ import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
 
 export default class Venue {
-  public index = 0;
-
   public uuid: string;
 
   public localizations: Localization[] = [];
