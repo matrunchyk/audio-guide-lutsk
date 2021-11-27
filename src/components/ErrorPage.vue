@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen justify-center gap-4  items-center flex-col w-full">
     <svgMan/>
-    <div class="text-xl">{{ $t('errors.ups') }}</div>
+    <div class="text-xl">{{ $t('errors.oops') }}</div>
     <div>{{ $t('errors.sorry_but') }} <br/>{{ $t('errors.not_found') }}</div>
     <router-link tag="div" to="/" class="buttonback p-3 rounded-md">{{ $t('errors.back_to') }}</router-link>
   </div>
