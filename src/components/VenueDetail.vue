@@ -19,9 +19,11 @@
             @click="Application.setDetailVenueMinimized(false)"/>
         </div>
         <img
-          class="px-3"
+          class="px-3 object-cover"
           v-if="!venueMinimized"
           :src="venue.image"
+          width="294"
+          height="208"
           alt=""/>
         <div>
           <svg-bookmark

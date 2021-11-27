@@ -23,6 +23,8 @@
     <img
         :src="venue.image"
         alt=""
+        width="294"
+        height="208"
         @click="venue.showDetail()"
         class="w-full h-52 cursor-pointer object-cover">
     <div>
