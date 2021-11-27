@@ -5,6 +5,8 @@
       <img
         src="@/assets/svg/icon-modal-close.svg"
         alt=""
+        width="16"
+        height="16"
         class="w-4 ml-auto cursor-pointer"
         @click="Application.setTutorialOpen(false)" />
     </div>

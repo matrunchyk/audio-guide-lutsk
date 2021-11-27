@@ -6,18 +6,18 @@
         class="flex items-center cursor-pointer"
     >
       <!-- toggle -->
-      <div class="relative">
+      <span class="relative block">
         <!-- input -->
         <input id="toogleA" type="checkbox" class="sr-only" @click="sortByRating"/>
         <!-- line -->
-        <div class="toggle-line w-6 h-2.5 rounded-full shadow-inner"></div>
+        <span class="toggle-line w-6 h-2.5 rounded-full shadow-inner block"></span>
         <!-- dot -->
-        <div class="dot absolute w-4 h-4 bg-white rounded-full shadow -left-1 -top-1 transition duration-300" ></div>
-      </div>
+        <span class="dot absolute w-4 h-4 bg-white rounded-full shadow -left-1 -top-1 transition duration-300 block"></span>
+      </span>
       <!-- label -->
-      <div class="ml-1 text-black font-normal text-xs">
+      <span class="ml-1 text-black font-normal text-xs ml-3 mr-3 block">
         {{ $t('header.sort_by_rating') }}
-      </div>
+      </span>
     </label>
   </div>
 </template>

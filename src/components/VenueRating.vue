@@ -1,25 +1,35 @@
 <template>
-  <div class="flex-grow flex mb-3 cursor-pointer justify-center">
+  <div class="flex-grow flex my-5 cursor-pointer justify-center">
     <img alt=""
          @click="setRating(1)"
          class="flex-none"
-         :src="star >= 1 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+         width="32"
+         height="31"
+         :src="star >= 1 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/empty.svg')">
     <img alt=""
          @click="setRating(2)"
          class="flex-none"
-         :src="star >= 2 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+         width="32"
+         height="31"
+         :src="star >= 2 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/empty.svg')">
     <img alt=""
          @click="setRating(3)"
          class="flex-none"
-         :src="star >= 3 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+         width="32"
+         height="31"
+         :src="star >= 3 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/empty.svg')">
     <img alt=""
          @click="setRating(4)"
          class="flex-none"
-         :src="star >= 4 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+         width="32"
+         height="31"
+         :src="star >= 4 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/empty.svg')">
     <img alt=""
          @click="setRating(5)"
          class="flex-none"
-         :src="star >= 5 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/full.svg')">
+         width="32"
+         height="31"
+         :src="star >= 5 ? require('@/assets/svg/stars/full.svg') : require('@/assets/svg/stars/empty.svg')">
   </div>
 </template>
 

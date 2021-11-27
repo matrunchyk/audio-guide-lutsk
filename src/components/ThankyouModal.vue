@@ -6,6 +6,8 @@
         {{ $t('modals.thank_you') }}
         <img src="@/assets/svg/icon-modal-close.svg"
              alt=""
+             width="16"
+             height="16"
              @click="closeModal"
              class="close-modal w-4 absolute right-0 -mt-20  cursor-pointer"
         />

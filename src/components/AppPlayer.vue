@@ -17,19 +17,27 @@
       <img src="@/assets/svg/player/fast-backward.svg"
            alt=""
            class="cursor-pointer"
+           width="16"
+           height="15"
            @click="rewindBackward" />
       <img src="@/assets/svg/player/pause-track.svg"
            alt=""
+           width="16"
+           height="15"
            class="cursor-pointer"
            @click="togglePlayerPlay"
            v-if="isPlaying" />
       <img src="@/assets/svg/player/play-track.svg"
            alt=""
+           width="16"
+           height="15"
            class="cursor-pointer"
            @click="togglePlayerPlay"
            v-else />
       <img src="@/assets/svg/player/fast-forward.svg"
            alt=""
+           width="16"
+           height="15"
            class="cursor-pointer"
            @click="rewindForward" />
     </div>
@@ -38,19 +46,19 @@
 
 <script lang="ts">
 import Application from "@/models/Application";
-import { computed, ref } from "vue";
+import Venue from '@/models/Venue';
+import { computed, defineComponent, Ref, ref } from "vue";
 import { event } from 'vue-gtag';
 
-export default {
+export default defineComponent({
   name: "AppPlayer",
   setup() {
     const isPlaying = ref(false);
-    const venue = Application.detailVenue;
+    const venue = Application.detailVenue as Ref<Venue>;
     const audioPlayer = ref<HTMLAudioElement>();
     const progressBar = ref<HTMLProgressElement>();
     const progress = ref('');
-    // @ts-ignore
-    const locationAudio = computed(() => venue.value.localizations.find(l => l.language.code === Application.language.value).audioUrl);
+    const locationAudio = computed(() => venue.value?.localizations?.find(l => l.language.code === Application.language.value)?.audioUrl);
 
     function togglePlayerPlay() {
       if (isPlaying.value && audioPlayer.value) {
@@ -60,7 +68,6 @@ export default {
       }
       isPlaying.value = !isPlaying.value;
       event('venue-toggle-play', {
-        // @ts-ignore
         value: `venue: ${venue.value?.localizations?.[0]?.name}, isPlaying: ${!isPlaying.value}`,
       });
     }
@@ -106,7 +113,7 @@ export default {
       togglePlayerPlay,
     };
   },
-};
+});
 </script>
 
 <style scoped>

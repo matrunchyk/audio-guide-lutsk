@@ -7,6 +7,7 @@ import updateLocationMutationRating from "@/gql/location-ratings/mutations/updat
 
 export default class LocationRating extends BaseModel {
     createMutation = createLocationMutationRating;
+
     updateMutation = updateLocationMutationRating;
 
     guestUuid: string;
@@ -14,6 +15,8 @@ export default class LocationRating extends BaseModel {
     location: Location
 
     rating: number;
+
+    locationUuid: string;
 
     defaults() {
         return {

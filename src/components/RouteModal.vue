@@ -4,13 +4,13 @@
     <div class="w-10/12 relative sm:w-2/5 bg-white py-5 text-sm rounded-xl">
       <img src="@/assets/svg/icon-modal-close.svg"
            alt=""
+           width="16"
+           height="16"
            @click="Application.setRouteModalOpen(false)"
-           class="w-4 absolute right-0 -mt-10  cursor-pointer" />
+           class="w-4 absolute right-0 -mt-10 cursor-pointer" />
       <div class="text-center mb-2 text-xl font-semibold">{{ $t('make_route') }}</div>
-      <div class="pb-4 text-center text-sm">{{ $t('modals.make_route_content') }}
-      </div>
+      <div class="pb-4 text-center text-sm">{{ $t('modals.make_route_content') }}</div>
       <AppButton @click="Application.setRouteModalOpen(false)">{{ $t('buttons.agree') }}</AppButton>
-
     </div>
   </div>
 </template>
