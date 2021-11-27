@@ -145,38 +145,38 @@ export default {
   },
   ru: {
     header: {
-      sort_by_rating: 'Сортувати за Рейтингом',
-      instruction: 'Інструкція',
+      sort_by_rating: 'Сортировать по рейтингу',
+      instruction: 'Подсказки',
       instruction_content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      search_by_map: 'Пошук по Карті',
-      search_by_list: 'Пошук по Списку',
+      search_by_map: 'Поиск по карте',
+      search_by_list: 'Поиск по списку',
     },
     errors: {
-      oops: 'Упс!',
+      oops: 'Только не это...',
       message: {
-        sorry_but: 'Вибачте, але сторінка за цим',
-        not_found: 'посиланням не знайдена.',
+        sorry_but: 'Извините, но данная страница',
+        not_found: 'не существует.',
       },
-      back_to: 'Повернутись на Головну',
+      back_to: 'Назад на главную',
     },
-    make_route: 'Прокласти маршрут',
+    make_route: 'Проложить маршрут',
     modals: {
       make_route_content: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.',
       make_rate_content: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.',
-      make_rate: 'Оцінити локацію',
-      thank_you: 'Дякуємо за відгук!'
+      make_rate: 'Оценить локацию',
+      thank_you: 'Спасибо за оценку!'
     },
     buttons: {
-      agree: 'Зрозуміло'
+      agree: 'Понятно'
     },
     venues: {
       recommended: 'Рекомендовано',
       rating: 'Рейтинг',
-      rate: 'Оцінити',
-      change_rating: 'Змінити оцінку',
-      show_on_map: 'Показати на карті',
-      add_to_favourites: 'Додати в обрані',
-      remove_from_favourites: 'Прибрати з Обраних',
+      rate: 'Оценить',
+      change_rating: 'Изменить оценку',
+      show_on_map: 'Показать на карте',
+      add_to_favourites: 'В избранное',
+      remove_from_favourites: 'Удалить из избранного',
     },
   },
 }
