@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header sm:flex  fixed z-10 ">
+  <div class="app-header sm:flex fixed z-10 ">
     <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse sm:flex-1 items-center">
       <img
         src="@/assets/svg/map.svg"
@@ -34,6 +34,8 @@
             v-for="lang in languages"
             :key="lang"
             alt=""
+            width="16"
+            height="15"
             class="mx-auto pt-1 hover:block cursor-pointer"
             :src="getImage(lang)"
             @click="selectLanguage(lang)"
@@ -41,6 +43,8 @@
         </div>
         <img
           alt=""
+          width="32"
+          height="30"
           class="flex-none cursor-pointer current-language"
           @click="showLanguageDropdown = !showLanguageDropdown"
           :src="currentLanguageImage" />
@@ -53,6 +57,8 @@
       <img
         src="@/assets/svg/icon-close.svg"
         alt=""
+        width="16"
+        height="16"
         v-if="menuOpen"
         class="flex-none cursor-pointer w-6"
         @click="Application.setMenuOpen(false)" />
@@ -70,7 +76,7 @@
         </div>
       </div>
     </div>
-    <div class="second-line sm:flex bg-white py-3 sm:items-center px-8">
+    <div class="second-line sm:flex bg-white py-3 sm:items-center pl-4 pr-2">
       <AppToggle class=""
                  v-if="$route.name !== 'map'" />
       <MakeRoute v-else-if="isFavoriteNum" />
@@ -99,12 +105,18 @@
       <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
         <img @click="linkToSourceSiteLeftIcon"
              src="@/assets/svg/logo-twotowers.svg"
+             width="49"
+             height="40"
              alt=""
              class="mr-auto" />
         <img src="@/assets/svg/logo-eu.svg"
+             width="45"
+             height="40"
              alt="" />
         <img src="@/assets/svg/logo-plbyua.svg"
              alt=""
+             width="80"
+             height="40"
              @click="linkToSourceSiteRightIcon" />
       </div>
     </div>
@@ -219,7 +231,7 @@ export default defineComponent({
 
 <style>
 .app-header {
-  min-width:       305px;
+  min-width:       320px;
   width:           20%;
   justify-content: space-between;
 }
@@ -243,10 +255,4 @@ export default defineComponent({
     width: 100%;
   }
 }
-
-/*@media (min-width: 640px) {*/
-/*  .app-header {*/
-/*    max-width: 20%;*/
-/*  }*/
-/*}*/
 </style>

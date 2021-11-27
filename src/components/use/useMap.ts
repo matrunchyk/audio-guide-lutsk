@@ -62,6 +62,7 @@ export default function useMap() {
   }
 
   function subscribeEvents() {
+    console.log('123123')
     if (eventsSubscribed) return;
     google.maps.event.addListener(directionsService, 'directions_changed', () => {
       console.log('directions_changed')

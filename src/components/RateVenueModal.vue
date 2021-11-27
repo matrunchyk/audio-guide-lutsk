@@ -5,6 +5,8 @@
       <img
         src="@/assets/svg/icon-modal-close.svg"
         alt=""
+        width="16"
+        height="16"
         class="w-4 absolute right-0 -mt-10  cursor-pointer"
         @click="Application.resetRatingVenue()" />
       <div class="text-center mb-2 text-xl font-semibold">{{ $t('modals.make_rate') }}</div>
@@ -21,9 +23,10 @@
 <script lang="ts">
 import Application from '@/models/Application';
 import LocationRating from "@/models/LocationRating";
-import { defineAsyncComponent, ref } from "vue";
+import Venue from '@/models/Venue';
+import { defineAsyncComponent, defineComponent, Ref, ref } from "vue";
 
-export default {
+export default defineComponent({
   name: "RateVenueModal",
   components: {
     VenueRating: defineAsyncComponent(() => import('@/components/VenueRating.vue')),
@@ -31,17 +34,15 @@ export default {
     ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
   },
   async setup() {
-    const venues = Application.venues;
-    const venue = Application.ratingVenue;
-    const locationRating = ref(new LocationRating());
+    const venues = Application.venues as Ref<Venue[]>;
+    const venue = Application.ratingVenue as Ref<Venue | null>;
+    const locationRating = ref(new LocationRating()) as Ref<LocationRating>;
 
     async function makeRated() {
-      // @ts-ignore
-      locationRating.value.guestUuid = localStorage.getItem('guestUuid');
+      locationRating.value.guestUuid = localStorage.getItem('guestUuid') || '';
       if (!venue.value) return;
       locationRating.value.rating = venue.value.rating;
-      // @ts-ignore
-      locationRating.value.locationUuid = venue.value.index;
+      locationRating.value.locationUuid = venue.value.uuid;
       if (venue.value.rated) {
         await locationRating.value.update();
       } else {
@@ -61,6 +62,6 @@ export default {
       locationRating,
     };
   }
-};
+});
 </script>
 

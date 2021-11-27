@@ -7,7 +7,9 @@
              :key="lang.code"
              class="flex cursor-pointer hover:shadow-md pr-32 pl-3.5 py-2.5 rounded-md border border-transparent hover:border-gray-300 gap-2 hover:block">
           <img class="flex-none"
-               :src="`@/assets/svg/flags/${lang.code}.svg`"
+               width="32"
+               height="30"
+               :src="getImage(lang.code)"
                alt="">
           <div class="flex-grow text-black text-md flex">{{ lang.title }}</div>
         </div>
@@ -20,6 +22,8 @@
 import { defineComponent, reactive, ref } from "vue";
 import LanguageRepository from "../repositories/LanguageRepository";
 
+const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
+
 export default defineComponent({
   name: "LanguageSelector",
 
@@ -30,6 +34,10 @@ export default defineComponent({
 
     await languageRepository.value.many();
 
+    function getImage(lang: string) {
+      return images(`./${lang}.svg`);
+    }
+
     let languages = reactive(languageRepository.value.dataset.all().map(lang => ({
       code: lang.code,
       title: lang.title,
@@ -37,6 +45,7 @@ export default defineComponent({
 
     return {
       languages,
+      getImage,
     };
   },
 });

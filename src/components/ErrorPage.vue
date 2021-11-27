@@ -1,9 +1,11 @@
 <template>
   <div class="flex h-screen justify-center gap-4  items-center flex-col w-full">
     <img src="@/assets/svg/man.svg"
+         width="465"
+         height="374"
          alt="" />
     <div class="text-xl">{{ $t('errors.oops') }}</div>
-    <div>{{ $t('errors.sorry_but') }} <br />{{ $t('errors.not_found') }}</div>
+    <div class="text-center">{{ $t('errors.message.sorry_but') }} <br />{{ $t('errors.message.not_found') }}</div>
     <router-link
       to="/"
     >

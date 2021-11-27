@@ -38,10 +38,11 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
+import Venue from '@/models/Venue';
 import { v4 as uuid } from 'uuid';
-import { defineAsyncComponent, onBeforeMount, onMounted, ref } from 'vue';
+import { defineAsyncComponent, defineComponent, onBeforeMount, onMounted, Ref, ref } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     AppHeader: defineAsyncComponent(() => import('@/components/AppHeader.vue')),
@@ -83,17 +84,17 @@ export default {
       selectLanguage,
       menuOpen: Application.menuOpen,
       tutorialOpen: Application.tutorialOpen,
-      ratingVenue: Application.ratingVenue,
+      ratingVenue: Application.ratingVenue as Ref<Venue>,
       routeModalOpen: Application.routeModalOpen,
     }
   }
-}
+})
 </script>
 
 <style scoped>
 .left-column {
   background: #f3f3f3;
-  min-width:  320px;
+  min-width:  348px;
 }
 
 @media (min-width: 640px) {
