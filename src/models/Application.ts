@@ -80,7 +80,7 @@ export default class Application {
       const ratings = item.locationRatings || [];
 
       return new Venue({
-        index: item.uuid,
+        uuid: item.uuid,
         image: item.imageUrl,
         localizations: item.localizations,
         icon: item.typeNum === 1 ? "img/icons/icon-castle.svg" : item.typeNum === 2 ? "img/icons/icon-church.svg" : item.typeNum === 3 ? "img/icons/icon-museum.svg" : item.typeNum === 4 ? "img/icons/icon-flag.svg" : "",
@@ -98,11 +98,11 @@ export default class Application {
         markerIconRecommendedFavorite: item.typeNum === 1 ? "/marker-icons/marker-castle-recommended-red-icon.svg" : item.typeNum === 2 ? "/marker-icons/marker-church-recommended-red-icon.svg" : item.typeNum === 3 ? "/marker-icons/marker-museum-recommended-red-icon.svg" : item.typeNum === 4 ? "/marker-icons/marker-flag-recommended-red-icon.svg" : "",
       })
     })
-      .sort((a: any, b: any) => b.isRecommended - a.isRecommended)
+      .sort((a: Venue, b: Venue) => Number(b.isRecommended) - Number(a.isRecommended))
       .map(
-        (venue: any, index: any, arr: any) => venue.enhanceRecommended(
-          !index && !!venue.isRecommended,
-          !!venue.isRecommended && arr[index + 1] && !arr[index + 1].isRecommended,
+        (venue: Venue, index: number, arr: Venue[]) => venue.enhanceRecommended(
+          !index && venue.isRecommended,
+          venue.isRecommended && arr[index + 1] && !arr[index + 1].isRecommended,
         )
       );
     useMap().generateMarker();

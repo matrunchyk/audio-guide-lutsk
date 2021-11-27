@@ -2,7 +2,7 @@
   <div class="app-venues relative mt-16">
     <AppVenue
         v-for="venue in venues"
-        :key="venue.index"
+        :key="venue.uuid"
         :venue="venue"/>
     <VenueDetail v-if="detailVenue"/>
   </div>
