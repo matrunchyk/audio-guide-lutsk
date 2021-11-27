@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import Application from '@/models/Application';
-import {defineAsyncComponent} from "vue";
+import { defineAsyncComponent, defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "AppVenues",
   components: {
     AppVenue: defineAsyncComponent(() => import('@/components/AppVenue.vue')),
@@ -24,7 +24,7 @@ export default {
       detailVenue: Application.detailVenue,
     };
   },
-};
+});
 </script>
 
 <style scoped>

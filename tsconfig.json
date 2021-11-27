@@ -2,6 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "target": "esnext",
+    "disableSizeLimit": true,
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",

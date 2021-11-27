@@ -1,8 +1,8 @@
 <template>
   <div class="flex h-screen">
     <div
-        class="flex-grow overflow-auto h-full"
-        :class="{
+      class="flex-grow overflow-auto h-full"
+      :class="{
          'left-column': $route.name !== '404',
          'sm:flex-grow-0': $route.name !== '404',
          'flex-grow-0': $route.name !== '404',
@@ -10,36 +10,36 @@
         }"
     >
       <Suspense>
-        <AppHeader v-if="$route.name !== '404'"/>
+        <AppHeader v-if="$route.name !== '404'" />
       </Suspense>
-      <router-view/>
-      <RouteModal v-if="routeModalOpen"/>
-      <AppTutorial v-if="tutorialOpen"/>
+      <router-view />
+      <RouteModal v-if="routeModalOpen" />
+      <AppTutorial v-if="tutorialOpen" />
       <Suspense>
-      <RateVenueModal v-if="ratingVenue"/>
+        <RateVenueModal v-if="ratingVenue" />
       </Suspense>
     </div>
     <div
-        class="hidden flex-grow"
-        :class="{
+      class="hidden flex-grow"
+      :class="{
         'bg-opacity-60': menuOpen,
         'sm:block': $route.name !== '404',
 
       }">
-      <AppMap v-if="windowWidth >= 640"/>
+      <AppMap v-if="windowWidth >= 640" />
     </div>
     <Suspense>
-    <language-selector
+      <language-selector
         v-if="!languageSelected"
-        @select="selectLanguage"/>
+        @select="selectLanguage" />
     </Suspense>
   </div>
 </template>
 
 <script lang="ts">
-import {defineAsyncComponent, onBeforeMount, onMounted, ref} from 'vue';
 import Application from '@/models/Application';
 import { v4 as uuid } from 'uuid';
+import { defineAsyncComponent, onBeforeMount, onMounted, ref } from 'vue';
 
 export default {
   name: 'App',
@@ -93,7 +93,7 @@ export default {
 <style scoped>
 .left-column {
   background: #f3f3f3;
-  min-width: 320px;
+  min-width:  320px;
 }
 
 @media (min-width: 640px) {

@@ -5,22 +5,23 @@
 </template>
 
 <script>
-import GoogleMapsApiLoader from 'google-maps-api-loader';
-import useMap from '@/components/use/useMap.ts';
+import { Loader } from '@googlemaps/js-api-loader';
+import useMap from '@/components/use/useMap';
 import Application from "../models/Application";
 
 export default {
   name: "appMap",
   data: () => ({
-    apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     google: null,
     map: null,
   }),
   async mounted() {
-    const googleMapApi = await GoogleMapsApiLoader({
-      apiKey: this.apiKey,
-    });
-    this.google = googleMapApi;
+    const loader = new Loader({
+      apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
+    })
+
+    this.google = await loader.load();
+
     this.initializeMap();
   },
   methods: {

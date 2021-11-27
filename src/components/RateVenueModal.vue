@@ -1,31 +1,32 @@
 <template>
   <div
-      class="z-50 Tutorial absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
+    class="z-50 Tutorial absolute inset-0 bg-opacity-60 flex justify-center content-center bg-black w-full flex-col items-center gap-1">
     <div class="w-10/12 relative sm:w-2/5 bg-white py-5 text-sm rounded-xl">
-      <icon-model-close
-          class="w-4 absolute right-0 -mt-10  cursor-pointer"
-          @click="Application.resetRatingVenue()"/>
+      <img
+        src="@/assets/svg/icon-modal-close.svg"
+        alt=""
+        class="w-4 absolute right-0 -mt-10  cursor-pointer"
+        @click="Application.resetRatingVenue()" />
       <div class="text-center mb-2 text-xl font-semibold">{{ $t('modals.make_rate') }}</div>
       <div class="pb-4 text-center text-sm">{{ $t('modals.make_rate_content') }}
       </div>
-      <venue-rating/>
+      <venue-rating />
       <app-button @click="makeRated">{{ venue.rated ? $t('venues.change_rating') : $t('venues.rate') }}</app-button>
 
     </div>
-    <ThankyouModal v-if="isRatingVenueForThankModal"/>
+    <ThankyouModal v-if="isRatingVenueForThankModal" />
   </div>
 </template>
 
 <script lang="ts">
 import Application from '@/models/Application';
-import {defineAsyncComponent, ref} from "vue";
 import LocationRating from "@/models/LocationRating";
+import { defineAsyncComponent, ref } from "vue";
 
 export default {
   name: "RateVenueModal",
   components: {
     VenueRating: defineAsyncComponent(() => import('@/components/VenueRating.vue')),
-    IconModelClose: defineAsyncComponent(() => import('@/assets/svg/icon-modal-close.svg')),
     AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
     ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
   },

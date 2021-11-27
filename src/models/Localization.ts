@@ -3,6 +3,7 @@ import Language from './Language';
 import Location from './Location'
 
 export default class Localization extends BaseModel {
+  name: string;
 
   audioUrl: string;
 
