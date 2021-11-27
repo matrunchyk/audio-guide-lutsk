@@ -4,7 +4,7 @@ import Location from './Location'
 
 export default class Localization extends BaseModel {
 
-  audioData: string;
+  audioUrl: string;
 
   locationDescription: string;
 
@@ -16,7 +16,7 @@ export default class Localization extends BaseModel {
 
   defaults() {
     return {
-      audioData: '',
+      audioUrl: '',
       locationDescription: '',
       locationTitle: '',
       location: null,

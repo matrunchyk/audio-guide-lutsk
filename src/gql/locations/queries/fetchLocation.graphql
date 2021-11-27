@@ -1,6 +1,6 @@
 query fetchLocation($uuid: String!) {
     fetchLocation(uuid: $uuid) {
-        imageData
+        imageUrl
         isEnabled
         isRecommended
         latLng {
@@ -9,7 +9,7 @@ query fetchLocation($uuid: String!) {
         }
         localizations {
             uuid
-            audioData
+            audioUrl
             locationTitle
             locationDescription
         }

@@ -2,7 +2,7 @@
 query fetchLocations {
   fetchLocations {
     uuid
-    imageData
+    imageUrl
     isRecommended
     isEnabled
     typeNum
@@ -20,7 +20,7 @@ query fetchLocations {
     }
     localizations {
       uuid
-      audioData
+      audioUrl
       locationDescription
       locationTitle
       language {
