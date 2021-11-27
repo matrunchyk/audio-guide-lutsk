@@ -41,6 +41,8 @@
     <div class="flex icon bg-red-600 gap-4 pl-4 py-2.5">
       <img
           class="flex-none cursor-pointer self-center"
+          width="15"
+          height="15"
           alt=""
           :src="venue.icon"
       >
