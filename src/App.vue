@@ -46,13 +46,13 @@ import { defineAsyncComponent, defineComponent, onBeforeMount, onMounted, Ref, r
 export default defineComponent({
   name: 'App',
   components: {
-    AppLoader: defineAsyncComponent(() => import('@/components/AppLoader.vue')),
-    AppHeader: defineAsyncComponent(() => import('@/components/AppHeader.vue')),
-    AppTutorial: defineAsyncComponent(() => import('@/components/AppTutorial.vue')),
-    RateVenueModal: defineAsyncComponent(() => import('@/components/RateVenueModal.vue')),
-    LanguageSelector: defineAsyncComponent(() => import('@/components/LanguageSelector.vue')),
-    RouteModal: defineAsyncComponent(() => import('@/components/RouteModal.vue')),
-    AppMap: defineAsyncComponent(() => import('@/components/AppMap.vue')),
+    AppLoader: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppLoader.vue')),
+    AppHeader: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppHeader.vue')),
+    AppTutorial: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppTutorial.vue')),
+    RateVenueModal: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/RateVenueModal.vue')),
+    LanguageSelector: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/LanguageSelector.vue')),
+    RouteModal: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/RouteModal.vue')),
+    AppMap: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppMap.vue')),
   },
 
   setup() {

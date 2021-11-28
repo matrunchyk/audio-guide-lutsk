@@ -29,9 +29,9 @@ import { defineAsyncComponent, defineComponent, Ref, ref } from "vue";
 export default defineComponent({
   name: "RateVenueModal",
   components: {
-    VenueRating: defineAsyncComponent(() => import('@/components/VenueRating.vue')),
-    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
-    ThankyouModal: defineAsyncComponent(() => import('@/components/ThankyouModal.vue')),
+    VenueRating: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/VenueRating.vue')),
+    AppButton: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppButton.vue')),
+    ThankyouModal: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/ThankyouModal.vue')),
   },
   async setup() {
     const venues = Application.venues as Ref<Venue[]>;

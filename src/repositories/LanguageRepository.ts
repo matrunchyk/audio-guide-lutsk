@@ -9,10 +9,10 @@ export default class LanguageRepository extends BaseRepository<Language> {
   model = Language;
 
   // @ts-ignore
-  fetchOneQuery = () => import('@/gql/languages/queries/fetchLanguage.graphql');
+  fetchOneQuery = () => import(/* webpackPrefetch: true */ '@/gql/languages/queries/fetchLanguage.graphql');
 
   // @ts-ignore
-  fetchManyQuery = () => import('@/gql/languages/queries/fetchLanguages.graphql');
+  fetchManyQuery = () => import(/* webpackPrefetch: true */ '@/gql/languages/queries/fetchLanguages.graphql');
 
   async processResponse(responseType, data) {
     this.dataset = collect(data);

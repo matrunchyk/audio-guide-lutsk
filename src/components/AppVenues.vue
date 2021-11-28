@@ -15,8 +15,8 @@ import { defineAsyncComponent, defineComponent } from "vue";
 export default defineComponent({
   name: "AppVenues",
   components: {
-    AppVenue: defineAsyncComponent(() => import('@/components/AppVenue.vue')),
-    VenueDetail: defineAsyncComponent(() => import('@/components/VenueDetail.vue')),
+    AppVenue: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppVenue.vue')),
+    VenueDetail: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/VenueDetail.vue')),
   },
   setup() {
     return {

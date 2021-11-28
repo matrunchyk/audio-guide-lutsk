@@ -22,7 +22,7 @@ import { defineAsyncComponent } from "vue";
 export default {
   name: "RouteModal",
   components: {
-    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
+    AppButton: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppButton.vue')),
   },
   setup() {
     return {

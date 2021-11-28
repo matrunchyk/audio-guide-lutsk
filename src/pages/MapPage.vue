@@ -13,8 +13,8 @@ import { defineAsyncComponent, defineComponent } from "vue";
 export default defineComponent({
   name: "map-page",
   components: {
-    AppMap: defineAsyncComponent(() => import('@/components/AppMap.vue')),
-    AppHeader: defineAsyncComponent(() => import('@/components/AppHeader.vue')),
+    AppMap: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppMap.vue')),
+    AppHeader: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppHeader.vue')),
   },
 });
 </script>
