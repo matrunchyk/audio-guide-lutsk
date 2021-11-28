@@ -1,6 +1,5 @@
 <template>
   <div class="app-loader fixed z-50 bg-white bg-opacity-70 inset-0 flex" v-show="loading">
-    {{ loading }}
     <div class="pl">
       <div class="pl__ball"
            v-for="index in Array.from({length: 4}, (_, i) => i + 1)"
@@ -29,10 +28,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-:root {
-  font-size: calc(16px + (32 - 16) * (100vw - 320px) / (2560 - 320));
-}
-
 body {
   background: #e3e4e8;
   display:    flex;
