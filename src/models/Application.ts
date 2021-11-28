@@ -2,12 +2,11 @@ import useMap from '@/components/use/useMap';
 import Venue from '@/models/Venue';
 import LocationRepository from "@/repositories/LocationRepository";
 import { Ref, ref } from "vue";
-import { useLoading } from 'vue3-loading-overlay';
 
 export default class Application {
   static venues = ref<Venue[]>([]) as Ref<Venue[]>;
 
-  private static loader = useLoading();
+  static loading = ref(true);
 
   static language = ref('uk');
 
@@ -32,11 +31,11 @@ export default class Application {
   static detailVenueMinimized = ref(false);
 
   static showLoader() {
-    this.loader.show();
+    this.loading.value = true;
   }
 
   static hideLoader() {
-    this.loader.hide();
+    this.loading.value = false;
   }
 
   static setLanguage(language: string) {
