@@ -34,7 +34,6 @@
     "@sentry/vue": "^6.15.0",
     "@vue/cli-service": "^5.0.0-rc.1",
     "core-js": "^3.19.1",
-    "faker": "^5.5.3",
     "graphql": "^15.7.2",
     "graphql-tag": "^2.12.5",
     "register-service-worker": "^1.7.2",
@@ -48,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
-    "@types/faker": "^5.5.5",
     "@types/google.maps": "^3.45.6",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
