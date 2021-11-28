@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header sm:flex fixed z-10 ">
+  <div class="app-header sm:flex fixed z-40 ">
     <div class="first-line justify-end flex py-3 px-4 bg-white gap-4 sm:flex-row-reverse sm:flex-1 items-center">
       <img
         src="@/assets/svg/map.svg"
@@ -234,7 +234,6 @@ export default defineComponent({
   min-width:       348px;
   width:           20%;
   justify-content: space-between;
-  z-index:         99;
 }
 
 .number {

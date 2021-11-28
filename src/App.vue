@@ -1,4 +1,5 @@
 <template>
+  <AppLoader/>
   <div class="flex h-screen">
     <div
       class="flex-grow overflow-auto h-full"
@@ -41,11 +42,11 @@ import Application from '@/models/Application';
 import Venue from '@/models/Venue';
 import { v4 as uuid } from 'uuid';
 import { defineAsyncComponent, defineComponent, onBeforeMount, onMounted, Ref, ref } from 'vue';
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 export default defineComponent({
   name: 'App',
   components: {
+    AppLoader: defineAsyncComponent(() => import('@/components/AppLoader.vue')),
     AppHeader: defineAsyncComponent(() => import('@/components/AppHeader.vue')),
     AppTutorial: defineAsyncComponent(() => import('@/components/AppTutorial.vue')),
     RateVenueModal: defineAsyncComponent(() => import('@/components/RateVenueModal.vue')),
