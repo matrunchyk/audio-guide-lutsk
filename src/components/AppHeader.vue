@@ -135,8 +135,8 @@ const images = require.context('@/assets/svg/flags/', false, /\.svg$/);
 export default defineComponent({
   name: "AppHeader",
   components: {
-    MakeRoute: defineAsyncComponent(() => import('./MakeRoute.vue')),
-    AppToggle: defineAsyncComponent(() => import('./AppToggle.vue')),
+    MakeRoute: defineAsyncComponent(() => import(/* webpackPrefetch: true */ './MakeRoute.vue')),
+    AppToggle: defineAsyncComponent(() => import(/* webpackPrefetch: true */ './AppToggle.vue')),
   },
   async setup() {
     const languageRepository = ref(new LanguageRepository());

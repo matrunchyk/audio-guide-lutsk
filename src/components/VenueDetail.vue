@@ -93,8 +93,8 @@ import { event } from 'vue-gtag';
 export default defineComponent({
   name: "VenueDetail",
   components: {
-    AppPlayer: defineAsyncComponent(() => import('@/components/AppPlayer.vue')),
-    AppButton: defineAsyncComponent(() => import('@/components/AppButton.vue')),
+    AppPlayer: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppPlayer.vue')),
+    AppButton: defineAsyncComponent(() => import(/* webpackPrefetch: true */ '@/components/AppButton.vue')),
   },
   setup() {
     const mapData = useMap();

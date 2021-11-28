@@ -6,10 +6,10 @@ export default class LocationRepository extends BaseRepository<Location> {
   model = Location;
 
   // @ts-ignore
-  fetchOneQuery = () => import('../gql/locations/queries/fetchLocation.graphql');
+  fetchOneQuery = () => import(/* webpackPrefetch: true */ '../gql/locations/queries/fetchLocation.graphql');
 
   // @ts-ignore
-  fetchManyQuery = () => import('../gql/locations/queries/fetchLocations.graphql');
+  fetchManyQuery = () => import(/* webpackPrefetch: true */ '../gql/locations/queries/fetchLocations.graphql');
 
   async processResponse(responseType, data) {
     this.dataset = collect(data);
