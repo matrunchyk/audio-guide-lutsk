@@ -31,7 +31,7 @@
           @click="Application.setDetailVenueMinimized(false)" />
       </div>
       <div
-        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-96 iphone678:h-80"
+        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-80 iphone678:h-72"
         v-if="!venueMinimized"
         :style="{backgroundImage: `url(${venue.image})`}" />
       <div>
