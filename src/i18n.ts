@@ -1,3 +1,4 @@
+import Application from '@/models/Application';
 import type { App } from 'vue';
 import { createI18n } from 'vue-i18n';
 import messages from './i18n/messages';
@@ -17,6 +18,8 @@ export const setI18n = (app: App<Element>) => {
         silentFallbackWarn: true,
         globalInjection: true,
     });
+
+    Application.setI18n(i18n.global);
 
     app.use(i18n);
 };
