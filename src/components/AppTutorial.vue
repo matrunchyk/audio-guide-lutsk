@@ -15,15 +15,6 @@
       <div class="text-tutorial pb-4">
         {{ $t('header.instruction_content') }}
       </div>
-      <div class="text-tutorial pb-4">
-        {{ $t('header.instruction_content') }}
-      </div>
-      <div class="text-tutorial pb-4">
-        {{ $t('header.instruction_content') }}
-      </div>
-      <div class="text-tutorial pb-4">
-        {{ $t('header.instruction_content') }}
-      </div>
     </div>
   </div>
 </template>
