@@ -44,9 +44,6 @@ export default defineComponent({
       if (!venue.value) return;
       locationRating.value.rating = venue.value.rating;
       locationRating.value.locationUuid = venue.value.uuid;
-      console.log(locationRating.value)
-      console.log(locationRating.value.locationUuid)
-      console.log(venue.value)
       if (venue.value.rated) {
         await locationRating.value.update();
       } else {

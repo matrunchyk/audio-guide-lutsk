@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-1.5 m-1.5 relative VenueItem bg-transparent"
+    class="p-1.5 m-1.5 relative VenueItem bg-transparent bg-white"
     :class="{
       'bg-red-100 border-l border-r border-red-300 my-0': venue.isRecommended && !isSorted,
       'rounded-t-md border-t mt-1.5': venue.firstRecommended && !isSorted,

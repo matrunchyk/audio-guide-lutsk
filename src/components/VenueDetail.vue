@@ -165,7 +165,7 @@ export default defineComponent({
 
 <style scoped>
 .venue-detail-content {
-  width: 347px;
+  width: 336px;
 }
 
 .venue-player {
