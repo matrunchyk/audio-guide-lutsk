@@ -34,8 +34,8 @@
             v-for="lang in languages"
             :key="lang"
             alt=""
-            width="16"
-            height="15"
+            width="32"
+            height="30"
             class="mx-auto pt-1 hover:block cursor-pointer"
             :src="getImage(lang)"
             @click="selectLanguage(lang)"
@@ -93,16 +93,10 @@
       <div class="cursor-pointer hover:text-x-red block sm:hidden"
            @click="switchView('list')">{{ $t('header.search_by_list') }}
       </div>
-      <div @click="generateRouteInHeader"
-           class="cursor-pointer flex justify-between hover:text-x-red">
-        {{ $t('make_route') }}
-        <span v-if="isFavoriteNum"
-              class="rounded-md bg-blue-900 text-white py-0 px-3">{{ isFavoriteNum }}</span>
-      </div>
       <div @click="openTutorial"
            class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}
       </div>
-      <div class="z-30 absolute bottom-0 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
+      <div class="z-30 absolute bottom-10 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
         <img @click="linkToSourceSiteLeftIcon"
              src="@/assets/svg/logo-twotowers.svg"
              width="49"
@@ -118,6 +112,20 @@
              width="80"
              height="40"
              @click="linkToSourceSiteRightIcon" />
+      </div>
+      <div
+        class="absolute bg-gray-200 bottom-0 drop-shadow-xl filter flex items-center justify-between left-0 px-5 py-2 text-gray-500 text-xs w-full">
+        <span>{{ $t('header.developed_by') }}:</span>
+        <a
+           href="https://digitalidea.ua/"
+           title="Digital Idea (c)"
+           target="_blank">
+          <img class="inline"
+               width="25"
+               alt="Digital Idea (c)"
+               src="https://digitalidea.ua/wp-content/uploads/2018/04/favicon-1-300x300.png" />
+          Digital Idea <sup>&copy;</sup>
+        </a>
       </div>
     </div>
   </div>
@@ -231,8 +239,7 @@ export default defineComponent({
 
 <style>
 .app-header {
-  min-width:       348px;
-  width:           20%;
+  width:           348px;
   justify-content: space-between;
 }
 

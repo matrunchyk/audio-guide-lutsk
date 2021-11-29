@@ -100,12 +100,6 @@ export default defineComponent({
 <style scoped>
 .left-column {
   background: #f3f3f3;
-  min-width:  348px;
-}
-
-@media (min-width: 640px) {
-  .left-column {
-    max-width: 20%;
-  }
+  width:  348px;
 }
 </style>
