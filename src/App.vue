@@ -70,6 +70,7 @@ export default defineComponent({
         document.body.classList.remove('overflow-hidden');
       }
     });
+
     onMounted(async () => {
       Application.showLoader();
 

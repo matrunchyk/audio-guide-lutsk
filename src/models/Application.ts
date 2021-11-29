@@ -2,6 +2,7 @@ import useMap from '@/components/use/useMap';
 import Venue from '@/models/Venue';
 import LocationRepository from "@/repositories/LocationRepository";
 import { Ref, ref } from "vue";
+import { VueI18n } from 'vue-i18n';
 
 export default class Application {
   static venues = ref<Venue[]>([]) as Ref<Venue[]>;
@@ -30,6 +31,8 @@ export default class Application {
 
   static detailVenueMinimized = ref(false);
 
+  static i18n: VueI18n;
+
   static showLoader() {
     this.loading.value = true;
   }
@@ -40,6 +43,7 @@ export default class Application {
 
   static setLanguage(language: string) {
     this.language.value = language;
+    this.i18n.locale = language;
   }
 
   static setMenuOpen(menuOpen: boolean) {
@@ -105,5 +109,9 @@ export default class Application {
         )
       );
     useMap().generateMarker();
+  }
+
+  static setI18n(i18n: VueI18n) {
+    this.i18n = i18n;
   }
 }
