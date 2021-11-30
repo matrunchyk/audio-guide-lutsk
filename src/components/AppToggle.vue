@@ -24,15 +24,23 @@
 
 <script lang="ts">
 import Application from "@/models/Application";
+import Venue from "@/models/Venue";
 
 export default {
   name: "AppToggle",
   setup() {
-
     function sortByRating() {
-      Application.isSortedByRating.value = true;
+      Application.isSortedByRating.value = !Application.isSortedByRating.value;
       if (Application.isSortedByRating.value) {
         Application.venues.value.sort((a, b) => b.rating - a.rating);
+      } else {
+        Application.venues.value.sort((a: Venue, b: Venue) => Number(b.isRecommended) - Number(a.isRecommended))
+          .map(
+            (venue: Venue, index: number, arr: Venue[]) => venue.enhanceRecommended(
+              !index && venue.isRecommended,
+              venue.isRecommended && arr[index + 1] && !arr[index + 1].isRecommended,
+            )
+          );
       }
     }
     return {
