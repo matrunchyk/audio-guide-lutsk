@@ -20,6 +20,8 @@ export default class Venue {
 
   public rating = 0;
 
+  public isEnabled = false;
+
   public averageRating = 0;
 
   public pinned = false;
