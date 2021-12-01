@@ -92,6 +92,7 @@ export default class Application {
         averageRating: ratings.reduce((sum, a) => sum + a.rating, 0) / ratings.length,
         rating: ratings.find(r => r.guestUuid === guestUuid) ? ratings.find(r => r.guestUuid === guestUuid).rating : 0,
         lat: item.latLng?.lat,
+        isMakeRoute: false,
         lng: item.latLng?.lng,
         isFavorite: false,
         marker: null,
