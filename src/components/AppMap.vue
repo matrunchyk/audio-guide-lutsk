@@ -12,17 +12,16 @@ import Application from "../models/Application";
 export default {
   name: "appMap",
   data: () => ({
-    google: null,
-    map: null,
+    google: useMap().getMapData().google,
+    map: useMap().getMapData().map,
   }),
   async mounted() {
     const loader = new Loader({
       apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     })
-
     this.google = await loader.load();
-
     this.initializeMap();
+    this.generateRoute();
   },
   methods: {
     initializeMap() {
@@ -45,6 +44,12 @@ export default {
         position: {lat, lng},
         map: this.map,
         icon,
+      });
+    },
+    generateRoute() {
+      Application.venues.value.forEach(venue => {
+        if (!venue.isMakeRoute) return;
+        venue.generateRoute();
       });
     },
     generateMarker() {
