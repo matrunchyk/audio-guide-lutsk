@@ -12,8 +12,8 @@ import Application from "../models/Application";
 export default {
   name: "appMap",
   data: () => ({
-    google: useMap().getMapData().google,
-    map: useMap().getMapData().map,
+    google: null,
+    map: null,
   }),
   async mounted() {
     const loader = new Loader({
