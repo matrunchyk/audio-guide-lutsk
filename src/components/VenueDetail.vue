@@ -107,7 +107,7 @@ export default defineComponent({
     function toggleFavorite() {
       if (!venue.value) return;
       venue.value.isFavorite = !venue.value.isFavorite;
-      venue.value.isMakeRoute = !venue.value.isMakeRoute
+      venue.value.isMakeRoute = !venue.value.isMakeRoute;
       if (!venue.value.isFavorite) {
         (mapData.getMapData()).directionsRenderer.setDirections({ routes: [] });
       }
