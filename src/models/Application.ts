@@ -85,6 +85,7 @@ export default class Application {
       return new Venue({
         uuid: item.uuid,
         image: item.imageUrl,
+        isEnabled: item.isEnabled,
         localizations: item.localizations,
         icon: item.typeNum === 1 ? "img/icons/icon-castle.svg" : item.typeNum === 2 ? "img/icons/icon-church.svg" : item.typeNum === 3 ? "img/icons/icon-museum.svg" : item.typeNum === 4 ? "img/icons/icon-flag.svg" : "",
         isRecommended: item.isRecommended,
@@ -108,7 +109,7 @@ export default class Application {
           !index && venue.isRecommended,
           venue.isRecommended && arr[index + 1] && !arr[index + 1].isRecommended,
         )
-      );
+      ).filter(venue => venue.isEnabled);
     useMap().generateMarker();
   }
 
