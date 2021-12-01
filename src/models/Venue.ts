@@ -28,6 +28,8 @@ export default class Venue {
 
   public lastRecommended = false;
 
+  public isMakeRoute = false;
+
   public lat = '';
 
   public lng = '';
