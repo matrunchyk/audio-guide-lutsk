@@ -23,11 +23,15 @@ export default function useMap() {
     marker.addListener("click", () => {
       Application.venues.value.forEach(venue => {
         if (+venue.lat === lat) {
+          if (venue.isRecommended) {
+            venue.marker?.setIcon(venue.markerIconRecommendedFavorite);
+          } else {
+            venue.marker?.setIcon(venue.markerIconFavorite);
+          }
           venue.showDetail();
         }
       });
       map.setZoom(15);
-      map.setCenter(marker.getPosition() as google.maps.LatLng);
     });
     return marker;
   }

@@ -97,21 +97,25 @@
            class="cursor-pointer hover:text-x-red">{{ $t('header.instruction') }}
       </div>
       <div class="z-30 absolute bottom-10 flex gap-2.5 border left-0 w-full py-6 px-4 justify-end">
-        <img @click="linkToSourceSiteLeftIcon"
+        <img @click="linkToSourceProjectIcon($t('header.source_link_project'))"
              src="@/assets/svg/logo-twotowers.svg"
              width="49"
              height="40"
              alt=""
-             class="mr-auto" />
+             class="mr-auto cursor-pointer" />
         <img src="@/assets/svg/logo-eu.svg"
+             class="cursor-pointer"
              width="45"
              height="40"
-             alt="" />
+             alt=""
+             @click="linkToSourcePbuIcon($t('header.source_link_pbu'))"
+        />
         <img src="@/assets/svg/logo-plbyua.svg"
+             class="cursor-pointer"
              alt=""
              width="80"
              height="40"
-             @click="linkToSourceSiteRightIcon" />
+             @click="linkToSourcePbuIcon($t('header.source_link_pbu'))" />
       </div>
       <div
         class="absolute bg-gray-200 bottom-0 drop-shadow-xl filter flex items-center justify-between left-0 px-5 py-2 text-gray-500 text-xs w-full">
@@ -176,12 +180,12 @@ export default defineComponent({
       event('select-language', { lang });
     }
 
-    function linkToSourceSiteLeftIcon() {
-      window.open('https://www.pbu2020.eu/ua/projects2020/232');
+    function linkToSourceProjectIcon(link) {
+      window.open(link);
     }
 
-    function linkToSourceSiteRightIcon() {
-      window.open('https://www.pbu2020.eu/');
+    function linkToSourcePbuIcon(link) {
+      window.open(link);
     }
 
     function openTutorial() {
@@ -217,8 +221,8 @@ export default defineComponent({
 
     return {
       selectLanguage,
-      linkToSourceSiteLeftIcon,
-      linkToSourceSiteRightIcon,
+      linkToSourceProjectIcon,
+      linkToSourcePbuIcon,
       currentLanguageImage,
       showLanguageList,
       showLanguageDropdown,
