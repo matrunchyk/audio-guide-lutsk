@@ -32,7 +32,7 @@ export default {
     function sortByRating() {
       Application.isSortedByRating.value = !Application.isSortedByRating.value;
       if (Application.isSortedByRating.value) {
-        Application.venues.value.sort((a, b) => b.rating - a.rating);
+        Application.venues.value.sort((a, b) => b.averageRating - a.averageRating);
       } else {
         Application.venues.value.sort((a: Venue, b: Venue) => Number(b.isRecommended) - Number(a.isRecommended))
           .map(
