@@ -7,6 +7,8 @@ export default {
       search_by_map: 'Пошук по карті',
       search_by_list: 'Пошук по списку',
       developed_by: 'Розробка та підтримка',
+      source_link_pbu: 'https://www.pbu2020.eu/ua',
+      source_link_project: 'https://www.pbu2020.eu/ua/projects2020/232',
     },
     errors: {
       oops: 'От халепа...',
@@ -43,6 +45,8 @@ export default {
       search_by_map: 'Search by map',
       search_by_list: 'Search by list',
       developed_by: 'Developed by',
+      source_link_pbu: 'https://www.pbu2020.eu/en',
+      source_link_project: 'https://www.pbu2020.eu/en/projects2020/146',
     },
     errors: {
       oops: 'Oh no...',
@@ -79,6 +83,8 @@ export default {
       search_by_map: 'Suche nach Karte',
       search_by_list: 'Suche nach Liste',
       developed_by: 'Developed by',
+      source_link_pbu: 'https://www.pbu2020.eu/en',
+      source_link_project: 'https://www.pbu2020.eu/en/projects2020/146',
     },
     errors: {
       oops: 'Oh doch',
@@ -115,6 +121,8 @@ export default {
       search_by_map: 'Szukaj na mapie',
       search_by_list: 'Szukaj na liście',
       developed_by: 'Developed by',
+      source_link_pbu: 'https://www.pbu2020.eu/pl',
+      source_link_project: 'https://www.pbu2020.eu/pl/projects2020/230',
     },
     errors: {
       oops: 'O, nie…',
@@ -151,6 +159,8 @@ export default {
       search_by_map: 'Поиск по карте',
       search_by_list: 'Поиск по списку',
       developed_by: 'Разработка и поддержка',
+      source_link_pbu: ' https://www.pbu2020.eu/by',
+      source_link_project: 'https://www.pbu2020.eu/by/projects2020/231',
     },
     errors: {
       oops: 'Только не это...',

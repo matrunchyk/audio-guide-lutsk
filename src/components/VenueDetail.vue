@@ -4,9 +4,9 @@
 
     <div class="venue-detail-content bg-white rounded-lg bottom-0 pt-2.5 -m-1.5 fixed pb-7 left-3"
          :class="{'venue-player':  venueMinimized}">
-      <div class="w-30 z-50 absolute right-0 -mt-8">
+      <div class="w-30 z-50 absolute right-2 -mt-1">
         <img
-          src="@/assets/svg/icon-modal-close.svg"
+          src="@/assets/svg/icon-close.svg"
           alt=""
           width="16"
           height="16"
@@ -31,7 +31,7 @@
           @click="Application.setDetailVenueMinimized(false)" />
       </div>
       <div
-        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-80 iphone678:h-72"
+        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-80 iphone678:h-60"
         v-if="!venueMinimized"
         :style="{backgroundImage: `url(${venue.image})`}" />
       <div>
@@ -100,9 +100,9 @@ export default defineComponent({
     const mapData = useMap();
     const venue = Application.detailVenue as Ref<Venue>;
     const venues = Application.venues as Ref<Venue[]>;
-    const venueLocalization = venue.value?.localizations?.find(l => l.language.code === Application.language.value);
-    const locationTitle = computed(() => venueLocalization?.locationTitle || '');
-    const locationDescription = computed(() => venueLocalization?.locationDescription || '');
+    const venueLocalization = computed(() => venue.value?.localizations?.find(l => l.language.code === Application.language.value));
+    const locationTitle = computed(() => venueLocalization.value?.locationTitle || '');
+    const locationDescription = computed(() => venueLocalization.value?.locationDescription || '');
 
     function toggleFavorite() {
       if (!venue.value) return;
@@ -135,6 +135,11 @@ export default defineComponent({
 
     function showOnMap() {
       if (!venue.value) return;
+      if (venue.value.isRecommended) {
+        venue.value.marker?.setIcon(venue.value.markerIconRecommendedFavorite);
+      } else {
+        venue.value.marker?.setIcon(venue.value.markerIconFavorite);
+      }
       if (window.innerWidth <= 640) {
         switchView('map');
       }
@@ -143,6 +148,11 @@ export default defineComponent({
     }
 
     function backToNormalZoom() {
+      if (venue.value.isRecommended) {
+        venue.value.marker?.setIcon(venue.value.markerIconRecommended);
+      } else {
+        venue.value.marker?.setIcon(venue.value.markerIcon);
+      }
       Application.resetDetailVenue();
       if (!mapData.getMapData().map) return;
       mapData.getMapData().map.setZoom(14);
@@ -171,7 +181,6 @@ export default defineComponent({
 
 .venue-player {
   min-width: 300px;
-  width:     19%;
 }
 
 @media (max-width: 640px) {
