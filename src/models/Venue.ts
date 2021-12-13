@@ -2,6 +2,7 @@ import useMap from '@/components/use/useMap';
 import Application from '@/models/Application';
 import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
+import * as Sentry from "@sentry/browser";
 
 export default class Venue {
   public uuid: string;
@@ -88,6 +89,7 @@ export default class Venue {
   }
 
   public generateRoute() {
+    Sentry.captureMessage("Something went wrong");
     // @ts-ignore
     useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
 
