@@ -90,9 +90,9 @@ export default class Venue {
 
   public generateRoute() {
     // Sentry.captureMessage("Something went wrong");
-    useMap().getMapData()?.directionsRenderer?.setMap(useMap().getMapData()?.map);
+    useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
 
-    this.calculateAndDisplayRoute(useMap().getMapData()?.directionsService, useMap().getMapData()?.directionsRenderer);
+    this.calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
   }
 
   public calculateAndDisplayRoute(
