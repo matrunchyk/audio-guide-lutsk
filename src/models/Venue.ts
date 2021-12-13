@@ -2,7 +2,7 @@ import useMap from '@/components/use/useMap';
 import Application from '@/models/Application';
 import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
-import * as Sentry from "@sentry/browser";
+// import * as Sentry from "@sentry/browser";
 
 export default class Venue {
   public uuid: string;
@@ -89,11 +89,10 @@ export default class Venue {
   }
 
   public generateRoute() {
-    Sentry.captureMessage("Something went wrong");
-    // @ts-ignore
-    useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
+    // Sentry.captureMessage("Something went wrong");
+    useMap().getMapData()?.directionsRenderer?.setMap(useMap().getMapData()?.map);
 
-    this.calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
+    this.calculateAndDisplayRoute(useMap().getMapData()?.directionsService, useMap().getMapData()?.directionsRenderer);
   }
 
   public calculateAndDisplayRoute(
@@ -117,7 +116,7 @@ export default class Venue {
           destination: this.createLatLng(this.lat, this.lng),
           waypoints: waypoints,
           optimizeWaypoints: true,
-          travelMode: (useMap().getMapData()).google.maps.TravelMode.WALKING,
+          travelMode: (useMap().getMapData())?.google.maps.TravelMode.WALKING,
         }).then((response: any) => {
           directionsRenderer.setDirections(response);
           Application.hideLoader();
