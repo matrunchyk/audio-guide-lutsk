@@ -110,19 +110,20 @@ export default defineComponent({
           });
           navigator.geolocation.getCurrentPosition(position => {
               console.log('lat', position.coords.latitude);
-              console.log('lng', position.coords.latitude);
+              console.log('lng', position.coords.longitude);
               if (!venue) return;
               directionsService.route({
-                origin: createLatLng(50.74734154237352, 50.74734154237352),
+                origin: createLatLng(50.74734154237352, 25.324579628477217),
                 destination: createLatLng(+venue.lat, +venue.lng),
                 waypoints: waypoints,
                 optimizeWaypoints: true,
                 travelMode: google.value.maps.TravelMode.WALKING,
               }).then((response: any) => {
+                console.log(response);
                 directionsRenderer.setDirections(response);
                 Application.hideLoader();
                 event('calculate-route-success', {
-                  value: `source: ${50.74734154237352}, ${50.74734154237352}; dest: ${venue.lat}, ${venue.lng}`,
+                  value: `source: ${50.74734154237352}, ${25.324579628477217}; dest: ${venue.lat}, ${venue.lng}`,
                 });
               });
             },
