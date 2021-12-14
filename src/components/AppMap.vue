@@ -8,7 +8,7 @@
 import { Loader } from '@googlemaps/js-api-loader';
 import useMap from '@/components/use/useMap';
 import Application from "../models/Application";
-import { event } from 'vue-gtag';
+// import { event } from 'vue-gtag';
 
 export default {
   name: "appMap",
@@ -38,7 +38,7 @@ export default {
       }
       useMap().generateMyGeoPosition();
       useMap().initMap(this.google, this.map);
-      this.generateRouteForMobile();
+      // this.generateRouteForMobile();
     },
     createMarker(lat, lng, icon) {
       return new this.google.maps.Marker({
@@ -47,57 +47,58 @@ export default {
         icon,
       });
     },
-    generateRouteForMobile() {
-      Application.venues.value.forEach(venue => {
-        if (!venue.isMakeRoute) return;
-         function createLatLng(lat, lng) {
-          return new (useMap().getMapData()).google.maps.LatLng(lat, lng);
-        }
-
-        function generateRoute() {
-          // Sentry.captureMessage("Something went wrong");
-          useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
-
-          calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
-        }
-        function calculateAndDisplayRoute(
-          directionsService,
-          directionsRenderer,
-        ) {
-          Application.showLoader();
-          const waypoints = [];
-          Application.venues.value.forEach(item => {
-            if (item.isFavorite) {
-              waypoints.push({
-                location: createLatLng(item.lat, item.lng),
-                stopover: true,
-              });
-            }
-          });
-          navigator.geolocation.getCurrentPosition(position => {
-              if (!venue) return;
-              directionsService.route({
-                origin: createLatLng(position.coords.latitude, position.coords.longitude),
-                destination: createLatLng(venue.lat, venue.lng),
-                waypoints: waypoints,
-                optimizeWaypoints: true,
-                travelMode: (useMap().getMapData())?.google.maps.TravelMode.WALKING,
-              }).then((response) => {
-                directionsRenderer.setDirections(response);
-                Application.hideLoader();
-                event('calculate-route-success', {
-                  value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
-                });
-              });
-            },
-            error => {
-              console.log(error.message);
-              event('calculate-route-error', { error: error.message });
-            })
-        }
-        generateRoute();
-      });
-    },
+    // generateRouteForMobile() {
+    //   console.log(useMap().getMapData());
+    //   Application.venues.value.forEach(venue => {
+    //     if (!venue.isMakeRoute) return;
+    //      function createLatLng(lat, lng) {
+    //       return new (useMap().getMapData()).google.maps.LatLng(lat, lng);
+    //     }
+    //
+    //     function generateRoute() {
+    //       // Sentry.captureMessage("Something went wrong");
+    //       useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
+    //
+    //       calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
+    //     }
+    //     function calculateAndDisplayRoute(
+    //       directionsService,
+    //       directionsRenderer,
+    //     ) {
+    //       Application.showLoader();
+    //       const waypoints = [];
+    //       Application.venues.value.forEach(item => {
+    //         if (item.isFavorite) {
+    //           waypoints.push({
+    //             location: createLatLng(item.lat, item.lng),
+    //             stopover: true,
+    //           });
+    //         }
+    //       });
+    //       navigator.geolocation.getCurrentPosition(position => {
+    //           if (!venue) return;
+    //           directionsService.route({
+    //             origin: createLatLng(position.coords.latitude, position.coords.longitude),
+    //             destination: createLatLng(venue.lat, venue.lng),
+    //             waypoints: waypoints,
+    //             optimizeWaypoints: true,
+    //             travelMode: (useMap().getMapData())?.google.maps.TravelMode.WALKING,
+    //           }).then((response) => {
+    //             directionsRenderer.setDirections(response);
+    //             Application.hideLoader();
+    //             event('calculate-route-success', {
+    //               value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
+    //             });
+    //           });
+    //         },
+    //         error => {
+    //           console.log(error.message);
+    //           event('calculate-route-error', { error: error.message });
+    //         })
+    //     }
+    //     generateRoute();
+    //   });
+    // },
     generateMarker() {
       Application.venues.value.forEach((venue) => {
         if (venue.isRecommended) {
