@@ -119,13 +119,16 @@ export default defineComponent({
     }
 
     function generateRoute() {
-      venues.value.forEach(venue => {
-        if (!venue.isFavorite) return;
-        venue.generateRoute();
-      });
       if (window.innerWidth <= 640) {
         switchView('map');
       }
+      venues.value.forEach(venue => {
+        if (venue.isFavorite && window.innerWidth >= 640) {
+          venue.generateRoute();
+        } else {
+          return;
+        }
+      });
     }
 
     function switchView(name: string) {
@@ -134,14 +137,14 @@ export default defineComponent({
     }
 
     function showOnMap() {
+      if (window.innerWidth <= 640) {
+        switchView('map');
+      }
       if (!venue.value) return;
       if (venue.value.isRecommended) {
         venue.value.marker?.setIcon(venue.value.markerIconRecommendedFavorite);
       } else {
         venue.value.marker?.setIcon(venue.value.markerIconFavorite);
-      }
-      if (window.innerWidth <= 640) {
-        switchView('map');
       }
       mapData.getMapData().map.setZoom(17);
       mapData.getMapData().map.setCenter(new (mapData.getMapData()).google.maps.LatLng(venue.value.lat, venue.value.lng));
