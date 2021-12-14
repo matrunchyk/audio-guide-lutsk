@@ -109,9 +109,11 @@ export default defineComponent({
             }
           });
           navigator.geolocation.getCurrentPosition(position => {
+              console.log('lat', position.coords.latitude);
+              console.log('lng', position.coords.latitude);
               if (!venue) return;
               directionsService.route({
-                origin: createLatLng(position.coords.latitude, position.coords.longitude),
+                origin: createLatLng(50.74734154237352, 50.74734154237352),
                 destination: createLatLng(+venue.lat, +venue.lng),
                 waypoints: waypoints,
                 optimizeWaypoints: true,
