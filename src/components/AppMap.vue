@@ -9,6 +9,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import useMap from '@/components/use/useMap';
 import Application from "../models/Application";
 import { defineComponent, ref, onMounted } from "vue";
+import router from "@/router";
 // import { event } from 'vue-gtag';
 
 export default defineComponent({
@@ -38,10 +39,40 @@ export default defineComponent({
     }
 
     function createMarker(lat, lng, icon) {
-      return new google.value.maps.Marker({
+      const marker = new google.value.maps.Marker({
         position: {lat, lng},
         map: map.value,
         icon,
+      });
+      marker.addListener("click", () => {
+        Application.venues.value.forEach(venue => {
+          if (+venue.lat === lat) {
+            if (venue.isRecommended) {
+              venue.marker?.setIcon(venue.markerIconRecommendedFavorite);
+            } else {
+              venue.marker?.setIcon(venue.markerIconFavorite);
+            }
+            venue.showDetail();
+          }
+        });
+        if (window.innerWidth <= 640) {
+          router.push({path: `/`});
+        }
+        map.value.setZoom(15);
+      });
+      return marker;
+    }
+    function generateShowOnMap() {
+      Application.venues.value.forEach(venue => {
+        if (!(useMap().getMapData())) return;
+        if (!venue.isShowOnMap) return;
+        if (venue.isRecommended) {
+          venue.marker?.setIcon(venue.markerIconRecommendedFavorite);
+        } else {
+          venue.marker?.setIcon(venue.markerIconFavorite);
+        }
+        useMap().getMapData().map.setZoom(17);
+        useMap().getMapData().map.setCenter(new (useMap().getMapData()).google.maps.LatLng(venue.lat, venue.lng));
       });
     }
 
@@ -50,53 +81,6 @@ export default defineComponent({
         if (!(useMap().getMapData())) return;
         if (!venue.isMakeRoute) return;
         venue.generateRoute();
-        //     if (!venue.isMakeRoute) return;
-        //      function createLatLng(lat, lng) {
-        //       return new (useMap().getMapData()).google.maps.LatLng(lat, lng);
-        //     }
-        //
-        //     function generateRoute() {
-        //       // Sentry.captureMessage("Something went wrong");
-        //       useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
-        //
-        //       calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
-        //     }
-        //     function calculateAndDisplayRoute(
-        //       directionsService: any,
-        //       directionsRenderer: any,
-        //     ) {
-        //       Application.showLoader();
-        //       const waypoints: { location: any; stopover: boolean; }[] = [];
-        //       Application.venues.value.forEach(item => {
-        //         if (item.isFavorite) {
-        //           waypoints.push({
-        //             location: createLatLng(item.lat, item.lng),
-        //             stopover: true,
-        //           });
-        //         }
-        //       });
-        //       navigator.geolocation.getCurrentPosition(position => {
-        //           if (!venue) return;
-        //           directionsService.route({
-        //             origin: createLatLng(position.coords.latitude, position.coords.longitude),
-        //             destination: createLatLng(venue.lat, venue.lng),
-        //             waypoints: waypoints,
-        //             optimizeWaypoints: true,
-        //             travelMode: (useMap().getMapData())?.google.maps.TravelMode.WALKING,
-        //           }).then((response) => {
-        //             directionsRenderer.setDirections(response);
-        //             Application.hideLoader();
-        //             event('calculate-route-success', {
-        //               value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
-        //             });
-        //           });
-        //         },
-        //         error => {
-        //           console.log(error.message);
-        //           event('calculate-route-error', { error: error.message });
-        //         })
-        //     }
-        //     generateRoute();
       });
     }
 
@@ -118,6 +102,7 @@ export default defineComponent({
     google.value = await loader.load();
     await initializeMap();
     generateRouteForMobile();
+    generateShowOnMap();
     });
 
     return {
