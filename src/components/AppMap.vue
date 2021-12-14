@@ -21,7 +21,7 @@ export default {
       apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
     })
     this.google = await loader.load();
-    this.initializeMap();
+    await this.initializeMap();
   },
   methods: {
     initializeMap() {
@@ -49,7 +49,8 @@ export default {
     },
     generateRouteForMobile() {
       Application.venues.value.forEach(venue => {
-       if (!venue.isMakeRoute && !(useMap().getMapData())) return;
+        if (!(useMap().getMapData())) return;
+       if (!venue.isMakeRoute) return;
          venue.generateRoute();
     //     if (!venue.isMakeRoute) return;
     //      function createLatLng(lat, lng) {
