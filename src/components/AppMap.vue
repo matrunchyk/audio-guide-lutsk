@@ -111,7 +111,7 @@ export default defineComponent({
           navigator.geolocation.getCurrentPosition(position => {
               if (!venue) return;
               directionsService.route({
-                origin: createLatLng(50.74734154237352, 25.324579628477217),
+                origin: createLatLng(position.coords.latitude, position.coords.longitude),
                 destination: createLatLng(+venue.lat, +venue.lng),
                 waypoints: waypoints,
                 optimizeWaypoints: true,
@@ -120,7 +120,7 @@ export default defineComponent({
                 directionsRenderer.setDirections(response);
                 Application.hideLoader();
                 event('calculate-route-success', {
-                  value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
+                  value: `source: ${50.74734154237352}, ${50.74734154237352}; dest: ${venue.lat}, ${venue.lng}`,
                 });
               });
             },
