@@ -31,7 +31,7 @@
           @click="Application.setDetailVenueMinimized(false)" />
       </div>
       <div
-        class="px-3 bg-cover w-auto bg-no-repeat bg-center h-80 iphone678:h-60"
+        class="venue-detail-height px-3 bg-cover w-auto bg-no-repeat bg-center h-80 iphone678:h-44"
         v-if="!venueMinimized"
         :style="{backgroundImage: `url(${venue.image})`}" />
       <div>
@@ -189,6 +189,9 @@ export default defineComponent({
 }
 
 @media (max-width: 640px) {
+  .venue-detail-height {
+    height: 12rem;
+  }
   .venue-detail-content {
     width: 97%;
   }
