@@ -108,9 +108,7 @@ export default defineComponent({
               });
             }
           });
-          function successCallBack(position) {
-            console.log('successCallBackLat', position.coords.latitude);
-            console.log('successCallBackLng', position.coords.longitude);
+          function successMakeRoute(position) {
             if (!venue) return;
             directionsService.route({
               origin: createLatLng(position.coords.latitude, position.coords.longitude),
@@ -119,7 +117,6 @@ export default defineComponent({
               optimizeWaypoints: true,
               travelMode: google.value.maps.TravelMode.WALKING,
             }).then((response: any) => {
-              console.log(response);
               directionsRenderer.setDirections(response);
               Application.hideLoader();
               event('calculate-route-success', {
@@ -127,7 +124,7 @@ export default defineComponent({
               });
             });
           }
-          navigator.geolocation.watchPosition(successCallBack,
+          navigator.geolocation.watchPosition(successMakeRoute,
             error => {
               console.log(error.message);
               event('calculate-route-error', { error: error.message });
