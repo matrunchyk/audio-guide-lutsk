@@ -137,6 +137,7 @@ export default defineComponent({
     }
 
     function showOnMap() {
+      venue.value.isShowOnMap = true;
       if (window.innerWidth <= 640) {
         switchView('map');
       }
@@ -151,6 +152,7 @@ export default defineComponent({
     }
 
     function backToNormalZoom() {
+      venue.value.isShowOnMap = false;
       if (venue.value.isRecommended) {
         venue.value.marker?.setIcon(venue.value.markerIconRecommended);
       } else {
