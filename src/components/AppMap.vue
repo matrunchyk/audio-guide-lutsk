@@ -10,6 +10,7 @@ import useMap from '@/components/use/useMap';
 import Application from "../models/Application";
 import { defineComponent, ref, onMounted } from "vue";
 import router from "@/router";
+import {event} from "vue-gtag";
 // import { event } from 'vue-gtag';
 
 export default defineComponent({
@@ -78,9 +79,57 @@ export default defineComponent({
 
     function generateRouteForMobile() {
       Application.venues.value.forEach(venue => {
-        if (!(useMap().getMapData())) return;
         if (!venue.isMakeRoute) return;
-        venue.generateRoute();
+        function createLatLng(lat: any, lng: any) {
+          const latLng =  new google.value.maps.LatLng(lat, lng);
+          return latLng;
+        }
+
+        function generateRoute() {
+          // Sentry.captureMessage("Something went wrong");
+          const directionsRenderer = new google.value.maps.DirectionsRenderer({suppressMarkers: true});
+          const directionsService = new google.value.maps.DirectionsService();
+          directionsRenderer.setMap(map.value);
+
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        }
+
+        function calculateAndDisplayRoute(
+          directionsService: any,
+          directionsRenderer: any,
+      ) {
+          Application.showLoader();
+          const waypoints: { location: any; stopover: boolean; }[] = [];
+          Application.venues.value.forEach(item => {
+            if (item.isFavorite) {
+              waypoints.push({
+                location: createLatLng(+item.lat, +item.lng),
+                stopover: true,
+              });
+            }
+          });
+          navigator.geolocation.getCurrentPosition(position => {
+              if (!venue) return;
+              directionsService.route({
+                origin: createLatLng(position.coords.latitude, position.coords.longitude),
+                destination: createLatLng(+venue.lat, +venue.lng),
+                waypoints: waypoints,
+                optimizeWaypoints: true,
+                travelMode: google.value.maps.TravelMode.WALKING,
+              }).then((response: any) => {
+                directionsRenderer.setDirections(response);
+                Application.hideLoader();
+                event('calculate-route-success', {
+                  value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
+                });
+              });
+            },
+            error => {
+              console.log(error.message);
+              event('calculate-route-error', { error: error.message });
+            })
+        }
+        generateRoute();
       });
     }
 
