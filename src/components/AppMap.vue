@@ -38,7 +38,7 @@ export default {
       }
       useMap().generateMyGeoPosition();
       useMap().initMap(this.google, this.map);
-      // this.generateRouteForMobile();
+      this.generateRouteForMobile();
     },
     createMarker(lat, lng, icon) {
       return new this.google.maps.Marker({
@@ -47,9 +47,10 @@ export default {
         icon,
       });
     },
-    // generateRouteForMobile() {
-    //   console.log(useMap().getMapData());
-    //   Application.venues.value.forEach(venue => {
+    generateRouteForMobile() {
+      Application.venues.value.forEach(venue => {
+       if (!venue.isMakeRoute && !(useMap().getMapData())) return;
+         venue.generateRoute();
     //     if (!venue.isMakeRoute) return;
     //      function createLatLng(lat, lng) {
     //       return new (useMap().getMapData()).google.maps.LatLng(lat, lng);
@@ -97,8 +98,8 @@ export default {
     //         })
     //     }
     //     generateRoute();
-    //   });
-    // },
+      });
+    },
     generateMarker() {
       Application.venues.value.forEach((venue) => {
         if (venue.isRecommended) {
