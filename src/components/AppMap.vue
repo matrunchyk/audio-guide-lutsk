@@ -22,7 +22,6 @@ export default {
     })
     this.google = await loader.load();
     this.initializeMap();
-    this.generateRouteForMobile();
   },
   methods: {
     initializeMap() {
@@ -39,6 +38,7 @@ export default {
       }
       useMap().generateMyGeoPosition();
       useMap().initMap(this.google, this.map);
+      this.generateRouteForMobile();
     },
     createMarker(lat, lng, icon) {
       return new this.google.maps.Marker({
