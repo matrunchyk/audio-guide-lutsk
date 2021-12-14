@@ -1,4 +1,5 @@
 import Application from "@/models/Application";
+import router from "@/router";
 
 let google: any = null;
 let map: any = null;
@@ -21,6 +22,9 @@ export default function useMap() {
       icon,
     });
     marker.addListener("click", () => {
+      if (window.innerWidth <= 640) {
+        router.push({path: `/`});
+      }
       Application.venues.value.forEach(venue => {
         if (+venue.lat === lat) {
           if (venue.isRecommended) {
