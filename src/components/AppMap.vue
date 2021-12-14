@@ -108,9 +108,9 @@ export default defineComponent({
               });
             }
           });
-          navigator.geolocation.getCurrentPosition(position => {
-              console.log('lat', position.coords.latitude);
-              console.log('lng', position.coords.longitude);
+          // navigator.geolocation.getCurrentPosition(position => {
+          //     console.log('lat', position.coords.latitude);
+          //     console.log('lng', position.coords.longitude);
               if (!venue) return;
               directionsService.route({
                 origin: createLatLng(50.74734154237352, 25.324579628477217),
@@ -126,11 +126,11 @@ export default defineComponent({
                   value: `source: ${50.74734154237352}, ${25.324579628477217}; dest: ${venue.lat}, ${venue.lng}`,
                 });
               });
-            },
-            error => {
-              console.log(error.message);
-              event('calculate-route-error', { error: error.message });
-            })
+            // },
+            // error => {
+            //   console.log(error.message);
+            //   event('calculate-route-error', { error: error.message });
+            // })
         }
         generateRoute();
       });
