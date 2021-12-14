@@ -94,6 +94,7 @@ export default class Application {
         rating: ratings.find(r => r.guestUuid === guestUuid) ? ratings.find(r => r.guestUuid === guestUuid).rating : 0,
         lat: item.latLng?.lat,
         isMakeRoute: false,
+        isShowOnMap: false,
         lng: item.latLng?.lng,
         isFavorite: false,
         marker: null,

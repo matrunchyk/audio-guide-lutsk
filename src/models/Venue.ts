@@ -33,6 +33,8 @@ export default class Venue {
 
   public isMakeRoute = false;
 
+  public isShowOnMap = false;
+
   public lat = '';
 
   public lng = '';
