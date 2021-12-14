@@ -108,25 +108,26 @@ export default defineComponent({
               });
             }
           });
-          navigator.geolocation.watchPosition(position => {
-              console.log('lng', position.coords.longitude);
-              console.log('lat', position.coords.latitude);
-              if (!venue) return;
-              directionsService.route({
-                origin: createLatLng(50.74734154237352, 25.324579628477217),
-                destination: createLatLng(+venue.lat, +venue.lng),
-                waypoints: waypoints,
-                optimizeWaypoints: true,
-                travelMode: google.value.maps.TravelMode.WALKING,
-              }).then((response: any) => {
-                console.log(response);
-                directionsRenderer.setDirections(response);
-                Application.hideLoader();
-                event('calculate-route-success', {
-                  value: `source: ${50.74734154237352}, ${25.324579628477217}; dest: ${venue.lat}, ${venue.lng}`,
-                });
+          function successCallBack(position) {
+            console.log('successCallBackLat', position.coords.latitude);
+            console.log('successCallBackLng', position.coords.longitude);
+            if (!venue) return;
+            directionsService.route({
+              origin: createLatLng(position.coords.latitude, position.coords.longitude),
+              destination: createLatLng(+venue.lat, +venue.lng),
+              waypoints: waypoints,
+              optimizeWaypoints: true,
+              travelMode: google.value.maps.TravelMode.WALKING,
+            }).then((response: any) => {
+              console.log(response);
+              directionsRenderer.setDirections(response);
+              Application.hideLoader();
+              event('calculate-route-success', {
+                value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
               });
-            },
+            });
+          }
+          navigator.geolocation.watchPosition(successCallBack,
             error => {
               console.log(error.message);
               event('calculate-route-error', { error: error.message });
