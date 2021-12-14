@@ -99,10 +99,21 @@ export default defineComponent({
           directionsRenderer: any,
       ) {
           Application.showLoader();
+          const waypoints: { location: any; stopover: boolean; }[] = [];
+          Application.venues.value.forEach(item => {
+            if (item.isFavorite) {
+              waypoints.push({
+                location: createLatLng(+item.lat, +item.lng),
+                stopover: true,
+              });
+            }
+          });
               if (!venue) return;
               directionsService.route({
                 origin: createLatLng(50.74734154237352, 25.324579628477217),
                 destination: createLatLng(+venue.lat, +venue.lng),
+                waypoints: waypoints,
+                optimizeWaypoints: true,
                 travelMode: google.value.maps.TravelMode.WALKING,
               }).then((response: any) => {
                 directionsRenderer.setDirections(response);
