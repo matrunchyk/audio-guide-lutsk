@@ -108,12 +108,12 @@ export default defineComponent({
               });
             }
           });
-          // navigator.geolocation.getCurrentPosition(position => {
-          //     console.log('lat', position.coords.latitude);
-          //     console.log('lng', position.coords.longitude);
+          navigator.geolocation.watchPosition(position => {
+              console.log('lat', position.coords.latitude);
+              console.log('lng', position.coords.longitude);
               if (!venue) return;
               directionsService.route({
-                origin: createLatLng(50.74734154237352, 25.324579628477217),
+                origin: createLatLng(position.coords.latitude, position.coords.longitude),
                 destination: createLatLng(+venue.lat, +venue.lng),
                 waypoints: waypoints,
                 optimizeWaypoints: true,
@@ -123,14 +123,14 @@ export default defineComponent({
                 directionsRenderer.setDirections(response);
                 Application.hideLoader();
                 event('calculate-route-success', {
-                  value: `source: ${50.74734154237352}, ${25.324579628477217}; dest: ${venue.lat}, ${venue.lng}`,
+                  value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${venue.lat}, ${venue.lng}`,
                 });
               });
-            // },
-            // error => {
-            //   console.log(error.message);
-            //   event('calculate-route-error', { error: error.message });
-            // })
+            },
+            error => {
+              console.log(error.message);
+              event('calculate-route-error', { error: error.message });
+            })
         }
         generateRoute();
       });
