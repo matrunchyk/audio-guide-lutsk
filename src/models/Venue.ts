@@ -118,10 +118,11 @@ export default class Venue {
           destination: this.createLatLng(this.lat, this.lng),
           waypoints: waypoints,
           optimizeWaypoints: true,
-          travelMode: (useMap().getMapData())?.google.maps.TravelMode.DRIVING,
+          travelMode: (useMap().getMapData())?.google.maps.TravelMode.WALKING,
         }).then((response: any) => {
           directionsRenderer.setDirections(response);
           Application.hideLoader();
+          console.log(`source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${this.lat}, ${this.lng}`);
           event('calculate-route-success', {
             value: `source: ${position.coords.latitude}, ${position.coords.longitude}; dest: ${this.lat}, ${this.lng}`,
           });
