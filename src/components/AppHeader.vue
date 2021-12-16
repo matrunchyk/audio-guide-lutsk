@@ -45,6 +45,7 @@
           alt=""
           width="32"
           height="30"
+          ref="languageItem"
           class="flex-none cursor-pointer current-language"
           @click="showLanguageDropdown = !showLanguageDropdown"
           :src="currentLanguageImage" />
@@ -78,8 +79,8 @@
     </div>
     <div class="second-line sm:flex bg-white py-3 sm:items-center pl-4 pr-2">
       <AppToggle class=""
-                 v-if="$route.name !== 'map'" />
-      <MakeRoute v-else-if="isFavoriteNum" />
+                 v-show="$route.name !== 'map'" />
+      <MakeRoute v-if="isFavoriteNum && $route.name === 'map'" />
     </div>
     <div
       class="left-menu bg-white absolute z-20 top-14 w-full overflow-hidden transform transition-transform ease-in p-4 flex-col justify-center gap-3"
@@ -151,6 +152,7 @@ export default defineComponent({
     AppToggle: defineAsyncComponent(() => import(/* webpackPrefetch: true */ './AppToggle.vue')),
   },
   async setup() {
+    const languageItem = ref<HTMLElement>();
     const languageRepository = ref(new LanguageRepository());
     await languageRepository.value.many();
     let showLanguageList = ref(true);
@@ -160,6 +162,13 @@ export default defineComponent({
     const venues = Application.venues;
     const isFavoriteNum = computed(() => venues.value.filter((venue) => venue.isFavorite).length);
     let currentLanguageImage = shallowRef(getImage(localStorage.getItem('languageSelected') || 'uk'));
+
+    window.addEventListener('click', (e) => {
+      // @ts-ignore
+      if (!languageItem.value?.contains(e.target)){
+        showLanguageDropdown.value = false;
+      }
+    })
 
     function getImage(lang: string) {
       return images(`./${lang}.svg`);
@@ -227,6 +236,7 @@ export default defineComponent({
       showLanguageList,
       showLanguageDropdown,
       languages,
+      languageItem,
       generateRouteInHeader,
       getImage,
       openTutorial,

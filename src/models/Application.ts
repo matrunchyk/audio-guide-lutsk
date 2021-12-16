@@ -90,7 +90,7 @@ export default class Application {
         icon: item.typeNum === 1 ? "img/icons/icon-castle.svg" : item.typeNum === 2 ? "img/icons/icon-church.svg" : item.typeNum === 3 ? "img/icons/icon-museum.svg" : item.typeNum === 4 ? "img/icons/icon-flag.svg" : "",
         isRecommended: item.isRecommended,
         rated: !!ratings.find(r => r.guestUuid === guestUuid),
-        averageRating: ratings.reduce((sum, a) => sum + a.rating, 0) / ratings.length,
+        averageRating: ratings.reduce((sum, a) => sum + a.rating, 0) / ratings.length || 0,
         rating: ratings.find(r => r.guestUuid === guestUuid) ? ratings.find(r => r.guestUuid === guestUuid).rating : 0,
         lat: item.latLng?.lat,
         isMakeRoute: false,

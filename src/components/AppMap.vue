@@ -55,10 +55,11 @@ export default defineComponent({
             }
             venue.showDetail();
           }
-        });
         if (window.innerWidth <= 640) {
           router.push({path: `/`});
+          venue.isShowOnMap = false;
         }
+        });
         map.value.setZoom(15);
       });
       return marker;
