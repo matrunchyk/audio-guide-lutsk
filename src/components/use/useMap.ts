@@ -26,12 +26,17 @@ export default function useMap() {
         router.push({path: `/`});
       }
       Application.venues.value.forEach(venue => {
+        if (venue.isRecommended) {
+          venue.marker?.setIcon(venue.markerIconRecommended);
+        } else {
+          venue.marker?.setIcon(venue.markerIcon);
+        }
         if (+venue.lat === lat) {
-          if (venue.isRecommended) {
-            venue.marker?.setIcon(venue.markerIconRecommendedFavorite);
-          } else {
-            venue.marker?.setIcon(venue.markerIconFavorite);
-          }
+            if (venue.isRecommended) {
+              venue.marker?.setIcon(venue.markerIconRecommendedFavorite);
+            } else {
+              venue.marker?.setIcon(venue.markerIconFavorite);
+            }
           venue.showDetail();
         }
       });
