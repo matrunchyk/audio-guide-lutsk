@@ -11,7 +11,6 @@ import Application from "../models/Application";
 import { defineComponent, ref, onMounted } from "vue";
 import router from "@/router";
 import {event} from "vue-gtag";
-// import { event } from 'vue-gtag';
 
 export default defineComponent({
   name: "appMap",
@@ -88,11 +87,9 @@ export default defineComponent({
 
         function generateRoute() {
           // Sentry.captureMessage("Something went wrong");
-          const directionsRenderer = new google.value.maps.DirectionsRenderer({suppressMarkers: true});
-          const directionsService = new google.value.maps.DirectionsService();
-          directionsRenderer.setMap(map.value);
+          useMap().getMapData().directionsRenderer.setMap(useMap().getMapData().map);
 
-          calculateAndDisplayRoute(directionsService, directionsRenderer);
+          calculateAndDisplayRoute(useMap().getMapData().directionsService, useMap().getMapData().directionsRenderer);
         }
 
         function calculateAndDisplayRoute(
@@ -129,7 +126,7 @@ export default defineComponent({
             error => {
               console.log(error.message);
               event('calculate-route-error', { error: error.message });
-            })
+            });
         }
         generateRoute();
       });
