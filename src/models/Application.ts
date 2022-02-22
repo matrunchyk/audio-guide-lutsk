@@ -3,6 +3,7 @@ import Venue from '@/models/Venue';
 import LocationRepository from "@/repositories/LocationRepository";
 import { Ref, ref } from "vue";
 import { VueI18n } from 'vue-i18n';
+import router from "@/router";
 
 export default class Application {
   static venues = ref<Venue[]>([]) as Ref<Venue[]>;
@@ -67,6 +68,7 @@ export default class Application {
   }
 
   static resetDetailVenue() {
+    router.push({ query: {} });
     this.detailVenue.value = null;
   }
 

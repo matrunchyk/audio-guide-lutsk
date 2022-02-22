@@ -98,7 +98,8 @@
 <script lang="ts">
 import Application from "@/models/Application";
 import Venue from '@/models/Venue';
-import { computed, PropType } from 'vue';
+import {computed, onMounted, PropType} from 'vue';
+import { useRoute } from "vue-router";
 
 export default {
   name: "AppVenue",
@@ -109,8 +110,14 @@ export default {
     },
   },
   setup(props: any) {
+    const route = useRoute();
     const isSorted = computed(() => Application.isSortedByRating.value);
     const locationTitle = computed(() => props.venue?.localizations?.find(l => l.language.code === Application.language.value)?.locationTitle || '');
+
+    onMounted(() => {
+      if (route.query.location === props.venue.uuid) props.venue.showDetail();
+    });
+
     return {
       locationTitle,
       isSorted,
