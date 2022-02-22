@@ -2,6 +2,7 @@ import useMap from '@/components/use/useMap';
 import Application from '@/models/Application';
 import Localization from '@/models/Localization';
 import { event } from 'vue-gtag';
+import router from "@/router";
 // import * as Sentry from "@sentry/browser";
 
 export default class Venue {
@@ -69,6 +70,7 @@ export default class Venue {
   }
 
   public showDetail(minimized = false) {
+    router.push({ query: { location: this.uuid } });
     Application.detailVenueMinimized.value = minimized;
     Application.detailVenue.value = this;
   }
